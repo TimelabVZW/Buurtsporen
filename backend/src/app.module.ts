@@ -32,28 +32,12 @@ import { IconModule } from './icon/icon.module';
     }),
     TypeOrmModule.forRootAsync({
       useFactory: () => {
-        if (process.env.NODE_ENV === 'production') {
-          return {
-            url: process.env.DATABASE_URL,
-            type: 'postgres',
-            ssl: {
-              rejectUnauthorized: false,
-            },
-            entities: ['dist/**/*.entity{.ts,.js}'],
-            synchronize: true,
-          };
-        } else {
-          return {
-            type: 'postgres',
-            host: 'localhost',
-            port: 5432,
-            username: 'postgres',
-            password: 'secret123',
-            database: 'waterlab',
-            synchronize: true,
-            entities: ['dist/**/*.entity{.ts,.js}'],
-          };
-        }
+        return {
+          url: process.env.DATABASE_URL,
+          type: 'postgres',
+          entities: ['dist/**/*.entity{.ts,.js}'],
+          synchronize: true,
+        };
       },
     }),
     AuthModule,
