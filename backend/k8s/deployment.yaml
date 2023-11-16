@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: asasense-api-backend
+  name: timelab-buurtsporen
   labels:
-    app: asasense-api-backend
+    app: timelab-buurtsporen
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: asasense-api-backend
+      app: timelab-buurtsporen
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: asasense-api-backend
+        app: timelab-buurtsporen
     spec:
       containers:
-        - name: asasense-api-backend
-          image: container-image
+        - name: timelab-buurtsporen
+          image: {{container-image}}
           ports:
             - containerPort: 8080
           env:
