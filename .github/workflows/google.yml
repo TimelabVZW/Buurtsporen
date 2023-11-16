@@ -63,19 +63,19 @@ jobs:
       run: |-
         cd backend && \
         docker build \
-          --tag "eu.gcr.io/$PROJECT_ID/$REPOSITORY-$IMAGE:$GITHUB_SHA" \
+          --tag "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
     # Push the Docker image to Google Artifact Registry
     - name: Publish
       run: |-
-        docker push "eu.gcr.io/$PROJECT_ID/$REPOSITORY-$IMAGE:$GITHUB_SHA"
+        docker push "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA"
 
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
         # replacing the image name in the k8s template
-        sed -i "s#{{container-image}}#eu.gcr.io/$PROJECT_ID/$REPOSITORY-$IMAGE:$GITHUB_SHA#g" backend/k8s/deployment.yaml
+        sed -i "s#{{container-image}}#$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA#g" backend/k8s/deployment.yaml
         sed -i "s#{{DATABASE_URL}}#${{secrets.DATABASE_URL}}#g" backend/k8s/deployment.yaml
         kubectl apply -f backend/k8s
