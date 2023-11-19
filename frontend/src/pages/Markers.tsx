@@ -42,8 +42,7 @@ const Markers = () => {
                             maxWidth: '100%',
                         }}
                     >
-                        <CrudMarkerDataGrid pageSize={15} pageSizeOptions={[15]}
-                        />
+                        <CrudMarkerDataGrid pageSize={15} pageSizeOptions={[15]}/>
                     </Card>
                 </Grid>
             </Grid>

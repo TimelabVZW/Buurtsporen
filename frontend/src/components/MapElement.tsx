@@ -13,7 +13,7 @@ const markerIcon = new Icon({
   })
 
 //   disabled === modal !== ''
-const MapElement: React.FC<MapElementProps> = ({marker, onClick, disabled}: MapElementProps) => {
+const MapElement: React.FC<MapElementProps> = (({marker, onClick, disabled}: MapElementProps) => {
     const coordsForSort= [...marker.coordinates]
 
     let sortedCoordinates = coordsForSort.sort((a, b) => {
@@ -92,6 +92,6 @@ const MapElement: React.FC<MapElementProps> = ({marker, onClick, disabled}: MapE
         default:
             return;
     }
-};
+}) as any;
 
 export default MapElement;

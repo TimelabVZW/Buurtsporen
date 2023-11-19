@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { GET_PAGINATED_MARKERS } from '../gql/queries';
 import debounce from 'lodash.debounce';
 
-const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudDataGridProps) => {
+const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: {pageSize: number, pageSizeOptions: number[]}) => {
   const [removeMarker] = useMutation(mutationRemoveMarker);
   const [page, setPage] = React.useState(1);
   const [gridPage, setGridPage] = React.useState(0);

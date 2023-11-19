@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [ -z "$KRSYNC_STARTED" ]; then
+    export KRSYNC_STARTED=true
+    exec rsync --blocking-io --rsh "$0" $@
+fi
+
+if [ -z "$KRSYNC_KUBECTL_CMD" ]; then
+    export KRSYNC_KUBECTL_CMD="kubectl"
+fi
+
+# Running as --rsh
+namespace=''
+pod=$1
+shift
+
+# If use uses pod@namespace rsync passes as: {us} -l pod namespace ...
+if [ "X$pod" = "X-l" ]; then
+    pod=$1
+    shift
+    namespace="-n $1"
+    shift
+fi
+
+container=''
+IFS='.'; read -ra podparts <<< "$pod"; IFS=' '
+if [ "${#podparts[@]}" = "2" ]; then
+   container="-c${podparts[0]}"
+   pod="${podparts[1]}"
+fi
+
+exec $KRSYNC_KUBECTL_CMD $namespace exec -i $pod $container -- "$@"
+
