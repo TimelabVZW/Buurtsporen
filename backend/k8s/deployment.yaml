@@ -24,3 +24,11 @@ spec:
           env:
             - name: DATABASE_URL
               value: {{DATABASE_URL}}
+          volumeMounts:
+            - name: storage
+              subPath: upload
+              mountPath: /app/upload
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: timelab-buurtsporen-storage
