@@ -20,7 +20,7 @@ spec:
         - name: timelab-buurtsporen
           image: {{container-image}}
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
           env:
             - name: DATABASE_URL
               value: {{DATABASE_URL}}
