@@ -17,7 +17,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Icons from './pages/Icons';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
+  uri: import.meta.env.BACKEND_URL+'/graphql',
   cache: new InMemoryCache(),
 });
 
