@@ -10,4 +10,7 @@ export class UpdateIconInput {
 
   @Field({ nullable: true})
   fileName?: string;
+
+  @Field({ nullable: true})
+  url: string;
 }

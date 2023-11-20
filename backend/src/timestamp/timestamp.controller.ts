@@ -1,50 +1,63 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Post,
-  Res,
-  UploadedFile,
-  UploadedFiles,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Controller, Post, Get, UploadedFiles, Param, UseInterceptors } from '@nestjs/common';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { join } from 'path';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const path = require('path');
 import { v4 as uuidv4 } from 'uuid';
+import * as AWS from 'aws-sdk';
+import { createReadStream } from 'fs';
 
-// Learned how to upload images to API from youtube video (https://www.youtube.com/watch?v=f-URVd2OKYc)
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
+
 @Controller('timestamp')
 export class TimestampController {
   @Post('upload')
   @UseInterceptors(
     AnyFilesInterceptor({
       storage: diskStorage({
-        destination: './upload/timestampFiles',
         filename: (req, file, cb) => {
-          const filename: string =
-            path.parse(file.originalname).name.replace(/\s/g, '') + uuidv4();
-          const extension: string = path.parse(file.originalname).ext;
-          cb(null, `${filename}${extension}`);
+          const filename: string = uuidv4();
+          const extension: string = file.originalname.split('.').pop();
+          cb(null, `${filename}.${extension}`);
         },
       }),
     }),
   )
-  uploadFile(@UploadedFiles() files: Array<Express.Multer.File>) {
+  async uploadFile(@UploadedFiles() files: Array<Express.Multer.File>) {
     const fileNames = [];
-    files.forEach((file) => {
+
+    for (const file of files) {
+      const fileData = createReadStream(file.path);
+
+      const params = {
+        Bucket: process.env.S3_BUCKET_NAME,
+        Key: file.filename,
+        Body: fileData,
+        ACL: 'public-read',
+        ContentType: file.mimetype,
+      };
+
+      await s3.upload(params).promise();
       fileNames.push(file.filename);
-    });
-    const imagesString = fileNames.join(',');
-    return imagesString;
+    }
+
+    const imageNames = fileNames.join('');
+    return {
+      url: `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/${imageNames}`,
+      fileName: imageNames,
+    };
   }
-  //   GET FOR DISPLAYING IMAGE
-  @Get('timestamp-file/:imagename')
-  findProductImage(@Param('imagename') imagename, @Res() res) {
-    return res.sendFile(
-      join(process.cwd(), '/upload/timestampFiles/' + imagename),
-    );
+  @Get('deleteSDK/:fileName')
+  async deleteIcon(@Param('fileName') fileName: string) {
+    const params = {
+      Bucket: process.env.S3_BUCKET_NAME,
+      Key: fileName,
+    };
+
+    await s3.deleteObject(params).promise();
+
+    return { message: 'File deleted successfully' };
   }
 }

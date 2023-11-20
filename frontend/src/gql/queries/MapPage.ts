@@ -26,6 +26,12 @@ query GetLayersData {
             }
         }
     }
+    icons {
+        id
+        name
+        fileName
+        url
+    }
 }
 `;
 

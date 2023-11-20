@@ -1,11 +1,13 @@
 import { ErrorMessage, Form, Formik } from "formik";
 import { MarkerFormProps, MarkerInput } from "../interfaces";
-import { Button, FormLabel, MenuItem, TextField  } from '@mui/material';
+import { Button, FormLabel, MenuItem, TextField, ImageList, ImageListItem, ImageListItemBar, IconButton } from '@mui/material';
 import * as yup from 'yup';
 import { mutationImportMarkers } from "../gql/mutations";
 import { useMutation } from "@apollo/client";
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ConditionalLoader from "./ConditionalLoader";
+import { useState } from "react";
 
 const validationSchema = yup.object({
     layerId: yup.number().required(),
@@ -14,8 +16,11 @@ const validationSchema = yup.object({
     author: yup.string(),
 });
 
-const MarkerForm = ({coordinate, layers, visible, setFormVisible, refetch}: MarkerFormProps) => {
+const MarkerForm = ({coordinate, layers, icons, visible, setFormVisible, refetch}: MarkerFormProps) => {
     const [importMarkers] = useMutation(mutationImportMarkers);
+    const [iconOpen, setIconOpen] = useState(false);
+    const [search, setSearch] = useState<string>('');
+    const [activeIcon, setActiveIcon] = useState('');
 
 const filteredLayers = layers?.filter((layer: {name: string, id: number, private: boolean}) => layer.private === false);
     
@@ -82,7 +87,8 @@ return (
                         id="layerId"
                         sx={{
                             width: '100%',
-                            px: '1rem'
+                            px: '1rem',
+                            mb: '2rem'
                         }}
                         select
                         value={values.layerId}
@@ -130,6 +136,84 @@ return (
                         onChange={handleChange}
                         sx={{width: '100%', px: '1rem', mt: '1rem', mb: '2rem'}}
                     />
+                    <div 
+                        className="iconSelector" 
+                        style={{
+                            marginBottom: '2rem'
+                        }}
+                    >
+                        <div 
+                            className="flex flex-row iconSelector--title"
+                            onClick={() => {
+                                setIconOpen(!iconOpen);
+                            }}>
+                            <FormLabel sx={{px: '1rem'}} htmlFor='iconId'>Choose a fitting icon</FormLabel>
+                            <ArrowForwardIosIcon  
+                                color='primary' 
+                                sx={{
+                                    width: '2rem',
+                                    transform: iconOpen? 'rotate(270deg)': 'rotate(90deg)',
+                                    transition: 'transform 0.3s ease-in-out'
+                                }}
+                            />
+                        </div>
+                        <ConditionalLoader condition={iconOpen}>
+                        <TextField
+                            name="search"
+                            id="search"
+                            placeholder="Search for an icon"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            rows={5}
+                            sx={{
+                                width: '100%',
+                                py: '0',
+                                px: '1rem',
+                                mt: '1rem',
+                                mb: '1rem',
+                                transition: 'all 0.3s ease-in-out'
+                            }}
+                        />
+                            <ImageList
+                                sx={{
+                                    width: '100%',
+                                    maxHeight: '24rem',
+                                    transform: 'translateZ(0)',
+                                    pl: '1rem'
+                                }}
+                                gap={1}
+                                rowHeight={120}
+                                cols={4}
+                            >
+                                {icons.filter((icon: any) => icon.name.includes(search)).map((icon: any) => {
+                                    return (
+                                    <ImageListItem 
+                                        key={icon.id} 
+                                        cols={1} 
+                                        rows={1} 
+                                        sx={{
+                                            position: 'relative', 
+                                            borderStyle: icon.id === activeIcon? 'solid':'none', 
+                                            borderWidth: '2px', 
+                                            borderColor: '#0000ff'
+                                        }}
+                                        onClick={() => {
+                                            setFieldValue('iconId', icon.id);
+                                            setActiveIcon(icon.id);
+                                        }}
+                                    >
+                                        <img
+                                        src={`${icon.url}`}
+                                        alt={icon.name}
+                                        loading="lazy"
+                                        style={{width: '80%', height: '5rem', objectFit: 'contain', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', maxWidth: '100%', maxHeight: '100'}}
+                                        />
+                                    </ImageListItem>
+                                    );
+                                })}
+                            </ImageList>
+                        </ConditionalLoader>
+                    </div>
                     <Button
                         variant="contained"
                         type="submit"

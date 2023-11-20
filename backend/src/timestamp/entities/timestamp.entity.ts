@@ -27,6 +27,10 @@ export class Timestamp {
   @Field({nullable: true})
   fileName?: string;
 
+  @Column({nullable: true})
+  @Field({nullable: true})
+  url?: string;
+
   //   Markers M-1
 
   @Column()

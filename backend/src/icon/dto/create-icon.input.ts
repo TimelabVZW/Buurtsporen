@@ -7,4 +7,7 @@ export class CreateIconInput {
 
   @Field()
   fileName: string;
+
+  @Field()
+  url: string;
 }

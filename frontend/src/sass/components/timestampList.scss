@@ -3,7 +3,7 @@
     padding: 1rem;
 }
 
-/* Styles for the image */
+
 .timestamp__image-container {
     width: 100%;
     margin: 0 auto;
@@ -14,7 +14,7 @@
     }
 }
 
-/* Styles for the header */
+
 .timestamp__header {
     display: flex;
     flex-direction: row;
@@ -25,14 +25,38 @@
     padding-right: 0.5rem;
 }
 
-/* Styles for the date within the header */
+
 .info-header__date {
     margin-left: 1rem;
     font-size: 0.8rem;
     color: #888;
 }
 
-/* Styles for the description */
+.timestamp__audio-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Optional: Set a background color */
+    audio {
+        width: 100%;
+    }
+}
+
+.timestamp__video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    video {
+        width: 100%;
+    
+    }
+}
+
+.timestamp__image-container {
+    text-align: center;
+}
+
 .timestamp__body {
     margin-top: 2rem;
     text-align: left;

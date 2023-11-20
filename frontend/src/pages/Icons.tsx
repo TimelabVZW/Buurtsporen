@@ -93,9 +93,11 @@ const Icons = () => {
                                 },
                                 body: data
                                 })
-                                .then((response) => response.text())
                                 .then(async (response) => {
-                                    input['fileName'] = response;
+                                    const responseBody = await response.json();
+                                    
+                                    input['fileName'] = responseBody.fileName;
+                                    input['url'] = responseBody.url;
                                 })     
                             }
 
@@ -182,8 +184,7 @@ const Icons = () => {
                                 return (
                                 <ImageListItem key={icon.id} cols={1} rows={1} sx={{position: 'relative'}}>
                                     <img
-                                    srcSet={`http://localhost:3000/icon/icon-file/${icon.fileName}`}
-                                    src={`http://localhost:3000/icon/icon-file/${icon.fileName}`}
+                                    src={`${icon.url}`}
                                     alt={icon.name}
                                     loading="lazy"
                                     style={{width: '10rem', height: '10rem', objectFit: 'contain', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', maxWidth: '100%', maxHeight: '100'}}
@@ -223,6 +224,7 @@ const Icons = () => {
                     id: icons.filter((icon: any) => icon.id === activeIcon)[0]?.id,
                     name: icons.filter((icon: any) => icon.id === activeIcon)[0]?.name,
                     files: [''],
+                    oldName: icons.filter((icon: any) => icon.id === activeIcon)[0]?.fileName || undefined,
                 }}
                 validationSchema={validationSchema2}
                 onSubmit={async (values, { setSubmitting }) => {
@@ -245,15 +247,34 @@ const Icons = () => {
                         },
                         body: data
                         })
-                        .then((response) => response.text())
                         .then(async (response) => {
-                            input['fileName'] = response;
-                        })     
+                        const responseBody = await response.json();
+                        console.log(responseBody);
+                        
+                        input['fileName'] = responseBody.fileName;
+                        input['url'] = responseBody.url;
+                        })
+                        .catch((error) => {
+                        // Handle errors if the promise is rejected
+                        console.error('An error occurred:', error);
+                        });
+                
+                        console.log(values)
+                        if (values.oldName) {
+                            await fetch(`http://localhost:3000/icon/deleteSDK/${values.oldName}`, {
+                            method: 'GET',
+                            headers: {
+                                'Accept': 'application/json',
+                            },
+                            })
+                        }
                     }
 
                     if (input.fileName === '') {
                         input.fileName = icons.filter((icon: any) => icon.id === activeIcon)[0]?.fileName;
                     }
+
+                    console.log(input)
 
                     const { data } = await updateIcon({
                         variables: input
@@ -338,13 +359,24 @@ const Icons = () => {
                     className="marker-form-button marker-form-button--delete"
                     color='error'
                     sx={{width: 'max-content', px: '1rem', ml: '1rem', mt: '2rem'}}
-                    onClick={() => {
+                    onClick={async () => {
                         setModalVisible('')
+                        
+                        // remove image from aws bucket
+                        await fetch(`http://localhost:3000/icon/deleteSDK/${icons.find((icon: any) => icon.id === activeIcon).fileName}`, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                        },
+                        })
+
+                        // remove icon from api
                         removeIcon({
                             variables: {
                                 id: icons.filter((icon: any) => icon.id === activeIcon)[0]?.id
                             }
                         });
+
                         setActiveIcon(null);
                         refetch();
                     }}

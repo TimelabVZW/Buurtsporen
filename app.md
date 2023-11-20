@@ -9,7 +9,7 @@ Al eerder naar Philippe gestuurd dat ik geen access heb naar de server van Timel
 
 # Nodige mutation voor een user te maken:
 
-invoeren in http://localhost:3000/graphql
+invoeren in https://api.buurtsporen.be/graphql
 
 mutation CreateUser {
   createUser(

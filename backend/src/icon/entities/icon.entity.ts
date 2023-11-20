@@ -19,6 +19,10 @@ export class Icon {
   @Field()
   fileName: string;
 
+  @Column()
+  @Field()
+  url: string;
+
   //   Marker 1-M
 
   @OneToMany(() => Marker, (marker) => marker.icon)

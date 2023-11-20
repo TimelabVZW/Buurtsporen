@@ -14,6 +14,9 @@ export class CreateTimestampInput {
   @Field({nullable: true})
   fileName?: string;
 
+  @Field({nullable: true})
+  url: string;
+
   // //   Markers M-1
 
   @Field(() => Int)

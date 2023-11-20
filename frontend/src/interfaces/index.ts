@@ -33,6 +33,7 @@ interface Icon {
 
 interface MarkerFormProps {
     layers: layer[],
+    icons: Icon[],
     coordinate: [number, number],
     visible: boolean,
     refetch: () => void,
@@ -81,18 +82,21 @@ interface TimestampFormInput {
     description: string,
     author?: string,
     fileName?: string,
+    url?: string,
     markerId: number,
 }
 
 interface IconFormInput {
     name: string,
     fileName?: string,
+    url?: string,
 }
 
 interface IconFormUpdate {
     id: number,
     name: string,
     fileName?: string,
+    url?: string,
 }
 
 interface ButtonProps {

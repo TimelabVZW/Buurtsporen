@@ -32,6 +32,38 @@ const TimestampList = ({coordinate, marker, visible, setFormVisible}: TimestampL
         return <p>Error...</p>;
     }
     
+    function isImageFile(filename: string) {
+        // Extract the file extension
+        const fileExtension = filename.split('.').pop();
+      
+        // List of common image file extensions
+        const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
+      
+        // Check if the extracted extension is in the list of image extensions
+        if (fileExtension === undefined) {
+            return false;
+        }
+        return imageExtensions.includes(fileExtension.toLowerCase());
+      }
+
+      function isAudioFile(filename: string) {
+        const fileExtension = filename.split('.').pop();
+        const audioExtensions = ['mp3', 'wav', 'ogg', 'aac', 'flac'];
+        if (fileExtension === undefined) {
+            return false;
+        }
+        return audioExtensions.includes(fileExtension.toLowerCase());
+      }
+
+      function isVideoFile(filename: string) {
+        const fileExtension = filename.split('.').pop();
+        const videoExtensions = ['mp4', 'avi', 'mkv', 'mov', 'wmv'];
+        if (fileExtension === undefined) {
+            return false;
+        }
+        return videoExtensions.includes(fileExtension.toLowerCase());
+      }
+    
 return (
     <div style={{display: visible? 'block' : 'none'}}>
         
@@ -61,12 +93,28 @@ return (
                 <div className='marker-info__divider'></div>
                 <ConditionalLoader condition={data.marker.timestamps.length > 0}>
                     <div className='marker-info__timestamps'>
-                        {data.marker.timestamps.map((timestamp: {author: string, description: string, createdAt: string, fileName: string,}, index: number) => (
+                        {data.marker.timestamps.map((timestamp: {author: string, description: string, createdAt: string, fileName: string, url: string}, index: number) => (
                             <div className='marker-info__timestamp'>
-                                <ConditionalLoader condition={timestamp.fileName? true : false}>
+                                <ConditionalLoader condition={timestamp.fileName ? true : false}>
+                                {isImageFile(timestamp.fileName) && (
                                     <div className="timestamp__image-container">
-                                        <img src={`http://localhost:3000/timestamp/timestamp-file/${timestamp.fileName}`} alt={`marker ${marker} timestamp ${index} `}/>
+                                    <img src={`${timestamp.url}`} alt={`marker ${marker} timestamp ${index}`} />
                                     </div>
+                                )}
+                                {isAudioFile(timestamp.fileName) && (
+                                    <div className="timestamp__audio-container">
+                                    <audio controls>
+                                        <source src={`${timestamp.url}`} />
+                                    </audio>
+                                    </div>
+                                )}
+                                {isVideoFile(timestamp.fileName) && (
+                                    <div className="timestamp__video-container">
+                                    <video controls>
+                                        <source src={`${timestamp.url}`} />
+                                    </video>
+                                    </div>
+                                )}
                                 </ConditionalLoader>
                                 <div className='timestamp__header'>
                                     <h3>{timestamp.author}</h3>

@@ -6,6 +6,7 @@ const GET_ICONS_PAGE = gql`
             id
             name
             fileName
+            url
         }
     }`
 ;

@@ -31,9 +31,9 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
         });
     }
 
-
     let rowKeys: string[] = Object.keys(selectedRows[0]);
 
+    console.log(formData)
     return (
         <Formik
         initialValues={{

@@ -55,7 +55,7 @@ const MarkerImportForm1 = ({selectedRows, layers, setModal, formData, setFormDat
 
             let {color, ...newValues} = values;
             let newColor = '#' + values.color.toString(16);
-            
+
             setFormData({...formData, ...newValues, color: newColor});
             
             setModal('import-2');
