@@ -83,4 +83,6 @@ jobs:
         # replacing the image name in the k8s template
         sed -i "s#{{container-image}}#$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA#g" backend/k8s/deployment.yaml
         sed -i "s#{{DATABASE_URL}}#${{secrets.DATABASE_URL}}#g" backend/k8s/deployment.yaml
+        sed -i "s#{{AWS_ACCESS_KEY_ID}}#${{secrets.AWS_ACCESS_KEY_ID}}#g" backend/k8s/deployment.yaml
+        sed -i "s#{{AWS_SECRET_ACCESS_KEY}}#${{secrets.AWS_SECRET_ACCESS_KEY}}#g" backend/k8s/deployment.yaml
         kubectl apply -f backend/k8s
