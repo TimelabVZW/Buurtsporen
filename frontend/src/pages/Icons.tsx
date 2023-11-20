@@ -86,7 +86,7 @@ const Icons = () => {
                                     data.append(`file${index}`, file)
                                 });
                             
-                                await fetch('http://localhost:3000/icon/upload', {
+                                await fetch('https://api.buurtsporen.be//icon/upload', {
                                 method: 'POST',
                                 headers: {
                                     'Accept': 'application/json',
@@ -240,7 +240,7 @@ const Icons = () => {
                             data.append(`file${index}`, file)
                         });
                     
-                        await fetch('http://localhost:3000/icon/upload', {
+                        await fetch('https://api.buurtsporen.be//icon/upload', {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -261,7 +261,7 @@ const Icons = () => {
                 
                         console.log(values)
                         if (values.oldName) {
-                            await fetch(`http://localhost:3000/icon/deleteSDK/${values.oldName}`, {
+                            await fetch(`https://api.buurtsporen.be//icon/deleteSDK/${values.oldName}`, {
                             method: 'GET',
                             headers: {
                                 'Accept': 'application/json',
@@ -363,7 +363,7 @@ const Icons = () => {
                         setModalVisible('')
                         
                         // remove image from aws bucket
-                        await fetch(`http://localhost:3000/icon/deleteSDK/${icons.find((icon: any) => icon.id === activeIcon).fileName}`, {
+                        await fetch(`https://api.buurtsporen.be//icon/deleteSDK/${icons.find((icon: any) => icon.id === activeIcon).fileName}`, {
                         method: 'GET',
                         headers: {
                             'Accept': 'application/json',
