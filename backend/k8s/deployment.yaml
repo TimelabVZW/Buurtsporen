@@ -24,6 +24,16 @@ spec:
           env:
             - name: DATABASE_URL
               value: {{DATABASE_URL}}
+            - name: AWS_ACCESS_KEY_ID
+              value: {{AWS_ACCESS_KEY_ID}}
+            - name: AWS_SECRET_ACCESS_KEY
+              value: {{AWS_SECRET_ACCESS_KEY}}
+            - name: AWS_REGION
+              value: europe-west1
+            - name: AWS_ENDPOINT
+              value: https://storage.googleapis.com
+            - name: S3_BUCKET_NAME
+              value: buurtsporen
           volumeMounts:
             - name: storage
               subPath: upload
