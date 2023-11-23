@@ -46,7 +46,7 @@ return (
                 title: '',
                 description: '',
                 author: '',
-                iconId: activeIcon || icons[0].id,
+                iconId: activeIcon || icons[0]?.id || undefined,
             }}
             validationSchema={validationSchema}
             onSubmit={async (values, { setSubmitting }) => {
