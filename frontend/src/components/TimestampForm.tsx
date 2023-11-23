@@ -40,7 +40,7 @@ return (
                     data.append(`file${index}`, file)
                 });
             
-                await fetch('http://localhost:3000/timestamp/upload', {
+                await fetch('https://api.buurtsporen.be/timestamp/upload', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
