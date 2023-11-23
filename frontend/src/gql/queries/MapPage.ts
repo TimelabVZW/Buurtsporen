@@ -18,6 +18,7 @@ query GetLayersData {
             icon {
                 id
                 fileName
+                url
             }
             coordinates {
                 id

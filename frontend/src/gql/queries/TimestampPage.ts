@@ -7,6 +7,7 @@ query GetTimestampsData {
         description
         createdAt
         fileName
+        url
     }
 }
 `;

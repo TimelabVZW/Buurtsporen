@@ -64,7 +64,7 @@ const Timestamps = () => {
             filterable: false,
             renderCell: (params: any) => {
                 if (params.row.fileName) {
-                    return <a target='blank' href={`https://api.buurtsporen.be/timestamp/timestamp-file/${params.row.fileName}`}><DownloadIcon sx={{fill: '#0000ff'}}/></a>;
+                    return <a target='blank' href={`${params.row.url}`}><DownloadIcon sx={{fill: '#0000ff'}}/></a>;
                 }
                 
               return 'No file';
