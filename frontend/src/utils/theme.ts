@@ -24,7 +24,7 @@ declare module '@mui/material/styles' {
             main: '#556cd6',
         },
         secondary: {
-            main: '#fff',
+            main: '#282829',
         },
         error: {
             main: red.A400,

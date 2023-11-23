@@ -18,7 +18,7 @@ import FilterIcon from '@mui/icons-material/FilterList';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import UserIconImage from '../assets/images/user-marker.png';
-import LogoImage from '../assets/images/logo.png';
+import RasterLogoImage from '../assets/svg/BS_logo_raster_1.svg';
 
 import "leaflet/dist/leaflet.css";
 
@@ -131,10 +131,10 @@ const Home = () => {
         theme="colored"
       />
       <div className={formVisible !== ''? 'app-container-map--small': 'app-container-map'}>
-        <MapContainer center={center} zoom={18} maxZoom={23} scrollWheelZoom={true}>
+        <MapContainer center={center} zoom={17} maxZoom={23} scrollWheelZoom={true}>
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            url='https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png'
             maxZoom={23}
           />
 
@@ -171,7 +171,7 @@ const Home = () => {
 
       {/* UI COMPONENTS */}
         <ConditionalLoader condition={modal === '' && formVisible === ''}>
-          <img className='title' src={LogoImage}/>
+          <img className='title' src={RasterLogoImage}/>
         </ConditionalLoader>
         <ConditionalLoader className='button-container button-container--bottom-left' condition={formVisible === ''}>
           <Button className='button button--filters' disabled={modal !== ''} type='button' onClick={() => setModal('filters')}>

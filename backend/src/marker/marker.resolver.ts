@@ -57,11 +57,6 @@ export class MarkerResolver {
   }
 
   @Mutation(() => Marker)
-  updateMarker(@Args('updateMarkerInput') updateMarkerInput: UpdateMarkerInput) {
-    return this.markerService.update(updateMarkerInput.id, updateMarkerInput);
-  }
-
-  @Mutation(() => Marker)
   removeMarker(@Args('id', { type: () => Int }) id: number) {
     return this.markerService.remove(id);
   }

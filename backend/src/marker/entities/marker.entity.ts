@@ -66,14 +66,15 @@ export class Marker {
 
   //   Icon M-1
  
-   @Column()
-   @Field(() => Int)
+   @Column({ nullable: true })
+   @Field(() => Int, { nullable: true })
    iconId: number;
  
    @ManyToOne(() => Icon, (icon) => icon.markers, {
-     onDelete: 'CASCADE',
+     onDelete: 'SET NULL',
+     nullable: true,
    })
-   @Field(() => Icon)
+   @Field(() => Icon, { nullable: true })
    icon: Icon;
 
  //   Coordinates 1-M

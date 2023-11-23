@@ -8,6 +8,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useEffect, useState } from "react";
 import TimestampForm from "./TimestampForm";
+import SquareGreenLogo from '../assets/svg/BS_logo_square_green.svg';
 
 const TimestampList = ({coordinate, marker, visible, setFormVisible}: TimestampListProps) => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -67,54 +68,63 @@ const TimestampList = ({coordinate, marker, visible, setFormVisible}: TimestampL
 return (
     <div style={{display: visible? 'block' : 'none'}}>
         
-        <div className='map-form-container__close' onClick={() => {
-            if (!form) {
-                setFormVisible('')
-            } else {
-                setForm(false)
-            }}
-            }>
-            <ArrowForwardIosIcon  color='secondary' sx={{
-            visibility: visible? 'visible': 'hidden',
-            width: visible? '2rem': '0',
-            }}/>
+        <div className="flex flex-row map-form-container__header">
+            <div className='map-form-container__close' onClick={() => {
+                if (!form) {
+                    setFormVisible('')
+                } else {
+                    setForm(false)
+                }}
+                }>
+                <ArrowForwardIosIcon  color='secondary' sx={{
+                visibility: visible? 'visible': 'hidden',
+                width: visible? '2rem': '0',
+                }}/>
+            </div>
+            <div className="small-logo--container" style={{display: visible? 'block' : 'none'}} >
+                <img src={SquareGreenLogo} />
+            </div>
         </div>
         <ConditionalLoader condition={!form}>
             <div className="map-timestamp-list" style={{display: visible? 'block' : 'none'}}>
                 <div className='marker-info__header'>
                     <h2>{data.marker.name}</h2>
-                    <p className="info-header__date">
-                        {new Date(data.marker.createdAt).toLocaleDateString()} {new Date(data.marker.createdAt).toLocaleTimeString()}
-                    </p>
+                    <div className="header-date__container flex">
+                        <p className="info-header__date info-header__date--title">Toegevoegd op:</p>
+                        <p className="info-header__date">
+                            {new Date(data.marker.createdAt).toLocaleDateString()} {new Date(data.marker.createdAt).toLocaleTimeString()}
+                        </p>
+                    </div>
                 </div>
                 <div className='marker-info__body'>
                     <p>{data.marker.description}</p>
                 </div>
                 <div className='marker-info__divider'></div>
                 <ConditionalLoader condition={data.marker.timestamps.length > 0}>
+                    <h2>Opmerkingen</h2>
                     <div className='marker-info__timestamps'>
                         {data.marker.timestamps.map((timestamp: {author: string, description: string, createdAt: string, fileName: string, url: string}, index: number) => (
                             <div className='marker-info__timestamp'>
-                                <ConditionalLoader condition={timestamp.fileName ? true : false}>
-                                {isImageFile(timestamp.fileName) && (
-                                    <div className="timestamp__image-container">
-                                    <img src={`${timestamp.url}`} alt={`marker ${marker} timestamp ${index}`} />
-                                    </div>
-                                )}
-                                {isAudioFile(timestamp.fileName) && (
-                                    <div className="timestamp__audio-container">
-                                    <audio controls>
-                                        <source src={`${timestamp.url}`} />
-                                    </audio>
-                                    </div>
-                                )}
-                                {isVideoFile(timestamp.fileName) && (
-                                    <div className="timestamp__video-container">
-                                    <video controls>
-                                        <source src={`${timestamp.url}`} />
-                                    </video>
-                                    </div>
-                                )}
+                                <ConditionalLoader condition={timestamp.fileName? true : false}>
+                                    {isImageFile(timestamp.fileName) && (
+                                        <div className="timestamp__image-container">
+                                        <img src={`${timestamp.url}`} alt={`marker ${marker} timestamp ${index}`} />
+                                        </div>
+                                    )}
+                                    {isAudioFile(timestamp.fileName) && (
+                                        <div className="timestamp__audio-container">
+                                        <audio controls>
+                                            <source src={`${timestamp.url}`} />
+                                        </audio>
+                                        </div>
+                                    )}
+                                    {isVideoFile(timestamp.fileName) && (
+                                        <div className="timestamp__video-container">
+                                        <video controls>
+                                            <source src={`${timestamp.url}`} />
+                                        </video>
+                                        </div>
+                                    )}
                                 </ConditionalLoader>
                                 <div className='timestamp__header'>
                                     <h3>{timestamp.author}</h3>
@@ -136,7 +146,7 @@ return (
                 </ConditionalLoader>
                 <Button className={isLoaded? 'button': 'button button--not-loaded' } type='button' onClick={() => setForm(true)}>
                     <AddBoxIcon color='secondary'/>
-                    <p>Add a timestamp</p>
+                    <p style={{color: '#282829'}}>Voeg een opmerking toe</p>
                 </Button>
             </div>
         </ConditionalLoader>

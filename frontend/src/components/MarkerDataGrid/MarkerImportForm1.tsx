@@ -11,7 +11,7 @@ import { ColorBox } from "material-ui-color";
 const validationSchema = yup.object({
     layerId: yup.number().required(),
     coordinateField: yup.string().required(),
-    iconId: yup.number().required(),
+    iconId: yup.number(),
     color: yup.number().required(),
 });
 

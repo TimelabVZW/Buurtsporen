@@ -29,14 +29,17 @@
             overflow-y: auto;
             overflow-x: auto;
             transition: all 1s ease-in-out;
+            .map-form-container__header {
+                margin-top: 1rem;
+                padding-right: 1rem;
+            }
             .map-form-container__close {
                 padding: 1rem 2rem;
-                background-color: #d5212a;
+                background-color: #4aaa9f;
                 width: max-content;
                 border-radius: 1rem;
                 margin-left: 1rem;
                 margin-right: auto;
-                margin-top: 1rem;
                 z-index: 4 !important;
             }
         }

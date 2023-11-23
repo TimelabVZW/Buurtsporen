@@ -27,9 +27,13 @@
 
 
 .info-header__date {
-    margin-left: 1rem;
     font-size: 0.8rem;
     color: #888;
+    text-align: right;
+    &--title {
+        margin-left: 1rem;
+        white-space: nowrap;
+    }
 }
 
 .timestamp__audio-container {
@@ -95,9 +99,13 @@
 
     /* Styles for the date within the header */
     .info-header__date {
-        margin-left: 1rem;
         font-size: 0.8rem;
         color: #888;
+        text-align: right;
+        &--title {
+            margin-left: 1rem;
+            white-space: nowrap;
+        }
     }
 
     /* Styles for the description */

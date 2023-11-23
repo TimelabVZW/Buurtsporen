@@ -112,149 +112,149 @@ const validationSchema = yup.object({
         <Header/>
         <DashboardMain active='import-export'>
         <Grid container gap={1.16} style={{padding: '1rem', maxWidth: 'calc(100vw - 4rem)'}}>
-                <Grid xs={3.95}>
-                    <Card 
-                        sx={{
-                            pt: '4rem',
-                            pb: '3rem',
+            <Grid xs={3.95}>
+                <Card 
+                    sx={{
+                        pt: '4rem',
+                        pb: '3rem',
+                    }}
+                >
+                    <Formik
+                        initialValues={{
+                            file: null,
+                            private: false,
+                            layerId: undefined,
+                            titleField: undefined,
+                            descriptionField: undefined,
                         }}
-                    >
-                        <Formik
-                            initialValues={{
-                                file: null,
-                                private: false,
-                                layerId: undefined,
-                                titleField: undefined,
-                                descriptionField: undefined,
-                            }}
-                            validationSchema={validationSchema}
-                            onSubmit={async (values, { setSubmitting }) => {
-                                setSubmitting(true);
-                                let titleKeyName: string | undefined = '';
-                                let descriptionKeyName: string | undefined = '';
+                        validationSchema={validationSchema}
+                        onSubmit={async (values, { setSubmitting }) => {
+                            setSubmitting(true);
+                            let titleKeyName: string | undefined = '';
+                            let descriptionKeyName: string | undefined = '';
 
-                                // check if titleField is filled
-                                if (
-                                    values.titleField !==  undefined
-                                ) {
-                                    titleKeyName = jsonKeys?.[values.titleField];
+                            // check if titleField is filled
+                            if (
+                                values.titleField !==  undefined
+                            ) {
+                                titleKeyName = jsonKeys?.[values.titleField];
+                            }
+
+                            // Check if descriptionField is filled
+                            if (
+                                values.descriptionField !==  undefined
+                            ) {
+                                descriptionKeyName = jsonKeys?.[values.descriptionField];
+                            }
+
+                            
+                            let inputs = jsonData.map((markerData: any[any]) => {
+                                let type = markerData.geometry.geometry.type;
+                                let name = titleKeyName? markerData[titleKeyName] : undefined;
+                                let coords = markerData.geometry.geometry.coordinates;
+                                let layerId = values.layerId;
+
+                                if (type === 'Point') {
+                                    coords = [coords]
                                 }
-
-                                // Check if descriptionField is filled
-                                if (
-                                    values.descriptionField !==  undefined
-                                ) {
-                                    descriptionKeyName = jsonKeys?.[values.descriptionField];
-                                }
-
                                 
-                                let inputs = jsonData.map((markerData: any[any]) => {
-                                    let type = markerData.geometry.geometry.type;
-                                    let name = titleKeyName? markerData[titleKeyName] : undefined;
-                                    let coords = markerData.geometry.geometry.coordinates;
-                                    let layerId = values.layerId;
-
-                                    if (type === 'Point') {
-                                        coords = [coords]
-                                    }
-                                    
-                                    if (descriptionKeyName) {
-                                        let description = markerData[descriptionKeyName]
-                                        return {
-                                            name: name,
-                                            description: description,
-                                            type: type,
-                                            coords: coords,
-                                            layerId: layerId
-                                        }
-                                    };
+                                if (descriptionKeyName) {
+                                    let description = markerData[descriptionKeyName]
                                     return {
                                         name: name,
+                                        description: description,
                                         type: type,
                                         coords: coords,
                                         layerId: layerId
                                     }
-                                });
-                                
-                                const { data } = await importMarkers({
-                                    variables: {
-                                        createMarkerWithCoordsInputs: inputs,
-                                    }
-                                })
+                                };
+                                return {
+                                    name: name,
+                                    type: type,
+                                    coords: coords,
+                                    layerId: layerId
+                                }
+                            });
+                            
+                            const { data } = await importMarkers({
+                                variables: {
+                                    createMarkerWithCoordsInputs: inputs,
+                                }
+                            })
 
-                                setTimeout(() => {
-                                    setSubmitting(false);
-                                }, 1000);
-                            }}
-                            >
-                            {({ values, setFieldValue, errors }) => (
-                                <Form className='card-form'>
-                                    <FormLabel sx={{px: '1rem'}} htmlFor='file'>Upload json file to import</FormLabel>
-                                    <input id="file" ref={fileRef} name="file" type="file" className='card-form-file' onChange={(event) => {
-                                        setFieldValue("file", event.currentTarget.files?.[0]);
-                                        checkJson(event);
-                                        readerRead(event);
-                                    }} />
-                                </Form>
-                            )}
-                        </Formik>
-                    </Card>
-                </Grid>
-                <Grid xs={3.95}>
-                    <Card 
-                        sx={{
-                            pt: '2rem',
-                            pb: '1rem'
+                            setTimeout(() => {
+                                setSubmitting(false);
+                            }, 1000);
                         }}
-                    >
-                        <h2>EXPORT</h2>
-                    </Card>
-                </Grid>
-                <Grid xs={3.95}>
-                    <Card 
-                        sx={{
-                            pt: '3.9rem',
-                            pb: '3.9rem'
-                        }}
-                    >
-                        <div className='countup-container'>
-                            <CountUp end={data.markers.length} duration={3} className='countup-number'/>
-                            <div className='flex countup-suffix'>
-                                <p className='countup-string'>Markers</p>
-                                <MarkerIcon 
-                                    className='countup-icon'
-                                    sx={{
-                                        width: '3rem',
-                                        height: '3rem',
-                                        marginLeft: '0.1rem',
-                                    }}
-                                />
-                            </div>
-                        </div>
-                    </Card>
-                </Grid>
-                <Grid xs={11.95}>
-                    <Card 
-                        sx={{
-                            pt: '1rem',
-                            pb: '1rem',
-                            px: '1rem',
-                            minHeight: '25rem',
-                            maxWidth: '100%',
-                        }}
-                    >
-                        <ConditionalLoader condition={jsonLoaded && jsonKeys !== null}>
-                            <MarkerDataGrid refetch={refetch} json={jsonData} layers={data.layers}/>
-                        </ConditionalLoader>
-                        <ConditionalLoader condition={!jsonLoaded || jsonKeys == null}>
-                            <p className='datagrid-placeholder'>Upload a JSON file to see the data</p>
-                        </ConditionalLoader>
-                    </Card>
-                </Grid>
+                        >
+                        {({ values, setFieldValue, errors }) => (
+                            <Form className='card-form'>
+                                <FormLabel sx={{px: '1rem'}} htmlFor='file'>Upload json file to import</FormLabel>
+                                <input id="file" ref={fileRef} name="file" type="file" className='card-form-file' onChange={(event) => {
+                                    setFieldValue("file", event.currentTarget.files?.[0]);
+                                    checkJson(event);
+                                    readerRead(event);
+                                }} />
+                            </Form>
+                        )}
+                    </Formik>
+                </Card>
             </Grid>
-        </DashboardMain>
-    </div>
-  )
+            <Grid xs={3.95}>
+                <Card 
+                    sx={{
+                        pt: '2rem',
+                        pb: '1rem'
+                    }}
+                >
+                    <h2>EXPORT</h2>
+                </Card>
+            </Grid>
+            <Grid xs={3.95}>
+                <Card 
+                    sx={{
+                        pt: '3.9rem',
+                        pb: '3.9rem'
+                    }}
+                >
+                    <div className='countup-container'>
+                        <CountUp end={data.markers.length} duration={3} className='countup-number'/>
+                        <div className='flex countup-suffix'>
+                            <p className='countup-string'>Markers</p>
+                            <MarkerIcon 
+                                className='countup-icon'
+                                sx={{
+                                    width: '3rem',
+                                    height: '3rem',
+                                    marginLeft: '0.1rem',
+                                }}
+                            />
+                        </div>
+                    </div>
+                </Card>
+            </Grid>
+            <Grid xs={11.95}>
+                <Card 
+                    sx={{
+                        pt: '1rem',
+                        pb: '1rem',
+                        px: '1rem',
+                        minHeight: '25rem',
+                        maxWidth: '100%',
+                    }}
+                >
+                    <ConditionalLoader condition={jsonLoaded && jsonKeys !== null}>
+                        <MarkerDataGrid refetch={refetch} json={jsonData} layers={data.layers}/>
+                    </ConditionalLoader>
+                    <ConditionalLoader condition={!jsonLoaded || jsonKeys == null}>
+                        <p className='datagrid-placeholder'>Upload a JSON file to see the data</p>
+                    </ConditionalLoader>
+                </Card>
+            </Grid>
+        </Grid>
+    </DashboardMain>
+</div>
+)
 }
 
 export default ImportExport;

@@ -30,7 +30,7 @@ const Header = () => {
     return (
         <div className="header-container">
             <div className="header">
-                <h2>Timelab Dashboard</h2>
+                <h2>Buurtsporen Dashboard</h2>
 
                 
                 <Button variant="contained" onClick={clickButton}>

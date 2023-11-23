@@ -47,10 +47,12 @@ return (
                 },
                 body: data
                 })
-                .then((response) => response.text())
                 .then(async (response) => {
-                    input['fileName'] = response;
-                })     
+                    const responseBody = await response.json();
+                    
+                    input['fileName'] = responseBody.fileName;
+                    input['url'] = responseBody.url;
+                })
             }
             
 

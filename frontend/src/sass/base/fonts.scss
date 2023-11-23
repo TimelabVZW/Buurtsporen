@@ -1,23 +1,11 @@
-@font-face {
-    font-family:'Baskerville';
-    src: url('../../assets/fonts/Baskerville.woff2') format('woff2'),
-    url('../../assets/fonts/Baskerville.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-    font-stretch: normal;
-    unicode-range: U+0020-2044;
-  }
-  
-  @font-face {
-    font-family:'Baskerville Bold';
-    src: url('../../assets/fonts/BaskervilleBold.woff2') format('woff2'),
-    url('../../assets/fonts/BaskervilleBold.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-    font-stretch: normal;
-    unicode-range: U+0020-2044;
-  }
+h1, h2 {
+  font-family: "cubano", sans-serif !important;
+}
 
-  * {
-    font-family: 'Baskerville Bold', sans-serif;
-  }
+* {
+  font-family: "eurostile", sans-serif !important;
+}
+
+h2 {
+  font-size: 2rem;
+}

@@ -9,7 +9,6 @@ import { LayerService } from 'src/layer/layer.service';
 import { IconService } from './../icon/icon.service';
 import { CoordinateService } from './../coordinate/coordinate.service';
 import { Layer } from 'src/layer/entities/layer.entity';
-import { FilterOperator, FilterSuffix, paginate, PaginateQuery, Paginated } from 'nestjs-paginate'
 import bounds from './bounds';
 import { Icon } from 'src/icon/entities/icon.entity';
 var classifyPoint = require("robust-point-in-polygon");
@@ -130,9 +129,13 @@ export class MarkerService {
   }
 
   //   UPDATE
-
-  update(id: number, updateMarkerInput: UpdateMarkerInput) {
-    return `This action updates a #${id} marker`;
+  
+  async setMarkerIconId(id: number, iconId: number): Promise<Marker> {
+    let marker = await this.markerRepository.findOne({
+      where: { id },
+    });
+    
+    return this.markerRepository.save({...marker, iconId});
   }
 
   //   DELETE

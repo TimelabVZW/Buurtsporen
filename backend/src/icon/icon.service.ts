@@ -1,15 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { CreateIconInput } from './dto/create-icon.input';
 import { UpdateIconInput } from './dto/update-icon.input';
 import { Icon } from './entities/icon.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { MarkerService } from 'src/marker/marker.service';
 
 @Injectable()
 export class IconService {
   constructor(
     @InjectRepository(Icon)
     private iconRepository: Repository<Icon>,
+    @Inject(forwardRef(() => MarkerService))
+    private markerService: MarkerService,
   ) {}
 
   //   CREATE
@@ -43,7 +46,16 @@ export class IconService {
 
   //   DELETE
 
-  remove(id: number) {
+  async remove(id: number) {
+    let icon = await this.iconRepository.findOne({
+      where: { id },
+      relations: ['markers'],
+    });
+
+    icon.markers.forEach((marker) => {
+      this.markerService.setMarkerIconId(marker.id, null)
+    })
+
     return this.iconRepository.delete(id);
   }
 }
