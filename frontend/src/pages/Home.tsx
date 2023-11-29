@@ -214,7 +214,7 @@ const Home = () => {
             </div>
           </div>
         </MassModal>
-      <ConditionalLoader condition={!inBounds && formVisible === ''}>
+      <ConditionalLoader condition={inBounds && formVisible === ''}>
         <Button className='button button--form' disabled={modal !== ''} type='button' onClick={() => setFormVisible('create-marker')}>
           <AddBoxIcon color='secondary'/>
         </Button>
