@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Popup, Marker, useMapEvent, useMap } from 'react-leaflet';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Icon, LatLng, latLng } from 'leaflet';
-import { Bounds, Button, ConditionalLoader, CustomCheckbox, MassModal, TimestampForm } from '../components';
+import { Bounds, Button, ConditionalLoader, CustomCheckbox, MassModal, SVGButton, TimestampForm } from '../components';
 import { toast, ToastContainer } from 'react-toastify';
 import { GET_MAPS_DATA } from '../gql/queries';
 import { useQuery } from '@apollo/client';
@@ -171,15 +171,32 @@ const Home = () => {
 
       {/* UI COMPONENTS */}
         <ConditionalLoader condition={modal === '' && formVisible === ''}>
-          <img className='title' src={RasterLogoImage}/>
-        </ConditionalLoader>
-        <ConditionalLoader className='button-container button-container--bottom-left' condition={formVisible === ''}>
-          <Button className='button button--filters' disabled={modal !== ''} type='button' onClick={() => setModal('filters')}>
-            <FilterIcon color='secondary'/>
-          </Button>
-          <Button className='button button--refresh' disabled={modal !== ''} type='button' onClick={onRefreshClick}>
-            <MyLocationIcon color='secondary'/>
-          </Button>
+          <div className='title--container'>
+            <img className='title' src={RasterLogoImage}/>
+            <div className='title--buttons flex flex-row'>
+              <SVGButton
+                onClick={onRefreshClick}
+              >
+                <MyLocationIcon color='secondary'/>
+              </SVGButton>
+              <SVGButton
+                onClick={() => {
+                  setModal('filters');
+                }}
+              >
+                <FilterIcon color='secondary'/>
+              </SVGButton>
+              <ConditionalLoader condition={inBounds && formVisible === ''}>
+                <SVGButton
+                  onClick={() => {
+                    setFormVisible('create-marker');
+                  }}
+                >
+                  <AddBoxIcon color='secondary'/>
+                </SVGButton>
+              </ConditionalLoader>
+            </div>
+          </div>
         </ConditionalLoader>
         <MassModal visible={modal === 'filters'} setVisible={(e : string) => setModal(e)}>
           <div className='filters-container'>
@@ -214,11 +231,6 @@ const Home = () => {
             </div>
           </div>
         </MassModal>
-      <ConditionalLoader condition={inBounds && formVisible === ''}>
-        <Button className='button button--form' disabled={modal !== ''} type='button' onClick={() => setFormVisible('create-marker')}>
-          <AddBoxIcon color='secondary'/>
-        </Button>
-      </ConditionalLoader>
     </div>
   )
 }
