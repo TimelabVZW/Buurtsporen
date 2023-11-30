@@ -1,6 +1,12 @@
+.main-container {
+    background-color: #d8d8d8;
+    height: 100vh;
+    width: 100vw;
+}
 .form-container {
     margin: auto;
-    background-color: #FFFFFF;
+    background-color: #3398db;
+    border-radius: 2rem;
     display: flex;
     flex-direction: column;
     padding: 3rem;
@@ -63,7 +69,7 @@ form {
                 font-size: 1.5rem;
                 color: black;
                 text-decoration: underline;
-                background-color: white;
+                background-color: #3398db;
                 border: none;
                 margin-top: 1rem;
             }

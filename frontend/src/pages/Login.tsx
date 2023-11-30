@@ -32,7 +32,7 @@ const Login = () => {
         <div className='main-content'>
             <div className='main-container'>
                 <div className='form-container'>
-                <h2  >Timelab</h2>
+                <h2  >Buurtsporen</h2>
                 <Formik
                     initialValues={{
                         email: "",
