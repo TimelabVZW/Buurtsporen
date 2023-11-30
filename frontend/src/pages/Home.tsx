@@ -186,15 +186,17 @@ const Home = () => {
               >
                 <FilterIcon color='secondary'/>
               </SVGButton>
-              <ConditionalLoader condition={inBounds && formVisible === ''}>
-                <SVGButton
-                  onClick={() => {
-                    setFormVisible('create-marker');
-                  }}
-                >
-                  <AddBoxIcon color='secondary'/>
-                </SVGButton>
-              </ConditionalLoader>
+              <div className='filler-square'>
+                <ConditionalLoader condition={inBounds && formVisible === ''}>
+                  <SVGButton
+                    onClick={() => {
+                      setFormVisible('create-marker');
+                    }}
+                  >
+                    <AddBoxIcon color='secondary'/>
+                  </SVGButton>
+                </ConditionalLoader>
+              </div>
             </div>
           </div>
         </ConditionalLoader>

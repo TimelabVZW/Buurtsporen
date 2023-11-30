@@ -38,10 +38,15 @@
       }
     }
   }
+  
+  .filler-square {
+    height: 2.3rem;
+    width: 2.3rem;
+  }
 }
 
 .title--buttons {
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .title {
@@ -58,6 +63,11 @@
 
   .title--container {
     padding-top: 1rem;
+  }
+
+  .filler-square {
+    width: 3.3rem !important;
+    height: 3.3rem !important;
   }
 
   .button--svg {
