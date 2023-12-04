@@ -13,7 +13,7 @@ const Bounds = () => {
   return (
     <>
         <Rectangle bounds={fullBounds} pathOptions={{color: '#000', fillOpacity: 0.2}} />
-        <Polygon positions={bounds} pathOptions={{ color: '#fff', fillOpacity: 0.2 }} />
+        <Polygon positions={bounds} pathOptions={{ color: '#fff', fillOpacity: 0.4 }} />
     </>
   );
 };
