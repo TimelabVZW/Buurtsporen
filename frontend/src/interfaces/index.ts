@@ -29,6 +29,7 @@ interface Icon {
     id: number,
     name: string,
     fileName: string,
+    url: string,
 }
 
 interface MarkerFormProps {
