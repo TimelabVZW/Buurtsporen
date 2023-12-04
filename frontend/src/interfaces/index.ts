@@ -29,7 +29,6 @@ interface Icon {
     id: number,
     name: string,
     fileName: string,
-    url: string,
 }
 
 interface MarkerFormProps {
@@ -163,6 +162,7 @@ interface SVGButtonProps {
     small?: boolean,
     onClick: () => void,
     children: React.ReactNode,
+    className?: string,
 }
 
 interface CrudDataGridProps {
