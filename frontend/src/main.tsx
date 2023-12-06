@@ -5,7 +5,7 @@ import {
   Route } from 'react-router-dom'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import App from './App'
-import { Dashboard, Home, ImportExport, Layers, Login, Markers, Timestamps } from './pages';
+import { Dashboard, Home, ImportExport, LandingPage, Layers, Login, Markers, Timestamps } from './pages';
 import { AuthProvider } from './context/authContext';
 import { ThemeProvider } from '@mui/material/styles';
 
@@ -30,7 +30,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <BrowserRouter>
           <Routes>
               <Route element={<App />}>
-                <Route path="/" element={<Home />} />
+                <Route path='/' element={<LandingPage/>} />
+                <Route path="/map" element={<Home />} />
                 <Route path='/login' element={<Login/>} />
                 <Route path='/dashboard' element={<Dashboard/>} />
                 <Route path='/layers' element={<Layers/>} />
