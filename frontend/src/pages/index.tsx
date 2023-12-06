@@ -5,6 +5,7 @@ import Layers from "./Layers";
 import ImportExport from "./ImportExport";
 import Timestamps from "./Timestamps";
 import Markers from "./Markers";
+import LandingPage from "./LandingPage";
 
 export { 
     Home,
@@ -13,5 +14,6 @@ export {
     Layers,
     ImportExport,
     Timestamps,
-    Markers
+    Markers,
+    LandingPage,
 } 
