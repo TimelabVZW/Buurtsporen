@@ -217,7 +217,7 @@ const Layers = () => {
                             maxWidth: '100%',
                         }}
                     >
-                        <CrudDataGrid rows={rows} columns={columns} pageSize={5} pageSizeOptions={[5, 10, 20]}
+                        <CrudDataGrid rows={rows} columns={columns} pageSize={10} pageSizeOptions={[5, 10, 20]}
                         />
                     </Card>
                 </Grid>
