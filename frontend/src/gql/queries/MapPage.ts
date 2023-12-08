@@ -6,6 +6,7 @@ query GetLayersData {
         id
         name
         private
+        defaultShow
         createdAt
         markers {
             id
@@ -18,7 +19,6 @@ query GetLayersData {
             icon {
                 id
                 fileName
-                url
             }
             coordinates {
                 id

@@ -9,6 +9,11 @@ import InfoIcon from '@mui/icons-material/Info';
 
 import BackupMarkerIconImage from '../assets/svg/BS_backup_icon.svg';
 
+const markerIcon = new Icon({
+    iconUrl: MarkerIconImage,
+    iconSize: [32, 32]
+  })
+
 //   disabled === modal !== ''
 const MapElement: React.FC<MapElementProps> = ({marker, onClick, disabled}: MapElementProps): JSX.Element | null => {
     const coordsForSort= [...marker.coordinates]
@@ -23,7 +28,7 @@ const MapElement: React.FC<MapElementProps> = ({marker, onClick, disabled}: MapE
             return (
                 <Marker  
                     icon={ new Icon({
-                        iconUrl: marker.icon? marker.icon.url : BackupMarkerIconImage,
+                        iconUrl: marker.icon? `http://localhost:3000/icon/icon-file/${marker.icon.fileName}` : BackupMarkerIconImage,
                         iconSize: [32, 32]
                       })
                     }

@@ -70,12 +70,23 @@ const Home = () => {
     });
   }, [refresh]);
 
+  useMemo(() => {
+      if (data) {
+        let defaultLayers = data.layers.filter((layer: any) => layer.defaultShow === true);
+        
+        if (defaultLayers.length > 0) {
+          setLayers(defaultLayers.map((layer: any) => layer.name));
+        }
+      }
+    }, [data]
+  )
+
   if (loading) return <p>Loading...</p>;
 
   if (error) {
       return <p>Error...</p>;
   }
-  
+
   const onRefreshClick = () => {
     setRefresh(new Date());
     if (location) {

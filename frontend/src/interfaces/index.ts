@@ -173,6 +173,11 @@ interface CrudDataGridProps {
     pageSizeOptions: number[];
 }
 
+interface CrudMarkerDataGridProps {
+    pageSize: number;
+    pageSizeOptions: number[];
+}
+
 export type {
     DeconstructedObject,
     MarkerDataGridProps,
@@ -193,6 +198,7 @@ export type {
     MassModalProps,
     SVGButtonProps,
     CrudDataGridProps,
+    CrudMarkerDataGridProps,
     MarkerFormProps,
     TimestampListProps,
     TimestampFormProps,

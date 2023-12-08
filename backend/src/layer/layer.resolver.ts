@@ -23,10 +23,10 @@ export class LayerResolver {
     return this.layerService.findOne(id);
   }
 
-  // @Mutation(() => Layer)
-  // updateLayer(@Args('updateLayerInput') updateLayerInput: UpdateLayerInput) {
-  //   return this.layerService.update(updateLayerInput.id, updateLayerInput);
-  // }
+  @Mutation(() => Layer)
+  updateDefaultShow(@Args('updateLayerInput') updateLayerInput: UpdateLayerInput) {
+    return this.layerService.updateDefaultShow(updateLayerInput.id, updateLayerInput);
+  }
 
   @Mutation(() => Layer)
   removeLayer(@Args('id', { type: () => Int }) id: number) {

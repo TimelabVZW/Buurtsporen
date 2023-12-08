@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Layer } from './entities/layer.entity';
 import { CreateLayerInput } from './dto/create-layer.input';
+import { UpdateLayerInput } from './dto/update-layer.input';
 
 @Injectable()
 export class LayerService {
@@ -32,10 +33,14 @@ export class LayerService {
   }
 
   //   UPDATE
+  
+  updateDefaultShow(id: number, updateLayerInput: UpdateLayerInput) {
+    let oldLayer = this.layerRepository.findOne({
+      where: { id },
+    });
 
-  // update(id: number, updateLayerInput: UpdateLayerInput) {
-  //   return `This action updates a #${id} category`;
-  // }
+    return this.layerRepository.save({...oldLayer, ...updateLayerInput});
+  }
 
   //   DELETE
 

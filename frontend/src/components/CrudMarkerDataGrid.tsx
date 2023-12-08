@@ -1,14 +1,14 @@
 import { Button } from '@mui/material';
 import { DataGrid, GridCellParams, getGridNumericOperators, getGridStringOperators } from '@mui/x-data-grid';
 import React, { useMemo } from 'react';
-import { CrudDataGridProps } from '../interfaces';
+import { CrudMarkerDataGridProps } from '../interfaces';
 import { mutationRemoveMarker } from '../gql/mutations';
 import { useMutation, useQuery } from '@apollo/client';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { GET_PAGINATED_MARKERS } from '../gql/queries';
 import debounce from 'lodash.debounce';
 
-const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: {pageSize: number, pageSizeOptions: number[]}) => {
+const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridProps) => {
   const [removeMarker] = useMutation(mutationRemoveMarker);
   const [page, setPage] = React.useState(1);
   const [gridPage, setGridPage] = React.useState(0);

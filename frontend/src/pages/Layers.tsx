@@ -1,4 +1,4 @@
-import { CrudDataGrid, DashboardMain, Header, MassModal } from '../components';
+import { CrudDataGrid, CustomCheckbox, DashboardMain, Header, MassModal } from '../components';
 import { useAuth } from '../context/authContext';
 import { Navigate } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
@@ -9,7 +9,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import CountUp from 'react-countup';
 
 import '../sass/pages/dashboard.scss'
-import { mutationCreateLayer, mutationRemoveLayer } from '../gql/mutations';
+import { mutationCreateLayer, mutationRemoveLayer, mutationUpdateDefaultShow } from '../gql/mutations';
 import { GET_LAYERS_DATA } from '../gql/queries';
 import { GridColDef } from '@mui/x-data-grid';
 import { useState } from 'react';
@@ -20,6 +20,7 @@ const Layers = () => {
     const [activeLayer, setActiveLayer] = useState<null | number>(null);
     const [createLayer] = useMutation(mutationCreateLayer);
     const [removeLayer] = useMutation(mutationRemoveLayer);
+    const [updateDefaultShow] = useMutation(mutationUpdateDefaultShow);
     const { loading, error, data, refetch } = useQuery(GET_LAYERS_DATA);
 
     if (authLoading) {
@@ -60,6 +61,36 @@ const Layers = () => {
         { field: "createdAt", headerName: "Created at", width: 250 },
         { field: "private", headerName: "Private", width: 150 },
         { field: "markers", headerName: "Markers", width: 150 },
+        {
+            field: "defaultShow",
+            headerName: "Default to show",
+            width: 150,
+            sortable: false,
+            filterable: false,
+            renderCell: (params) => {
+                let disabled = false;
+                const onClick = async (e: any) => {
+                    disabled = true;
+                    await updateDefaultShow({
+                        variables: {
+                            id: params.row.id,
+                            defaultShow: !params.row.defaultShow
+                        }
+                    })
+                    params.row.defaultShow = !params.row.defaultShow;
+                    disabled = false;
+                };
+            
+                return (
+                    <CustomCheckbox
+                        name=''
+                        onClick={onClick}
+                        disabled={disabled}
+                        initialChecked={params.row.defaultShow}
+                    />
+                )
+            }
+        },
     ]
 
 

@@ -7,6 +7,7 @@ import mutationRemoveTimestamp from "./RemoveTimestamp";
 import mutationCreateIcon from "./CreateIcon";
 import mutationRemoveIcon from "./RemoveIcon";
 import mutationUpdateIcon from "./UpdateIcon";
+import mutationUpdateDefaultShow from "./UpdateDefaultShow";
 
 export {
     mutationCreateLayer,
@@ -18,4 +19,5 @@ export {
     mutationCreateIcon,
     mutationUpdateIcon,
     mutationRemoveIcon,
+    mutationUpdateDefaultShow,
 }

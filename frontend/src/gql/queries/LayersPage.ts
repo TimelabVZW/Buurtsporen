@@ -7,6 +7,7 @@ query GetLayersData {
         name
         private
         createdAt
+        defaultShow
         markers {
             id
         }

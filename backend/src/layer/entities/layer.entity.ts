@@ -32,6 +32,10 @@ export class Layer {
   @Field()
   private: boolean;
 
+  @Column({ default: false })
+  @Field()
+  defaultShow: boolean;
+
   // //   Markers 1-M
   @OneToMany(() => Marker, (marker) => marker.layer)
   @Field(() => [Marker], { nullable: true })
