@@ -28,7 +28,8 @@ const MapElement: React.FC<MapElementProps> = ({marker, onClick, disabled}: MapE
             return (
                 <Marker  
                     icon={ new Icon({
-                        iconUrl: marker.icon? marker.icon.url : BackupMarkerIconImage,
+                        iconUrl: marker.icon? marker.icon.url : '',
+                        emptyUrl: BackupMarkerIconImage,
                         iconSize: [32, 32]
                       })
                     }
