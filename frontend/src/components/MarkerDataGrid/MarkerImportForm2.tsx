@@ -11,7 +11,7 @@ const validationSchema = yup.object({
     description: yup.string().required(),
 });
 
-const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModal, refetch}: MarkerImportFormProps) => {
+const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModal, refetch, jsonType}: MarkerImportFormProps) => {
     const [focus, setFocus] = React.useState<'' | 'title' | 'description'>('');
     const [importMarkers] = useMutation(mutationImportMarkers);
     const titleField = useRef<HTMLInputElement>(null);
@@ -50,6 +50,22 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
             
             function getCoordinatesArray(markerData: any, field: string): [number, number][] | null {
                 const coordinates = markerData[field];
+
+                if (jsonType !== 'json') {
+                    if (markerData[field]) {
+                        let coords = markerData[field].replace('POINT (', '').replace(')', '').split(/\s+/);
+                        
+                        // Check if there are exactly two elements in the resulting array
+                        if (coords.length === 2 && !isNaN(parseFloat(coords[0])) && !isNaN(parseFloat(coords[1]))) {
+                            let [longitude, latitude] = coords.map(parseFloat);
+                            return [[latitude, longitude]];
+                        } else {
+                            console.log('Invalid input string.');
+                        }
+                    } else {
+                        console.log('markerData[field] is undefined or null.');
+                    }
+                }
             
                 if (!Array.isArray(coordinates)) {
                     return null;
@@ -99,7 +115,7 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
                     
                     if (coords) {
                         const input: MarkerInput = {
-                            type: markerData['geometry.geometry.type'],
+                            type: jsonType === 'json'? markerData['geometry.geometry.type'] : 'Point',
                             name: templateString(values.title, markerData),
                             coords,
                             description: templateString(values.description, markerData),

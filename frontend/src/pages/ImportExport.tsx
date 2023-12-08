@@ -1,23 +1,25 @@
 import { ConditionalLoader, DashboardMain, Header, MarkerDataGrid } from '../components';
 import { useAuth } from '../context/authContext';
 import { Navigate } from 'react-router-dom';
-import { Button, Card, Checkbox, FormControlLabel, FormLabel, Grid, Input, MenuItem, Select, TextField } from '@mui/material';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { Field, Form, Formik } from 'formik';
+import { Card, FormLabel, Grid} from '@mui/material';
+import { Form, Formik } from 'formik';
 import CountUp from 'react-countup';
 import MarkerIcon from '@mui/icons-material/Room';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_IMPORTEXPORT_DATA } from '../gql/queries';
 import * as yup from 'yup';
+import Papa from 'papaparse';
+import * as XLSX from 'xlsx';
 
 import '../sass/pages/dashboard.scss'
-import { DetailedHTMLProps, InputHTMLAttributes, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { mutationImportMarkers } from '../gql/mutations';
 
 const ImportExport = () => {
     const [ jsonLoaded , setJsonLoaded ] = useState(false);
     const [ jsonKeys , setJsonKeys ] = useState<string[] | null>(null); 
     const [ jsonData , setJsonData ]  = useState([]); 
+    const [ jsonType , setJsonType ]  = useState(''); 
     const { authenticated, authLoading, user } = useAuth();
     const [importMarkers] = useMutation(mutationImportMarkers);
     const fileRef = useRef<HTMLInputElement | null>(null);
@@ -69,6 +71,8 @@ const validationSchema = yup.object({
               const type = file.type.split("/")[1];
               const validTypes = [
                 "json",
+                'xlsx',
+                'csv',
               ];
               if (!validTypes.includes(type)) {
                 valid = false;
@@ -80,32 +84,88 @@ const validationSchema = yup.object({
       )
   })
 //   file reader functions
-  function readerRead(event: any) {
-    let reader = new FileReader();
-    reader.onload = readerLoad;
-    reader.readAsText(event.target.files[0])
-  }
+    async function readerRead(event: any) {
+        const file = event.target.files[0];
 
-  async function readerLoad(event: any) {
-    let obj = JSON.parse(event.target.result);
-    setJsonLoaded(true);
-    setJsonData(obj);
-    let jsonKeysTemp = Object.keys(obj[1]);
-    setJsonKeys(jsonKeysTemp.filter((key: any) => typeof obj[0][key] === 'string' || typeof obj[0][key] === 'number'));
-  }
+        if (file.type === 'application/json') {
+            // Handle JSON file
+            setJsonType('json');
+            let reader = new FileReader();
+            reader.onload = readerLoad;
+            reader.readAsText(file);
+        } else if (file.type === 'text/csv') {
+            // Handle CSV file
+            setJsonType('csv');
+            Papa.parse(file, {
+                complete: (result) => {
+                handleParsedData(result.data);
+                },
+                header: true, // Set to true if CSV file has headers
+            });
+        } else if (
+            file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+            file.type === 'application/vnd.ms-excel'
+        ) {
+            setJsonType('xlsx');
+            // Handle XLSX file
+            const arrayBuffer = await file.arrayBuffer();
+            const data = new Uint8Array(arrayBuffer);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-  function checkJson(event: any) {
-    if (event.currentTarget.files?.[0].type.split('/')[1] === 'json') {
-        return;
+            // Skip the first row to use the values from the second row as keys
+            const keysRow = jsonData.shift();
+      
+            // Handle the rest of the data
+            handleParsedData(jsonData, keysRow);
+        }
+
+        function handleParsedData(parsedData: any, keysRow?: any) {
+            // Use the values from the first row as keys if available
+            const newJsonData = parsedData.map((row: any) => {
+                const newRow: any = {};
+                if (keysRow) {
+                Object.keys(row).forEach((key, index) => {
+                    newRow[keysRow[key] || `column${index + 1}`] = row[key];
+                });
+                } else {
+                // If keysRow is not available, use original keys
+                Object.keys(row).forEach((key, index) => {
+                    newRow[key] = row[key];
+                });
+                }
+                return newRow;
+            });
+        
+            setJsonLoaded(true);
+            setJsonData(newJsonData);
+        
+            // Now, jsonKeys will be populated with the new keys based on the values from the first row (if available)
+            let jsonKeysTemp = Object.keys(newJsonData[0]);
+            setJsonKeys(
+                jsonKeysTemp.filter(
+                (key: any) => typeof newJsonData[0][key] === 'string' || typeof newJsonData[0][key] === 'number'
+                )
+            );
+        }
     }
-    setJsonLoaded(false);
-  }
 
-  function filterJsonKeys(): void {
-    if (jsonKeys && jsonData) {
-        setJsonKeys(jsonKeys.filter((key: any) => typeof jsonData[0][key] === 'string' || typeof jsonData[0][key] === 'number'))
+    async function readerLoad(event: any) {
+        let obj = JSON.parse(event.target.result);
+        setJsonLoaded(true);
+        setJsonData(obj);
+        let jsonKeysTemp = Object.keys(obj[1]);
+        setJsonKeys(jsonKeysTemp.filter((key: any) => typeof obj[0][key] === 'string' || typeof obj[0][key] === 'number'));
     }
-  }
+
+    function checkJson(event: any) {
+        if (event.currentTarget.files?.[0].type.split('/')[1] === 'json') {
+            return;
+        }
+        setJsonLoaded(false);
+    }
     
   return (
     <div className='dashboard-container dashboard-container--import'>
@@ -244,7 +304,7 @@ const validationSchema = yup.object({
                     }}
                 >
                     <ConditionalLoader condition={jsonLoaded && jsonKeys !== null}>
-                        <MarkerDataGrid refetch={refetch} json={jsonData} layers={data.layers}/>
+                        <MarkerDataGrid refetch={refetch} json={jsonData} layers={data.layers} jsonType={jsonType}/>
                     </ConditionalLoader>
                     <ConditionalLoader condition={!jsonLoaded || jsonKeys == null}>
                         <p className='datagrid-placeholder'>Upload a JSON file to see the data</p>

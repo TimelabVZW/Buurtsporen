@@ -2,11 +2,12 @@ import React from 'react'
 import { Icon, MarkerImportFormProps } from '../../interfaces'
 import { ErrorMessage, Form, Formik } from 'formik'
 import * as yup from 'yup';
-import { Button, FormLabel, MenuItem, StepButton, TextField } from '@mui/material';
+import { Button, FormLabel, MenuItem, TextField } from '@mui/material';
 import { useMutation, useQuery } from '@apollo/client';
 import { mutationImportMarkers } from '../../gql/mutations';
 import { GET_ICONS_PAGE } from '../../gql/queries';
 import { ColorBox } from "material-ui-color";
+
 
 const validationSchema = yup.object({
     layerId: yup.number().required(),
@@ -15,7 +16,7 @@ const validationSchema = yup.object({
     color: yup.number().required(),
 });
 
-const MarkerImportForm1 = ({selectedRows, layers, setModal, formData, setFormData}: MarkerImportFormProps) => {
+const MarkerImportForm1 = ({selectedRows, layers, setModal, formData, setFormData, jsonType}: MarkerImportFormProps) => {
     const [importMarkers] = useMutation(mutationImportMarkers);
     const [colorValue, setColorValue] = React.useState<number>(0);
 
@@ -42,7 +43,7 @@ const MarkerImportForm1 = ({selectedRows, layers, setModal, formData, setFormDat
         validationSchema={validationSchema}
         validate={(values) => {
             const errors: Record<string, string> = {};
-            if (values.coordinateField) {
+            if (values.coordinateField && jsonType === 'json') {
                 if (typeof selectedRows[0][values.coordinateField][0] !== 'number' && typeof selectedRows[0][values.coordinateField][0][0] !== 'number' && typeof selectedRows[0][values.coordinateField][0][0][0] !== 'number') {
                     errors.coordinateField = 'The coordinates field must contain a number';
                 }

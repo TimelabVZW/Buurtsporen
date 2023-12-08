@@ -11,6 +11,7 @@ interface layer {
 
 interface MarkerDataGridProps {
     json: any[],
+    jsonType: string,
     layers: layer[],
     refetch: () => void,
 }
@@ -123,6 +124,7 @@ interface Coordinate {
 interface MarkerImportFormProps {
     selectedRows: any[],
     layers: layer[],
+    jsonType: string,
     setModal: (value: string) => void,
     formData: FormData,
     setFormData: (value: object) => void,
