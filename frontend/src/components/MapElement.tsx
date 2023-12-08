@@ -4,15 +4,9 @@ import { Marker, Polygon, Polyline, Popup } from 'react-leaflet';
 import Button from './Button';
 import { Icon, LatLngExpression } from 'leaflet';
 
-import MarkerIconImage from '../assets/images/normal-marker.png';
+import BackupMarkerIconImage from '../assets/svg/BS_backup_icon.svg';
 import InfoIcon from '@mui/icons-material/Info';
 
-import BackupMarkerIconImage from '../assets/svg/BS_backup_icon.svg';
-
-const markerIcon = new Icon({
-    iconUrl: MarkerIconImage,
-    iconSize: [32, 32]
-  })
 
 //   disabled === modal !== ''
 const MapElement: React.FC<MapElementProps> = ({marker, onClick, disabled}: MapElementProps): JSX.Element | null => {
