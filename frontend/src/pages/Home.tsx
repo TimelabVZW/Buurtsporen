@@ -49,7 +49,6 @@ const Home = () => {
         progress: undefined,
         theme: "colored",
       });
-      console.log('test');
       
       const crds = position.coords;
       if (location?.[0] !== crds.latitude && location?.[1] !== crds.longitude) {

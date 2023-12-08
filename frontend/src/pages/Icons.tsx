@@ -249,7 +249,6 @@ const Icons = () => {
                         })
                         .then(async (response) => {
                         const responseBody = await response.json();
-                        console.log(responseBody);
                         
                         input['fileName'] = responseBody.fileName;
                         input['url'] = responseBody.url;
@@ -259,7 +258,6 @@ const Icons = () => {
                         console.error('An error occurred:', error);
                         });
                 
-                        console.log(values)
                         if (values.oldName) {
                             await fetch(`https://api.buurtsporen.be/icon/deleteSDK/${values.oldName}`, {
                             method: 'GET',
@@ -273,8 +271,6 @@ const Icons = () => {
                     if (input.fileName === '') {
                         input.fileName = icons.filter((icon: any) => icon.id === activeIcon)[0]?.fileName;
                     }
-
-                    console.log(input)
 
                     const { data } = await updateIcon({
                         variables: input
