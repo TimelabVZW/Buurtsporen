@@ -17,6 +17,8 @@ const MapElement: React.FC<MapElementProps> = ({marker, onClick, disabled}: MapE
     }); 
     
     let coordinates: LatLngExpression[] = sortedCoordinates.map((coordinate) => [coordinate.latitude, coordinate.longitude]);
+    console.log(marker.icon)
+
     switch (marker.type) {
         case 'Point':
             return (
