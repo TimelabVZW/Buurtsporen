@@ -28,7 +28,7 @@ const MapElement: React.FC<MapElementProps> = ({marker, onClick, disabled}: MapE
             return (
                 <Marker  
                     icon={ new Icon({
-                        iconUrl: marker.icon? `http://localhost:3000/icon/icon-file/${marker.icon.fileName}` : BackupMarkerIconImage,
+                        iconUrl: marker.icon? marker.icon.url : BackupMarkerIconImage,
                         iconSize: [32, 32]
                       })
                     }
