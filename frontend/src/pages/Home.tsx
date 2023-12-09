@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Popup, Marker, useMapEvent, useMap } from 'react-leaflet';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Icon, LatLng, latLng } from 'leaflet';
-import { Bounds, Button, ConditionalLoader, CustomCheckbox, MassModal, SVGButton, TimestampForm } from '../components';
+import { Bounds, Button, ConditionalLoader, CustomCheckbox, LoadingMap, MassModal, SVGButton, TimestampForm } from '../components';
 import { toast, ToastContainer } from 'react-toastify';
 import { GET_MAPS_DATA } from '../gql/queries';
 import { useQuery } from '@apollo/client';
@@ -80,7 +80,7 @@ const Home = () => {
     }, [data]
   )
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <LoadingMap/>;
 
   if (error) {
       return <p>Error...</p>;

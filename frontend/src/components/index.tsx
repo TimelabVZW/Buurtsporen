@@ -11,6 +11,7 @@ import MarkerDataGrid from "./MarkerDataGrid/MarkerDataGrid";
 import CrudDataGrid from "./CrudDataGrid";
 import TimestampForm from "./TimestampForm";
 import CrudMarkerDataGrid from "./CrudMarkerDataGrid";
+import LoadingMap from "./LoadingMap";
 
 export {
     Button,
@@ -26,4 +27,5 @@ export {
     CrudDataGrid,
     TimestampForm,
     CrudMarkerDataGrid,
+    LoadingMap,
 }

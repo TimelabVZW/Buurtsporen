@@ -1,0 +1,51 @@
+.loading-map {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #4aaa9f; // Set your desired background color
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .logo--container {
+      position: relative;
+      text-align: center;
+      width: 12rem;
+      height: 12rem;
+  
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 40%;
+        max-height: 40%;
+        width: auto;
+        height: auto;
+      }
+    }
+}
+
+
+@media (min-width: 768px) {
+    .loading-map {
+      
+        .logo--container {
+          width: 18rem;
+          height: 18rem;
+        }
+    }
+}
+
+
+@media (min-width: 1120px) {
+    .loading-map {
+      
+        .logo--container {
+          width: 24rem;
+          height: 24rem;
+        }
+    }
+}
