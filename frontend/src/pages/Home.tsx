@@ -2,6 +2,7 @@ import { MapContainer, TileLayer, Popup, Marker, useMapEvent, useMap } from 'rea
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Icon, LatLng, latLng } from 'leaflet';
 import { Bounds, Button, ConditionalLoader, CustomCheckbox, LoadingMap, MassModal, SVGButton, TimestampForm } from '../components';
+import { Button as MuiButton } from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
 import { GET_MAPS_DATA } from '../gql/queries';
 import { useQuery } from '@apollo/client';
@@ -241,6 +242,21 @@ const Home = () => {
                 <CustomCheckbox className='filter__imported' initialChecked={onlyTimeLab} onClick={() => setOnlyTimeLab(!onlyTimeLab)} name='Toon enkel de data dat door Timelab zijn toegevoegd'/>
               </div>
             </div>
+            <MuiButton
+              variant='contained'
+              className='card-form-button'
+              onClick={() => {
+                setModal('');
+              }}
+              sx={{
+                  display: 'flex',
+                  justifyContent: 'end',
+                  margin: '1rem 1rem 0 auto',
+                  width: 'max-content'
+              }}
+            >
+              {'Filter'}
+            </MuiButton>
           </div>
         </MassModal>
     </div>
