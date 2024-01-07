@@ -91,7 +91,7 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
           setActiveMarker(params.row.id);
           setModal('edit');
         };
-        return <Button onClick={onClick}><DeleteIcon sx={{ fill: '#FF0000', '&::hover': "#AA0000"}}/></Button>;
+        return <Button onClick={onClick}><EditIcon sx={{ fill: '#4aa3df', '&::hover': "#2980b9"}}/></Button>;
       }
     },
     { field: "id", headerName: "ID", width: 150, filterable: true, filterOperators: idFilterOperator },
