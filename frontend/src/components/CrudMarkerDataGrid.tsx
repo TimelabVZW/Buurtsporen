@@ -196,7 +196,7 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
         }}
         >
         {({ values, handleChange, setFieldValue, isSubmitting, errors, touched }) => (
-            <Form className='card-form' style={{paddingTop: '2rem'}}>
+            <Form className='card-form' style={{paddingTop: '2rem', minWidth: '32rem'}}>
                 <FormLabel sx={{px: '1rem'}} htmlFor='name'>Name</FormLabel>
                 <ErrorMessage name="name" component="div" className='errorfield' />
                 <TextField
@@ -214,6 +214,7 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
                     id="description"
                     value={values.description}
                     onChange={handleChange}
+                    multiline
                     rows={5}
                     sx={{width: '100%', py: '0', px: '1rem', mt: '1rem'}}
                 />
