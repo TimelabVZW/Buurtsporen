@@ -39,7 +39,7 @@ const Home = () => {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      toast.info('Fetching your location', {
+      toast.info('Locatie aan het ophalen', {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -222,7 +222,7 @@ const Home = () => {
               <div className='flex flex-col filter__second'>
                 <DatePicker 
                   className='filter__datepicker'
-                  slotProps={{ textField: { helperText: 'Start Date' } }}
+                  slotProps={{ textField: { helperText: 'Start datum' } }}
                   value={dates.start? dayjs(dates.start) : dayjs(new Date())}
                   onChange={(value: any) => {
                     let newDates = dates;
@@ -231,14 +231,14 @@ const Home = () => {
                   }}/>
                 <DatePicker
                   className='filter__datepicker'
-                  slotProps={{ textField: { helperText: 'End Date' } }}
+                  slotProps={{ textField: { helperText: 'Eind datum' } }}
                   value={dates.end? dayjs(dates.end) : dayjs(new Date())}
                   onChange={(value: any) => {
                     let newDates = dates;
                     dates['end'] = value;
                     setDates(newDates)
                   }}/>
-                <CustomCheckbox className='filter__imported' initialChecked={onlyTimeLab} onClick={() => setOnlyTimeLab(!onlyTimeLab)} name='Only show data imported by TimeLab'/>
+                <CustomCheckbox className='filter__imported' initialChecked={onlyTimeLab} onClick={() => setOnlyTimeLab(!onlyTimeLab)} name='Toon enkel de data dat door Timelab zijn toegevoegd'/>
               </div>
             </div>
           </div>

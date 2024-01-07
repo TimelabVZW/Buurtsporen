@@ -153,6 +153,14 @@ export class MarkerService {
     return this.markerRepository.save({...marker, iconId});
   }
 
+  update(id: number, updateMarkerInput: UpdateMarkerInput) {
+    let oldMarker = this.markerRepository.findOne({
+      where: { id },
+    });
+
+    return this.markerRepository.save({...oldMarker, ...updateMarkerInput});
+  }
+
   //   DELETE
 
   remove(id: number) {
