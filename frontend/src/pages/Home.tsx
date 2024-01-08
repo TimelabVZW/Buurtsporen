@@ -244,15 +244,15 @@ const Home = () => {
             </div>
             <MuiButton
               variant='contained'
+              color='primary'
               className='card-form-button'
               onClick={() => {
                 setModal('');
               }}
               sx={{
-                  display: 'flex',
-                  justifyContent: 'end',
-                  margin: '1rem 1rem 0 auto',
-                  width: 'max-content'
+                  display: 'absolute',
+                  bottom: '1rem',
+                  right: '1rem',
               }}
             >
               {'Filter'}
