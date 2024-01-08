@@ -221,24 +221,28 @@ const Home = () => {
                 ))}
               </div>
               <div className='flex flex-col filter__second'>
-                <DatePicker 
-                  className='filter__datepicker'
-                  slotProps={{ textField: { helperText: 'Start datum' } }}
-                  value={dates.start? dayjs(dates.start) : dayjs(new Date())}
-                  onChange={(value: any) => {
-                    let newDates = dates;
-                    dates['start'] = value;
-                    setDates(newDates)
-                  }}/>
-                <DatePicker
-                  className='filter__datepicker'
-                  slotProps={{ textField: { helperText: 'Eind datum' } }}
-                  value={dates.end? dayjs(dates.end) : dayjs(new Date())}
-                  onChange={(value: any) => {
-                    let newDates = dates;
-                    dates['end'] = value;
-                    setDates(newDates)
-                  }}/>
+                <div className='flex flex-row second__dates'>
+                  <DatePicker 
+                    className='filter__datepicker'
+                    slotProps={{ textField: { helperText: 'Start datum' } }}
+                    value={dates.start? dayjs(dates.start) : dayjs(new Date())}
+                    onChange={(value: any) => {
+                      let newDates = dates;
+                      dates['start'] = value;
+                      setDates(newDates)
+                    }}
+                  />
+                  <DatePicker
+                    className='filter__datepicker'
+                    slotProps={{ textField: { helperText: 'Eind datum' } }}
+                    value={dates.end? dayjs(dates.end) : dayjs(new Date())}
+                    onChange={(value: any) => {
+                      let newDates = dates;
+                      dates['end'] = value;
+                      setDates(newDates)
+                    }}
+                  />
+                </div>
                 <CustomCheckbox className='filter__imported' initialChecked={onlyTimeLab} onClick={() => setOnlyTimeLab(!onlyTimeLab)} name='Toon enkel de data dat door Timelab zijn toegevoegd'/>
               </div>
             </div>
