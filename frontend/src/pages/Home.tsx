@@ -250,7 +250,7 @@ const Home = () => {
                 setModal('');
               }}
               sx={{
-                  display: 'absolute',
+                  position: 'absolute',
                   bottom: '1rem',
                   right: '1rem',
               }}

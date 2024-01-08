@@ -7,6 +7,9 @@
         .filter__layers {
             max-height: 5rem;
             overflow-y: auto;
+            &::-webkit-scrollbar {
+                display: none;
+            }
         }
         .filter__datepicker {
             width: 80%;
@@ -35,9 +38,6 @@
             width: 45%;
             height: 50vh;
             max-height: 50vh;
-            &::-webkit-scrollbar {
-                display: none;
-            }
         }
         .filter__second {
             padding-left: 2rem;
