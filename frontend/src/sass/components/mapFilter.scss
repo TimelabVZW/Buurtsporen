@@ -1,6 +1,7 @@
 .filters-container {
     width: 80vw;
-    height: 90vw;
+    height: max-content;
+    padding-bottom: 1rem;
     .filter__options {
         display: flex;
         flex-direction: column;
