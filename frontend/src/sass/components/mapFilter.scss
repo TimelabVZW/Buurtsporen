@@ -10,10 +10,16 @@
             &::-webkit-scrollbar {
                 display: none;
             }
-        }
-        .filter__datepicker {
-            width: 80%;
-            margin-bottom: 1rem;
+            .second__dates {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                .filter__datepicker {
+                    width: 45%;
+                    margin-bottom: 1rem;
+                }
+            }
         }
         .filter__imported {
             width: 100%;
@@ -41,9 +47,15 @@
         }
         .filter__second {
             padding-left: 2rem;
-            .filter__datepicker {
-                width: 100%;
-                margin-bottom: 2rem;
+            .second__dates {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                .filter__datepicker {
+                    width: 100%;
+                    margin-bottom: 2rem;
+                }
             }
             .filter__imported {
                 width: 100%;
