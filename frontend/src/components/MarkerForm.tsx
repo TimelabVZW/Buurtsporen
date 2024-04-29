@@ -52,13 +52,16 @@ return (
             onSubmit={async (values, { setSubmitting }) => {
                 setSubmitting(true);
 
+                let iconId: number | undefined = typeof values.iconId === 'string' ? parseInt(values.iconId) : values.iconId;
+
                 let input: MarkerInput[] = [{
                     type: 'Point',
                     name: values.title,
                     coords: [coordinate],
                     layerId: values.layerId,
+                    iconId,
                     createdAt: new Date(),
-                }]
+                }];
 
                 if (values.description) {
                     input[0].description = values.description;
@@ -195,9 +198,9 @@ return (
                                 {icons.filter((icon: any) => icon.name.includes(search)).map((icon: any) => {
                                     return (
                                     <ImageListItem 
-                                        key={icon.id} 
-                                        cols={1} 
-                                        rows={1} 
+                                        key={icon.id}
+                                        cols={1}
+                                        rows={1}
                                         sx={{
                                             position: 'relative', 
                                             borderStyle: icon.id === activeIcon? 'solid':'none', 
