@@ -304,7 +304,6 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
                             </ImageList>
                         </ConditionalLoader>
                     </div>
-                    <p>{activeIcon}</p>
                 <Button
                   variant='contained'
                   className='card-form-button'
