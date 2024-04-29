@@ -42,10 +42,6 @@ interface MarkerFormProps {
     setFormVisible: (value: string) => void,
 }
 
-interface TiptapProps {
-    setInput: (e: string) => void,
-}
-
 // named MarkerInterface to avoid confusion with Marker from react-leaflet
 interface MarkerInterface {
     id: number, 
