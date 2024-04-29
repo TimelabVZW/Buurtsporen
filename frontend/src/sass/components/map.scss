@@ -71,7 +71,6 @@
 .leaflet-popup-content-wrapper {
     background-color: #fdfdfd;
     border-radius: 1rem;
-    padding-top: 3rem;
     width: max-content;
     height: max-content;
     .button {
@@ -82,6 +81,10 @@
 
 .Mui-checked {
     color: #4aaa9f !important;
+}
+
+.MuiSelect-select {
+    margin-left: 0.5rem;
 }
 
 .MuiButton-contained {

@@ -12,6 +12,7 @@ import CrudDataGrid from "./CrudDataGrid";
 import TimestampForm from "./TimestampForm";
 import CrudMarkerDataGrid from "./CrudMarkerDataGrid";
 import LoadingMap from "./LoadingMap";
+import Tiptap from "./Tiptap";
 
 export {
     Button,
@@ -28,4 +29,5 @@ export {
     TimestampForm,
     CrudMarkerDataGrid,
     LoadingMap,
+    Tiptap,
 }
