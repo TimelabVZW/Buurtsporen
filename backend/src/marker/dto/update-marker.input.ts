@@ -11,4 +11,7 @@ export class UpdateMarkerInput extends PartialType(CreateMarkerInput) {
 
   @Field({ nullable: true})
   description?: string;
+
+  @Field(() => Int, { nullable: true})
+  iconId?: number;
 }

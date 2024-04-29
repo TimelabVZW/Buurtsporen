@@ -13,9 +13,18 @@ const GET_PAGINATED_MARKERS = gql`
         id
         name
       }
+      icon {
+        id
+      }
     }
     markers {
         id
+    }
+    icons {
+      id
+      name
+      fileName
+      url
     }
   }
 `;

@@ -59,11 +59,9 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
                         if (coords.length === 2 && !isNaN(parseFloat(coords[0])) && !isNaN(parseFloat(coords[1]))) {
                             let [longitude, latitude] = coords.map(parseFloat);
                             return [[latitude, longitude]];
-                        } else {
-                            console.log('Invalid input string.');
                         }
                     } else {
-                        console.log('markerData[field] is undefined or null.');
+                        ('markerData[field] is undefined or null.');
                     }
                 }
             

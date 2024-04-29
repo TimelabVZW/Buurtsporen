@@ -225,7 +225,7 @@ input UpdateMarkerInput {
   author: String
   description: String
   color: String
-  iconId: Float
+  iconId: Int
   layerId: Int
   id: Int!
 }

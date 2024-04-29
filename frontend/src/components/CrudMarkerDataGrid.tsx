@@ -1,6 +1,6 @@
-import { Button, FormLabel, TextField } from '@mui/material';
+import { Button, FormLabel, TextField, ImageList, ImageListItem } from '@mui/material';
 import { DataGrid, GridCellParams, getGridNumericOperators, getGridStringOperators } from '@mui/x-data-grid';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { CrudMarkerDataGridProps } from '../interfaces';
 import { mutationRemoveMarker, mutationUpdateMarker } from '../gql/mutations';
 import { useMutation, useQuery } from '@apollo/client';
@@ -9,6 +9,8 @@ import { GET_PAGINATED_MARKERS } from '../gql/queries';
 import debounce from 'lodash.debounce';
 import EditIcon from '@mui/icons-material/Edit';
 import MassModal from './MassModal';
+import ConditionalLoader from "./ConditionalLoader";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { ErrorMessage, Form, Formik } from 'formik';
 import * as yup from 'yup';
 
@@ -20,16 +22,19 @@ const validationSchema = yup.object({
 
 const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridProps) => {
   const [activeMarker, setActiveMarker] = React.useState<number>();
-  const [modal, setModal] = React.useState('');
+  const [iconOpen, setIconOpen] = useState(false);
+  const [search, setSearch] = useState<string>('');
+  const [modal, setModal] = useState('');
+  const [activeIcon, setActiveIcon] = useState('');
   const [updateMarker] = useMutation(mutationUpdateMarker);
   const [removeMarker] = useMutation(mutationRemoveMarker);
-  const [page, setPage] = React.useState(1);
-  const [gridPage, setGridPage] = React.useState(0);
-  const [limit, setLimit] = React.useState(15);
-  const [filterModel, setfilterModel] = React.useState({items: []});
-  const [sortBy, setSortBy] = React.useState("id");
-  const [sortDirection, setSortDirection] = React.useState("ASC");
-  const [filter, setFilter] = React.useState({name: '', type: '', author: '', description: ''});
+  const [page, setPage] = useState(1);
+  const [gridPage, setGridPage] = useState(0);
+  const [limit, setLimit] = useState(15);
+  const [filterModel, setfilterModel] = useState({items: []});
+  const [sortBy, setSortBy] = useState("id");
+  const [sortDirection, setSortDirection] = useState("ASC");
+  const [filter, setFilter] = useState({name: '', type: '', author: '', description: ''});
   const { loading, error, data, refetch } = useQuery(GET_PAGINATED_MARKERS, {
     variables: {
       query: {
@@ -45,12 +50,12 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
   useMemo(() => {
     refetch();
   }, [page, limit, sortBy, sortDirection, filter]);
-
   
   if (loading) return <div>Loading...</div>;
 
   if (error) return <div>Error! {error.message}</div>;
   
+  let icons = data.icons;
 
   const idFilterOperator = getGridStringOperators().filter(
     (operator) => {
@@ -89,6 +94,7 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
       renderCell: (params: any) => {
         const onClick = (e: any) => {
           setActiveMarker(params.row.id);
+          setActiveIcon(data.paginatedMarkers.find((marker: any) => marker.id === params.row.id)?.icon.id)
           setModal('edit');
         };
         return <Button onClick={onClick}><EditIcon sx={{ fill: '#4aa3df', '&::hover': "#2980b9"}}/></Button>;
@@ -169,7 +175,8 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
         <Formik
         initialValues={{
           name: data.paginatedMarkers.find((marker: any) => marker.id === activeMarker)?.name || '',
-          description: data.paginatedMarkers.find((marker: any) => marker.id === activeMarker)?.description || '',
+          description: data.paginatedMarkers.find((marker: any) => marker.id === activeMarker)?.description || '',          
+          iconId: data.paginatedMarkers.find((marker: any) => marker.id === activeMarker)?.icon.id || undefined,
         }}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
@@ -179,6 +186,7 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
               id : activeMarker,
               name: values.name,
               description: values.description,
+              iconId: values.iconId
             }
 
             const { data } = await updateMarker({
@@ -218,6 +226,85 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
                     rows={5}
                     sx={{width: '100%', py: '0', px: '1rem', mt: '1rem'}}
                 />
+                                    <div 
+                        className="iconSelector" 
+                        style={{
+                            marginBottom: '2rem'
+                        }}
+                    >
+                        <div 
+                            className="flex flex-row iconSelector--title"
+                            onClick={() => {
+                                setIconOpen(!iconOpen);
+                            }}>
+                            <FormLabel sx={{px: '1rem'}} htmlFor='iconId'>Kies een passend icoontje</FormLabel>
+                            <ArrowForwardIosIcon  
+                                color='secondary' 
+                                sx={{
+                                    width: '2rem',
+                                    transform: iconOpen? 'rotate(270deg)': 'rotate(90deg)',
+                                    transition: 'transform 0.3s ease-in-out'
+                                }}
+                            />
+                        </div>
+                        <ConditionalLoader condition={iconOpen}>
+                        <TextField
+                            name="search"
+                            id="search"
+                            placeholder="Search for an icon"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            rows={5}
+                            sx={{
+                                width: '100%',
+                                py: '0',
+                                px: '1rem',
+                                mt: '1rem',
+                                mb: '1rem',
+                                transition: 'all 0.3s ease-in-out'
+                            }}
+                        />
+                            <ImageList
+                                sx={{
+                                    width: '100%',
+                                    maxHeight: '24rem',
+                                    transform: 'translateZ(0)',
+                                    pl: '1rem'
+                                }}
+                                gap={1}
+                                rowHeight={120}
+                                cols={4}
+                            >
+                                {icons.filter((icon: any) => icon.name.includes(search)).map((icon: any) => {
+                                    return (
+                                    <ImageListItem 
+                                        key={icon.id}
+                                        cols={1}
+                                        rows={1}
+                                        sx={{
+                                            position: 'relative', 
+                                            borderStyle: icon.id === activeIcon? 'solid':'none', 
+                                            borderWidth: '2px', 
+                                            borderColor: '#4aaa9f'
+                                        }}
+                                        onClick={() => {
+                                            setFieldValue('iconId', icon.id);
+                                            setActiveIcon(icon.id);
+                                        }}
+                                    >
+                                        <img
+                                        src={`${icon.url}`}
+                                        alt={icon.name}
+                                        loading="lazy"
+                                        style={{width: '80%', height: '5rem', objectFit: 'contain', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', maxWidth: '100%', maxHeight: '100'}}
+                                        />
+                                    </ImageListItem>
+                                    );
+                                })}
+                            </ImageList>
+                        </ConditionalLoader>
+                    </div>
+                    <p>{activeIcon}</p>
                 <Button
                   variant='contained'
                   className='card-form-button'

@@ -184,11 +184,11 @@ const extensions = [
   StarterKit.configure({
     bulletList: {
       keepMarks: true,
-      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+      keepAttributes: false,
     },
     orderedList: {
       keepMarks: true,
-      keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+      keepAttributes: false,
     },
   }),
 ]
@@ -201,7 +201,6 @@ const Tiptap = () => {
               // Update the test state with the current HTML content of the editor
               setTest(editor ? editor.getHTML() : '');
             }}> </EditorProvider>
-        {/* Render the HTML content */}
         <div dangerouslySetInnerHTML={{ __html: test }} />
       </>
     );
