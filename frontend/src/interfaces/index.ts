@@ -205,5 +205,4 @@ export type {
     TimestampListProps,
     TimestampFormProps,
     MapElementProps,
-    TiptapProps,
 }
