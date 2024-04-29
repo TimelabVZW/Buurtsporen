@@ -12,6 +12,7 @@ const validationSchema = yup.object({
 
 const TimestampForm = ({marker, visible, setFormVisible, refetch}: TimestampFormProps) => {
     const [createTimestamp] = useMutation(mutationCreateTimestamp);
+    const backendURL = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
 return (
     <div className="map-markerform" style={{display: visible? 'block' : 'none'}}>
@@ -40,7 +41,7 @@ return (
                     data.append(`file${index}`, file)
                 });
             
-                await fetch('https://api.buurtsporen.be/timestamp/upload', {
+                await fetch( backendURL + '/timestamp/upload', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

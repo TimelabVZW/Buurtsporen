@@ -1,6 +1,7 @@
 /node_modules
 # compiled output
 /backend/.env
+/frontend/.env
 /backend/dist
 /backend/node_modules
 

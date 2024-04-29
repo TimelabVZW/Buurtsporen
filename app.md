@@ -1,15 +1,26 @@
 # Github Repo
 
-https://github.com/pgm-stefdebo3/Timelab-project/tree/main
+https://github.com/TimelabVZW/Buurtsporen
 
+# Env files
 
-# Deploy link
+## Frontend env variables
 
-Al eerder naar Philippe gestuurd dat ik geen access heb naar de server van Timelab omdat ze net met verlof zijn, ik kan het niet echt ergens anders deployen omdat ik Multer gebruik en veel gratis deployers hebben daar problemen mee + mono-repo kan ik niet meer op huroku zetten aangezien dit betalend is
+- VITE_BACKEND_URL (link naar waar de api/bakcend gehost word. ex. http://localhost:3000)
+
+## Backend env variables
+
+- AWS_ACCESS_KEY_ID (IAM user acces key id)
+- AWS_SECRET_ACCESS_KEY (IAM user secret access key)
+- AWS_REGION (region your bucket is hosted in)
+
+- S3_BUCKET_NAME ( name defined to your bucket on S3)
+
+- DATABASE_URL ( link to your database ex. postgres://myuser:mypassword@localhost:5432/mydatabase)
 
 # Nodige mutation voor een user te maken:
 
-invoeren in https://api.buurtsporen.be/graphql
+invoeren in DATABASE_URL/graphql
 
 mutation CreateUser {
   createUser(

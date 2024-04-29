@@ -39,9 +39,10 @@ export const AuthProvider = ({ children }: any) => {
         getLocalToken();
     }, []);
     const Login = async ({ username, password }: LoginProps) => {
-        const token = await axios.post('https://api.buurtsporen.be/login',{ // link needs to go into env
-        username,
-        password
+        const token = await axios.post( import.meta.env.VITE_REACT_APP_BACKEND_URL + '/login',
+        {
+            username,
+            password
         })
         if (token) {
             localStorage.setItem('jwt-token', JSON.stringify(token?.data?.access_token)) // name needs to go into env

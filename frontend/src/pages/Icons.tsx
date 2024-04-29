@@ -52,6 +52,7 @@ const Icons = () => {
     }
 
     let icons = data.icons;
+    const backendURL = import.meta.env.VITE_REACT_APP_BACKEND_URL;
     
     
   return (
@@ -86,7 +87,7 @@ const Icons = () => {
                                     data.append(`file${index}`, file)
                                 });
                             
-                                await fetch('https://api.buurtsporen.be/icon/upload', {
+                                await fetch(backendURL + '/icon/upload', {
                                 method: 'POST',
                                 headers: {
                                     'Accept': 'application/json',
@@ -240,7 +241,7 @@ const Icons = () => {
                             data.append(`file${index}`, file)
                         });
                     
-                        await fetch('https://api.buurtsporen.be/icon/upload', {
+                        await fetch(backendURL + '/icon/upload', {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -259,7 +260,7 @@ const Icons = () => {
                         });
                 
                         if (values.oldName) {
-                            await fetch(`https://api.buurtsporen.be/icon/deleteSDK/${values.oldName}`, {
+                            await fetch(backendURL + `/icon/deleteSDK/${values.oldName}`, {
                             method: 'GET',
                             headers: {
                                 'Accept': 'application/json',
@@ -359,7 +360,7 @@ const Icons = () => {
                         setModalVisible('')
                         
                         // remove image from aws bucket
-                        await fetch(`https://api.buurtsporen.be/icon/deleteSDK/${icons.find((icon: any) => icon.id === activeIcon).fileName}`, {
+                        await fetch(backendURL + `/icon/deleteSDK/${icons.find((icon: any) => icon.id === activeIcon).fileName}`, {
                         method: 'GET',
                         headers: {
                             'Accept': 'application/json',

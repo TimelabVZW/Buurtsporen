@@ -20,6 +20,7 @@ type Icon {
   id: Int!
   name: String!
   fileName: String!
+  url: String!
   markers: [Marker!]
 }
 
@@ -29,6 +30,7 @@ type Timestamp {
   author: String
   description: String
   fileName: String
+  url: String
   markerId: Int!
   marker: Marker!
 }
@@ -43,8 +45,8 @@ type Marker {
   color: String
   layerId: Int!
   layer: Layer!
-  iconId: Int!
-  icon: Icon!
+  iconId: Int
+  icon: Icon
   coordinates: [Coordinate!]
   timestamps: [Timestamp!]
 }
@@ -54,6 +56,7 @@ type Layer {
   name: String!
   createdAt: Date!
   private: Boolean!
+  defaultShow: Boolean!
   markers: [Marker!]
 }
 
@@ -75,6 +78,7 @@ input IconInput {
   id: Int!
   name: String!
   fileName: String!
+  url: String!
   markers: [MarkerInput!]
 }
 
@@ -84,6 +88,7 @@ input TimestampInput {
   author: String
   description: String
   fileName: String
+  url: String
   markerId: Int!
   marker: MarkerInput!
 }
@@ -98,8 +103,8 @@ input MarkerInput {
   color: String
   layerId: Int!
   layer: LayerInput!
-  iconId: Int!
-  icon: IconInput!
+  iconId: Int
+  icon: IconInput
   coordinates: [CoordinateInput!]
   timestamps: [TimestampInput!]
 }
@@ -109,6 +114,7 @@ input LayerInput {
   name: String!
   createdAt: Date!
   private: Boolean!
+  defaultShow: Boolean!
   markers: [MarkerInput!]
 }
 
@@ -148,11 +154,12 @@ type Mutation {
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
   createLayer(createLayerInput: CreateLayerInput!): Layer!
+  updateDefaultShow(updateLayerInput: UpdateLayerInput!): Layer!
   removeLayer(id: Int!): Layer!
   createMarker(createMarkerInput: CreateMarkerInput!): Marker!
   createMarkers(createMarkerInputs: [CreateMarkerInput!]!): [Marker!]!
   createMarkersWithCoords(createMarkerWithCoordsInputs: [CreateMarkerWithCoordsInput!]!): [Marker!]!
-  updateMarker(updateMarkerInput: UpdateMarkerInput!): Marker!
+  updateMarker(updateMarkerInput: UpdateMarkerInput!): Icon!
   removeMarker(id: Int!): Marker!
   createTimestamp(createTimestampInput: CreateTimestampInput!): Timestamp!
   updateTimestamp(updateTimestampInput: UpdateTimestampInput!): Timestamp!
@@ -179,6 +186,13 @@ input UpdateUserInput {
 input CreateLayerInput {
   name: String!
   private: Boolean!
+}
+
+input UpdateLayerInput {
+  name: String
+  private: Boolean
+  id: Int!
+  defaultShow: Boolean!
 }
 
 input CreateMarkerInput {
@@ -220,6 +234,7 @@ input CreateTimestampInput {
   description: String
   author: String
   fileName: String
+  url: String
   markerId: Int!
 }
 
@@ -227,6 +242,7 @@ input UpdateTimestampInput {
   description: String
   author: String
   fileName: String
+  url: String
   markerId: Int
   id: Int!
 }
@@ -247,10 +263,12 @@ input UpdateCoordinateInput {
 input CreateIconInput {
   name: String!
   fileName: String!
+  url: String!
 }
 
 input UpdateIconInput {
   id: Int!
   name: String
   fileName: String
+  url: String
 }
