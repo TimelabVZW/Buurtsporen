@@ -13,6 +13,8 @@ import TimestampForm from "./TimestampForm";
 import CrudMarkerDataGrid from "./CrudMarkerDataGrid";
 import LoadingMap from "./LoadingMap";
 import Tiptap from "./WYSIWYG/Tiptap";
+import ParameterMenu from "./WYSIWYG/ParameterMenu";
+import ImportMenu from "./WYSIWYG/ImportMenu";
 
 export {
     Button,
@@ -30,4 +32,6 @@ export {
     CrudMarkerDataGrid,
     LoadingMap,
     Tiptap,
+    ParameterMenu,
+    ImportMenu,
 }

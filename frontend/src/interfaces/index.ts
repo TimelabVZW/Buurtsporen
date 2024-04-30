@@ -1,3 +1,4 @@
+import { Editor } from "@tiptap/react";
 import { ReactElement } from "react";
 
 interface DeconstructedObject {
@@ -187,6 +188,15 @@ interface TiptapProps {
     MenuBar: React.ReactNode;
 }
 
+interface ImportMenuProps {
+    keys: string[];
+}
+
+interface ParameterMenuProps {
+    keys: string[];
+    editor: Editor;
+}
+
 export type {
     DeconstructedObject,
     MarkerDataGridProps,
@@ -213,4 +223,6 @@ export type {
     TimestampFormProps,
     MapElementProps,
     TiptapProps,
+    ImportMenuProps,
+    ParameterMenuProps,
 }

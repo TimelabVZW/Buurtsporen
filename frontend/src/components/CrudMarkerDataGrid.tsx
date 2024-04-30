@@ -14,7 +14,6 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { ErrorMessage, Form, Formik } from 'formik';
 import * as yup from 'yup';
 
-
 const validationSchema = yup.object({
   name: yup.string().required().max(40),
   description: yup.string().required().max(500),

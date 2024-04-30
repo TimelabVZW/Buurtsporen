@@ -5,6 +5,9 @@ import * as yup from 'yup';
 import { Button, FormLabel, TextField  } from '@mui/material';
 import { useMutation } from '@apollo/client';
 import { mutationImportMarkers } from '../../gql/mutations';
+import Tiptap from '../WYSIWYG/Tiptap';
+import ImportMenu from '../WYSIWYG/ImportMenu';
+import DOMPurify from "dompurify";
 
 const validationSchema = yup.object({
     title: yup.string().required(),
@@ -18,7 +21,7 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
     const descriptionField = useRef<HTMLInputElement>(null);
 
 
-    function templateString(template: string, object: Record<string, number>): string {
+    const templateString = (template: string, object: Record<string, number>): string => {
         return template.replace(/{([^}]+)}/g, (match: string, key: string) => {
             const value = object[key.trim()];
             if (value === undefined) {
@@ -116,7 +119,7 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
                             type: jsonType === 'json'? markerData['geometry.geometry.type'] : 'Point',
                             name: templateString(values.title, markerData),
                             coords,
-                            description: templateString(values.description, markerData),
+                            description: DOMPurify.sanitize(templateString(values.description, markerData)),
                             color: formData.color,
                             layerId: formData.layerId,
                             iconId: formData.iconId,
@@ -149,34 +152,6 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
         >
         {({ values, handleChange, setFieldValue, isSubmitting, errors, touched }) => (
             <Form className='parameter-card-form' style={{paddingTop: '2rem'}}>
-                <div className='card-form-parameters'>
-                    {Object.keys(selectedRows[0]).map((key: string, index: number) => {
-                        return (
-                            <Button 
-                                variant="outlined"  
-                                className='card-form-parameter'
-                                onClick={() => {
-                                    if (focus !== '') {
-                                        values[focus] = values[focus] + `{${key}}`;
-                                        setFieldValue(focus, values[focus]);
-                                        if (focus === 'title') {
-                                            titleField.current?.querySelector('textarea')?.focus();
-                                            return;
-                                        }
-                                        if (focus === 'description') {
-                                            descriptionField.current?.querySelector('textarea')?.focus();
-                                            return;
-                                        }
-                                    }
-                                }}
-                            >
-                                {key}
-                            </Button>
-                        )
-                    })}
-                </div>
-                <div className='card-form-divider'>
-                </div>
                 <div className='card-form-form'>
                     <FormLabel sx={{px: '1rem'}} htmlFor='title'>Enter the desired title for the markers</FormLabel>
                     <ErrorMessage name="title" component="div" className='errorfield' />
@@ -193,21 +168,10 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
                         rows={2}
                         sx={{width: '100%', px: '1rem', mt: '1rem', mb: '2rem'}}
                     />
-                    <FormLabel sx={{px: '1rem'}} htmlFor='description'>Enter the desired description for the markers</FormLabel>
-                    <ErrorMessage name="description" component="div" className='errorfield' />
-                    <TextField
-                        name="description"
-                        id="description"
-                        ref={descriptionField}
-                        onFocus={() => {
-                            setFocus('description');
-                        }}
-                        value={values.description}
-                        onChange={handleChange}
-                        multiline
-                        rows={5}
-                        sx={{width: '100%', px: '1rem', mt: '1rem', mb: '2rem'}}
-                    />
+                    
+                    <FormLabel sx={{px: '1rem'}} htmlFor='wysiwyg'>Enter the desired description for the markers</FormLabel>
+                    <ErrorMessage name="wysiwyg" component="div" className='errorfield' />
+                    <Tiptap MenuBar={<ImportMenu keys={Object.keys(selectedRows[0])}/>} setInput={(e: string) => values.description = e}/>
                     <div className='form-step-buttons'>
                         <Button
                             variant="outlined"

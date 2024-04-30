@@ -35,12 +35,12 @@ const extensions = [
 
 const Tiptap = ({setInput, MenuBar}: TiptapProps) => {
     return (
-      <>
+      <div className='wysiwyg-container'>
         <EditorProvider slotBefore={MenuBar} extensions={extensions} onBlur={({editor}) => {
               // Update the test state with the current HTML content of the editor
               setInput(editor ? editor.getHTML() : '');
             }}> </EditorProvider>
-      </>
+      </div>
     );
   };
 

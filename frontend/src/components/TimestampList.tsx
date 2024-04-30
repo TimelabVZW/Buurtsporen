@@ -97,7 +97,7 @@ return (
                     </div>
                 </div>
                 <div className='marker-info__body'>
-                    <p>{data.marker.description}</p>
+                    <div dangerouslySetInnerHTML={{ __html: data.marker.description }} />
                 </div>
                 <div className='marker-info__divider'></div>
                 <ConditionalLoader condition={data.marker.timestamps.length > 0}>

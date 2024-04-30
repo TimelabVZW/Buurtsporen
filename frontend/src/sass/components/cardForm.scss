@@ -8,11 +8,11 @@
 }
 
 .parameter-card-form {
-    width: 80vw;
+    width: 100%;
     display: flex;
     flex-direction: row;
     gap: 1rem;
-    max-height: 28rem;
+    max-height: 39.5rem;
     .card-form-parameters {
         width: 35%;
         display: flex;
@@ -48,7 +48,6 @@
     .card-form-form {
         display: flex;
         flex-direction: column;
-        width: 57%;
         .form-step-buttons {
             display: flex;
             flex-direction: row;
