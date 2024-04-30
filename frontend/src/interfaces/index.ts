@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+
 interface DeconstructedObject {
     [key: string]: any;
 }
@@ -179,6 +181,11 @@ interface CrudMarkerDataGridProps {
     pageSize: number;
     pageSizeOptions: number[];
 }
+ 
+interface TiptapProps {
+    setInput: (e: string) => void;
+    MenuBar: React.ReactNode;
+}
 
 export type {
     DeconstructedObject,
@@ -205,4 +212,5 @@ export type {
     TimestampListProps,
     TimestampFormProps,
     MapElementProps,
+    TiptapProps,
 }

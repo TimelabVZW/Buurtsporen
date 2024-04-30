@@ -12,7 +12,7 @@ import CrudDataGrid from "./CrudDataGrid";
 import TimestampForm from "./TimestampForm";
 import CrudMarkerDataGrid from "./CrudMarkerDataGrid";
 import LoadingMap from "./LoadingMap";
-import Tiptap from "./Tiptap";
+import Tiptap from "./WYSIWYG/Tiptap";
 
 export {
     Button,
