@@ -30,6 +30,28 @@
         flex-direction: column;
         gap: 1rem;
         line-height: 1.5;
+
+        h3 {
+            font-size: 1.6rem;
+            line-height: 1.1;
+        }
+
+        ul {
+            list-style-type: circle;
+            padding: 0 1rem;
+        }
+
+        ol {
+            list-style-type: decimal;
+            padding: 0 1rem;
+        }
+
+        blockquote {
+            font-style: italic;
+            padding: 20px;
+            margin: 0;
+            border-left: 5px solid #333; 
+          }
     }
     .marker-info__divider{
         height: 2px;

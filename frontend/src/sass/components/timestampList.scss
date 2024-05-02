@@ -67,6 +67,27 @@
     padding-right: 0.5rem;
     padding-bottom: 3rem;
     border-bottom: solid 1px #ccc;
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    ul {
+        list-style-type: circle;
+        padding: 0 1rem;
+    }
+
+    ol {
+        list-style-type: decimal;
+        padding: 0 1rem;
+    }
+
+    blockquote {
+        font-style: italic;
+        padding: 20px;
+        margin: 0;
+        border-left: 5px solid #333; 
+    }
 }
 
 @media (min-width: 768px) {.marker-info__timestamp {

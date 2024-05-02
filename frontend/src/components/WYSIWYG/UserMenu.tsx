@@ -153,35 +153,35 @@ const UserMenu = () => {
                         <UnlinkIcon/>
                     </button>
                 </div>
+                <div className='wysiwyg--sub wysiwyg--unredo'>
+                    <button
+                    type='button'
+                    onClick={() => editor.chain().focus().undo().run()}
+                    disabled={
+                        !editor.can()
+                        .chain()
+                        .focus()
+                        .undo()
+                        .run()
+                    }
+                    >
+                        <UndoIcon/>
+                    </button>
+                    <button
+                    type='button'
+                    onClick={() => editor.chain().focus().redo().run()}
+                    disabled={
+                        !editor.can()
+                        .chain()
+                        .focus()
+                        .redo()
+                        .run()
+                    }
+                    >
+                        <RedoIcon/>
+                    </button>
+                </div>
             </div>
-            </div>
-        <div className='wysiwyg--sub wysiwyg--unredo'>
-            <button
-            type='button'
-            onClick={() => editor.chain().focus().undo().run()}
-            disabled={
-                !editor.can()
-                .chain()
-                .focus()
-                .undo()
-                .run()
-            }
-            >
-                <UndoIcon/>
-            </button>
-            <button
-            type='button'
-            onClick={() => editor.chain().focus().redo().run()}
-            disabled={
-                !editor.can()
-                .chain()
-                .focus()
-                .redo()
-                .run()
-            }
-            >
-                <RedoIcon/>
-            </button>
         </div>
     </div>
     </>
