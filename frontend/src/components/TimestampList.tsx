@@ -133,8 +133,7 @@ return (
                                     </p>
                                 </div>
                                 <div className='timestamp__body'>
-                                    <p>{timestamp.description}</p> 
-                                    {/* NEEDSWORK123 dangerously input */}
+                                    <div dangerouslySetInnerHTML={{__html: timestamp.description}}/>
                                 </div>
                             </div>
                         ))}

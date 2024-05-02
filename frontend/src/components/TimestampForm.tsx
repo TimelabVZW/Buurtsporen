@@ -4,6 +4,9 @@ import { Button, FormLabel, Input, MenuItem, TextField  } from '@mui/material';
 import * as yup from 'yup';
 import { mutationCreateTimestamp, mutationImportMarkers } from "../gql/mutations";
 import { useMutation } from "@apollo/client";
+import Tiptap from "./WYSIWYG/Tiptap";
+import UserMenu from "./WYSIWYG/UserMenu";
+import DOMPurify from "dompurify";
 
 const validationSchema = yup.object({
     description: yup.string().max(1000).required(),
@@ -27,7 +30,7 @@ return (
             setSubmitting(true);
 
             let input: TimestampFormInput = {
-                description: values.description,
+                description: DOMPurify.sanitize(values.description),
                 markerId: marker,
             }
 
@@ -75,15 +78,7 @@ return (
             <Form className='marker-form' style={{paddingTop: '2rem'}}>
                 <FormLabel sx={{px: '1rem'}} htmlFor='description'>Enter your message</FormLabel>
                 <ErrorMessage name="description" component="div" className='errorfield' />
-                <TextField
-                    name="description" //NEEDSWORK123 WYSIWYG FIELD
-                    id="description"
-                    value={values.description}
-                    onChange={handleChange}
-                    multiline
-                    rows={5}
-                    sx={{width: '100%', px: '1rem', mt: '1rem', mb: '2rem'}}
-                />
+                <Tiptap MenuBar={<UserMenu/>} setInput={(e: string) => values.description = e}/>
                 <FormLabel sx={{px: '1rem'}} htmlFor='author'>Enter your name</FormLabel>
                 <ErrorMessage name="author" component="div" className='errorfield' />
                 <TextField
