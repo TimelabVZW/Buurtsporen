@@ -13,6 +13,53 @@
     gap: 0.5rem;
   }
 
+  .wysiwyg-menu--user {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+    gap: 2rem;
+
+    .wysiwyg--typography{
+      gap: 2rem;
+    }
+    
+    .wysiwyg--typography,
+    .wysiwyg--mainbar {
+      justify-content: space-between;
+    }
+
+    .wysiwyg--typography,
+    .wysiwyg--structure-container,
+    .wysiwyg--mainbar {
+      flex-grow: 1;
+    }
+
+    .wysiwyg--structure {
+      width: max-content;
+    }
+
+    button {
+      width: 2rem;
+      height: 2rem;
+      svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      }
+    }
+  }
+
+  .wysiwyg--sub {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .wysiwyg--unredo {
+    margin-left: auto;
+  }
+
   .wysiwyg-menu--parameters {
     display: flex;
     flex-direction: row;

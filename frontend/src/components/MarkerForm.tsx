@@ -4,11 +4,14 @@ import { Button, FormLabel, MenuItem, TextField, ImageList, ImageListItem, Image
 import * as yup from 'yup';
 import { mutationImportMarkers } from "../gql/mutations";
 import { useMutation } from "@apollo/client";
+import DOMPurify from "dompurify";
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ConditionalLoader from "./ConditionalLoader";
 import { useState } from "react";
 import SquareGreenLogo from '../assets/svg/BS_logo_square_green.svg';
+import UserMenu from "./WYSIWYG/UserMenu";
+import Tiptap from "./WYSIWYG/Tiptap";
 
 const validationSchema = yup.object({
     layerId: yup.number().required(),
@@ -64,7 +67,7 @@ return (
                 }];
 
                 if (values.description) {
-                    input[0].description = values.description;
+                    input[0].description = DOMPurify.sanitize(values.description);
                 }
 
                 if (values.author) {
@@ -126,16 +129,7 @@ return (
                     />
                     <FormLabel sx={{px: '1rem'}} htmlFor='description'>Geef een beschrijving aan het toegevoegde punt <span className="text-red">*</span></FormLabel>
                     <ErrorMessage name="description" component="div" className='errorfield' />
-                    <TextField
-                        name="description"
-                        id="description"
-                        defaultValue={values.description}
-                        value={values.description}
-                        onChange={handleChange}
-                        multiline
-                        rows={5}
-                        sx={{width: '100%', px: '1rem', mt: '1rem', mb: '1.8rem'}}
-                    />
+                    <Tiptap MenuBar={<UserMenu/>} setInput={(e: string) => values.description = e}/>
                     <FormLabel sx={{px: '1rem'}} htmlFor='author'>Voeg je naam toe (optioneel)</FormLabel>
                     <ErrorMessage name="author" component="div" className='errorfield' />
                     <TextField

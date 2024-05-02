@@ -76,7 +76,7 @@ return (
                 <FormLabel sx={{px: '1rem'}} htmlFor='description'>Enter your message</FormLabel>
                 <ErrorMessage name="description" component="div" className='errorfield' />
                 <TextField
-                    name="description"
+                    name="description" //NEEDSWORK123 WYSIWYG FIELD
                     id="description"
                     value={values.description}
                     onChange={handleChange}

@@ -168,9 +168,8 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
                         rows={2}
                         sx={{width: '100%', px: '1rem', mt: '1rem', mb: '2rem'}}
                     />
-                    
-                    <FormLabel sx={{px: '1rem'}} htmlFor='wysiwyg'>Enter the desired description for the markers</FormLabel>
-                    <ErrorMessage name="wysiwyg" component="div" className='errorfield' />
+                    <FormLabel sx={{px: '1rem'}} htmlFor='description'>Enter the desired description for the markers</FormLabel>
+                    <ErrorMessage name="description" component="div" className='errorfield' />
                     <Tiptap MenuBar={<ImportMenu keys={Object.keys(selectedRows[0])}/>} setInput={(e: string) => values.description = e}/>
                     <div className='form-step-buttons'>
                         <Button
