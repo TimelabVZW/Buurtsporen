@@ -9,8 +9,8 @@ import { mutationRemoveTimestamp } from '../gql/mutations';
 import { Button, Card, Grid } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import CrudDataGrid from '../components/CrudDataGrid';
-import DownloadIcon from '@mui/icons-material/Download';
 
+import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const Timestamps = () => {

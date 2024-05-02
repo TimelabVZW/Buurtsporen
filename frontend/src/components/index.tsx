@@ -15,6 +15,7 @@ import LoadingMap from "./LoadingMap";
 import Tiptap from "./WYSIWYG/Tiptap";
 import ParameterMenu from "./WYSIWYG/ParameterMenu";
 import ImportMenu from "./WYSIWYG/ImportMenu";
+import MarkerList from "./MarkerList";
 
 export {
     Button,
@@ -34,4 +35,5 @@ export {
     Tiptap,
     ParameterMenu,
     ImportMenu,
+    MarkerList,
 }

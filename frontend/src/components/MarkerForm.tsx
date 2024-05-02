@@ -80,13 +80,10 @@ return (
                     }
                 })
 
-                if (data) {
-                    refetch();
-                }
-                setFormVisible('');
-
                 setTimeout(() => {
                     setSubmitting(false);
+                    setFormVisible('');
+                    refetch();
                 }, 1000);
             }}
             >

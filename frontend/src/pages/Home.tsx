@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Popup, Marker, useMapEvent, useMap } from 'react-leaflet';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Icon, LatLng, latLng } from 'leaflet';
-import { Bounds, Button, ConditionalLoader, CustomCheckbox, LoadingMap, MassModal, SVGButton, TimestampForm } from '../components';
+import { Bounds, Button, ConditionalLoader, CustomCheckbox, LoadingMap, MarkerList, MassModal, SVGButton, TimestampForm } from '../components';
 import { Button as MuiButton } from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
 import { GET_MAPS_DATA } from '../gql/queries';
@@ -31,7 +31,7 @@ const Home = () => {
   const [inBounds, setInBounds] = useState(false);
   const [onlyTimeLab, setOnlyTimeLab] = useState(false);
   const [layers, setLayers] = useState<string[]>([]);
-  const [dates, setDates] = useState<{start: any, end: any}>({ start: new Date(0), end: new Date() });
+  const [dates, setDates] = useState<{start: any, end: any}>({ start: new Date(0), end: new Date(Date.now() + 3600000) });
   const [formVisible, setFormVisible] = useState('');
   const [activeMarker, setActiveMarker] = useState<number>();
   const [refresh, setRefresh] = useState(new Date());
@@ -158,17 +158,14 @@ const Home = () => {
           </ConditionalLoader>
           
           <ConditionalLoader condition={data}>
-              {data.layers?.filter((layer: {name: string}) => layers.indexOf(layer.name) > -1).map((layer: layer) => {
-              return (filterMarkers(layer.markers).map((marker: MarkerInterface) => (
-                <MapElement 
-                  marker={marker}
-                  onClick={() => {
-                    setActiveMarker(marker.id)
-                    setFormVisible('timestamp-list')
-                  }} 
-                  disabled={modal !== ''}
-                />
-              )))})}
+            <MarkerList
+              layers={data.layers}
+              layersToShow={layers}
+              filterMarkers={filterMarkers}
+              setActiveMarker={setActiveMarker}
+              setFormVisible={setFormVisible}
+              modal={modal}
+            />
           </ConditionalLoader>
           <Bounds />
         </MapContainer>

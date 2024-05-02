@@ -197,6 +197,15 @@ interface ParameterMenuProps {
     editor: Editor;
 }
 
+interface MarkerListProps {
+  layers: layer[];
+  layersToShow: string[];
+  filterMarkers: (markers: MarkerInterface[]) => MarkerInterface[];
+  setActiveMarker: (id: number) => void;
+  setFormVisible: (visible: string) => void;
+  modal: string;
+}
+
 export type {
     DeconstructedObject,
     MarkerDataGridProps,
@@ -225,4 +234,5 @@ export type {
     TiptapProps,
     ImportMenuProps,
     ParameterMenuProps,
+    MarkerListProps,
 }
