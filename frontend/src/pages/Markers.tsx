@@ -12,7 +12,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const Markers = () => {
     const { authenticated, authLoading, user } = useAuth();
-    // needs optimizement using pagination (fetchMore, offset, limit)
     const [removeMarker] = useMutation(mutationRemoveMarker);
 
     if (authLoading) {

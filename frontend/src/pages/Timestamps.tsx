@@ -14,6 +14,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const Timestamps = () => {
+    // NEEDS OPTIMIZATION USING PAGINATION
     const { authenticated, authLoading, user } = useAuth();
     const { loading, error, data, refetch } = useQuery(GET_TIMESTAMPS_DATA);
     const [removeTimestamp] = useMutation(mutationRemoveTimestamp);
