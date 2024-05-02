@@ -37,9 +37,9 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
   const { loading, error, data, refetch } = useQuery(GET_PAGINATED_MARKERS, {
     variables: {
       query: {
-        page: page,      // Set the initial page number
-        limit: limit,    // Set the page size (number of items per page)
-        sortBy: sortBy, // Set the default sorting field
+        page: page,                   // Set the initial page number
+        limit: limit,                 // Set the page size (number of items per page)
+        sortBy: sortBy,               // Set the default sorting field
         sortDirection: sortDirection, // Set the default sorting direction
         ...filter
       },

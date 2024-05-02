@@ -26,8 +26,6 @@ export class Marker {
   @Field(() => Int)
   id: number;
 
-  // Properties
-
   @Column()
   @Field()
   name: string;

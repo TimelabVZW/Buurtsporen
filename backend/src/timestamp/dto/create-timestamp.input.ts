@@ -4,7 +4,6 @@ import { Column } from 'typeorm';
 @InputType()
 export class CreateTimestampInput {
 
-  // variables per type (all nullable)
   @Field({nullable: true})
   description?: string;
   

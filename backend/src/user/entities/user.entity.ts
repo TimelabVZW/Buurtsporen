@@ -11,7 +11,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-// Got this method from Dion during class ('most secure method for password hashing')
 import * as bcrypt from 'bcrypt';
 
 @Entity()

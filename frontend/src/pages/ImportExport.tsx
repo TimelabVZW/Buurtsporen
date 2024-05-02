@@ -100,7 +100,7 @@ const validationSchema = yup.object({
                 complete: (result) => {
                 handleParsedData(result.data);
                 },
-                header: true, // Set to true if CSV file has headers
+                header: true,
             });
         } else if (
             file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
