@@ -1,18 +1,13 @@
-import { CrudDataGrid, CrudMarkerDataGrid, DashboardMain, Header } from '../components';
+import { CrudMarkerDataGrid, DashboardMain, Header } from '../components';
 import { useAuth } from '../context/authContext';
 import { Navigate } from 'react-router-dom';
 
 import '../sass/pages/dashboard.scss'
-import { GET_PAGINATED_MARKERS } from '../gql/queries';
-import { useMutation, useQuery } from '@apollo/client';
-import { mutationRemoveMarker } from '../gql/mutations';
-import { Button, Grid, Card } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Grid, Card } from "@mui/material";
 
 
 const Markers = () => {
-    const { authenticated, authLoading, user } = useAuth();
-    const [removeMarker] = useMutation(mutationRemoveMarker);
+    const { authenticated, authLoading } = useAuth();
 
     if (authLoading) {
         return (
