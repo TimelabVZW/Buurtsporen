@@ -74,16 +74,17 @@ return (
                     input[0].author = values.author;
                 }
 
-                const { data } = await importMarkers({
+                await importMarkers({
                     variables: {
                         createMarkerWithCoordsInputs: input,
                     }
+                }).then(() => {
+                    setFormVisible('');
+                    refetch();
                 })
 
                 setTimeout(() => {
                     setSubmitting(false);
-                    setFormVisible('');
-                    refetch();
                 }, 1000);
             }}
             >
