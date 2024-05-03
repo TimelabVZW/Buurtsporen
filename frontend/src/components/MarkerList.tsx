@@ -4,7 +4,6 @@ import { MarkerInterface, MarkerListProps } from '../interfaces';
 
 const MarkerList = ({
   layers,
-  filterMarkers,
   setActiveMarker,
   setFormVisible,
   modal,
