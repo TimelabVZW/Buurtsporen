@@ -8,7 +8,7 @@ import App from './App'
 import { Dashboard, Home, ImportExport, LandingPage, Layers, Login, Markers, Timestamps } from './pages';
 import { AuthProvider } from './context/authContext';
 import { ThemeProvider } from '@mui/material/styles';
-import options from './utils/apolloOptions';
+// import options from './utils/apolloOptions';
 
 import './sass/main.scss'
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,7 +20,7 @@ import Test from './pages/Test';
 
 const client = new ApolloClient({
   uri: import.meta.env.VITE_REACT_APP_BACKEND_URL+'/graphql',
-  cache: new InMemoryCache(options),
+  cache: new InMemoryCache(),
 });
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

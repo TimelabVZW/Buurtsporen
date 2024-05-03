@@ -1,42 +1,43 @@
-import { InMemoryCacheConfig } from "@apollo/client";
+// import { InMemoryCacheConfig } from "@apollo/client";
+// import { FieldMergeFunction } from '@apollo/client/cache';
 
-const options: InMemoryCacheConfig = {
-    typePolicies: {
-        Query: {
-            fields: {
-                markers: {
-                    keyArgs: ['id', '__typename'],
-                    merge(existing = [], incoming: any[], { args }: { args: { id: number, __typename: string } }) {
-                        return incoming;
-                    },
-                },
-                timestamps: {
-                    keyArgs: ['id', '__typename'],
-                    merge(existing = [], incoming: any[], { args }: { args: { id: number, __typename: string } }) {
-                        return incoming;
-                    },
-                },
-                icons: {
-                    keyArgs: ['id', '__typename'],
-                    merge(existing = [], incoming: any[], { args }: { args: { id: number, __typename: string } }) {
-                        return incoming;
-                    },
-                },
-                coordinates: {
-                    keyArgs: ['id', '__typename'],
-                    merge(existing = [], incoming: any[], { args }: { args: { id: number, __typename: string } }) {
-                        return incoming;
-                    },
-                },
-                layers: {
-                    keyArgs: ['id', '__typename'],
-                    merge(existing = [], incoming: any[], { args }: { args: { id: number, __typename: string } }) {
-                        return incoming;
-                    },
-                },
-            },
-        },
-    },
-};
+// const options: InMemoryCacheConfig = {
+//     typePolicies: {
+//         Query: {
+//             fields: {
+//                 markers: {
+//                     keyArgs: ['id', '__typename'],
+//                     merge(existing = [], incoming: any[], { args }: { args: { id: number, __typename: string } }) {
+//                         return incoming;
+//                     },
+//                 },
+//                 timestamps: {
+//                     keyArgs: ['id', '__typename'],
+//                     merge(existing = [], incoming: any[], { args }: { args: { id: number, __typename: string } }) {
+//                         return incoming;
+//                     },
+//                 },
+//                 icons: {
+//                     keyArgs: ['id', '__typename'],
+//                     merge(existing = [], incoming: any[], { args }: { args: { id: number, __typename: string } }) {
+//                         return incoming;
+//                     },
+//                 },
+//                 coordinates: {
+//                     keyArgs: ['id', '__typename'],
+//                     merge(existing = [], incoming: any[], { args }: { args: { id: number, __typename: string } }) {
+//                         return incoming;
+//                     },
+//                 },
+//                 layers: {
+//                     keyArgs: ['id', '__typename'],
+//                     merge(existing = [], incoming: any[], { args }: { args: { id: number, __typename: string } }) {
+//                         return incoming;
+//                     },
+//                 },
+//             },
+//         },
+//     },
+// };
 
-export default options;
+// export default options;
