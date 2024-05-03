@@ -1,4 +1,6 @@
-const options = {
+import { InMemoryCacheConfig } from "@apollo/client";
+
+const options: InMemoryCacheConfig = {
     typePolicies: {
         Query: {
             fields: {
