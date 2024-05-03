@@ -114,7 +114,6 @@ interface ButtonProps {
 
 interface TimestampListProps {
     marker: number,
-    coordinate: [number, number],
     visible: boolean,
     setFormVisible: (value: string) => void,
 }

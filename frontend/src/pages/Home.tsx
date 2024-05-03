@@ -156,7 +156,7 @@ const Home = () => {
           <div className='map-form-container'>
             <MarkerForm refetch={refetch} setFormVisible={setFormVisible} visible={formVisible === 'create-marker'} layers={data.layers} icons={data.icons} coordinate={location? location : [0, 0]}/>
             <ConditionalLoader condition={formVisible === 'timestamp-list'}>
-              <TimestampList setFormVisible={setFormVisible} visible={formVisible === 'timestamp-list'} marker={activeMarker? activeMarker : 0} coordinate={location? location : [0, 0]}/>
+              <TimestampList setFormVisible={setFormVisible} visible={formVisible === 'timestamp-list'} marker={activeMarker? activeMarker : 0} />
             </ConditionalLoader>
           </div>
       </div>

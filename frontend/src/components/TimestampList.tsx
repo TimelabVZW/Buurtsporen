@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import TimestampForm from "./TimestampForm";
 import SquareGreenLogo from '../assets/svg/BS_logo_square_green.svg';
 
-const TimestampList = ({coordinate, marker, visible, setFormVisible}: TimestampListProps) => {
+const TimestampList = ({marker, visible, setFormVisible}: TimestampListProps) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [form, setForm] = useState(false);
 
@@ -33,7 +33,7 @@ const TimestampList = ({coordinate, marker, visible, setFormVisible}: TimestampL
         return <p>Error...</p>;
     }
     
-    function isImageFile(filename: string) {
+    const isImageFile = (filename: string) => {
         // Extract the file extension
         const fileExtension = filename.split('.').pop();
       
@@ -47,7 +47,7 @@ const TimestampList = ({coordinate, marker, visible, setFormVisible}: TimestampL
         return imageExtensions.includes(fileExtension.toLowerCase());
       }
 
-      function isAudioFile(filename: string) {
+      const isAudioFile = (filename: string) => {
         const fileExtension = filename.split('.').pop();
         const audioExtensions = ['mp3', 'wav', 'ogg', 'aac', 'flac'];
         if (fileExtension === undefined) {
@@ -56,7 +56,7 @@ const TimestampList = ({coordinate, marker, visible, setFormVisible}: TimestampL
         return audioExtensions.includes(fileExtension.toLowerCase());
       }
 
-      function isVideoFile(filename: string) {
+      const isVideoFile = (filename: string) => {
         const fileExtension = filename.split('.').pop();
         const videoExtensions = ['mp4', 'avi', 'mkv', 'mov', 'wmv'];
         if (fileExtension === undefined) {
