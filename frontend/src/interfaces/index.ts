@@ -199,7 +199,6 @@ interface ParameterMenuProps {
 
 interface MarkerListProps {
   layers: layer[];
-  filterMarkers: (markers: MarkerInterface[]) => MarkerInterface[];
   setActiveMarker: (id: number) => void;
   setFormVisible: (visible: string) => void;
   modal: string;

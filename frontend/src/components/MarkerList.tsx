@@ -13,7 +13,7 @@ const MarkerList = ({
     <>
       {layers
         .map((layer) =>
-          filterMarkers(layer.markers).map((marker) => (
+          layer.markers.map((marker) => (
             <MapElement
               key={marker.id}
               marker={marker}

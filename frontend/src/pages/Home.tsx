@@ -23,6 +23,8 @@ import RasterLogoImage from '../assets/svg/BS_logo_raster_1.svg';
 
 import "leaflet/dist/leaflet.css";
 
+//7584 Onderzoeken of ik de query nog eens moet updaten voor geimporteerde markers, als dat mogelijk is.
+//      Verminderd load op de user interface.
 
 const Home = () => {
   const [location, setLocation] = useState<null | [number, number]>(null);
@@ -38,7 +40,7 @@ const Home = () => {
   const [layers, setLayers] = useState<number[]>([]);
   const [layersSet, setLayersSet] = useState(false);
   const { loading, error, data, refetch } = useQuery(GET_MAPS_DATA, {
-    variables: {ids: layers},
+    variables: {ids: layers, onlyImported: onlyTimeLab},
   });
 
   useEffect(() => {
@@ -106,22 +108,6 @@ const Home = () => {
     }
   }
 
-  const filterMarkers = (markers: MarkerInterface[]) => {
-    let filteredMarkers = markers;
-    
-    if (dates.start) {
-      filteredMarkers = filteredMarkers.filter((marker: MarkerInterface) => new Date(marker.createdAt) >= new Date(dates.start))
-      
-    }
-    if (dates.end) {
-      filteredMarkers = filteredMarkers.filter((marker: MarkerInterface) => new Date(marker.createdAt) <= new Date(dates.end))
-    }
-    if (onlyTimeLab === true) {
-      filteredMarkers = filteredMarkers.filter((marker: MarkerInterface) => marker.author === 'ImportedByTimelab')
-    }
-    return filteredMarkers;
-  }
-
   const userIcon = new Icon({
     iconUrl: UserIconImage,
     iconSize: [32, 32]
@@ -160,7 +146,6 @@ const Home = () => {
           <ConditionalLoader condition={data}>
             <MarkerList
               layers={data.layersByIds}
-              filterMarkers={filterMarkers}
               setActiveMarker={setActiveMarker}
               setFormVisible={setFormVisible}
               modal={modal}

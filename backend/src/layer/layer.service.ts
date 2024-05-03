@@ -39,11 +39,19 @@ export class LayerService {
     });
   }
 
-  async findByIds(ids: number[]): Promise<Layer[]> {
-    return this.layerRepository.find({
+  async findByIds(ids: number[], onlyImported: boolean): Promise<Layer[]> {
+    let layers = await this.layerRepository.find({
       where: { id: In(ids) },
       relations: ['markers', 'markers.coordinates', 'markers.timestamps'],
     });
+    if (onlyImported) {
+      layers = layers.map((layer) => {
+        layer.markers = layer.markers.filter((marker) => marker.author === 'ImportedByTimelab');
+        return layer;
+      })
+    }
+
+    return layers;
   }
 
   //   UPDATE

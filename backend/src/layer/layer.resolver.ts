@@ -24,11 +24,14 @@ export class LayerResolver {
   }
 
 @Query(() => [Layer], { name: 'layersByIds' })
-findLayersByIds(@Args('ids', { type: () => [Int]}) ids: number[]): Promise<Layer[]> {
+findLayersByIds(
+  @Args('ids', { type: () => [Int]}) ids: number[],
+  @Args('onlyImported', { type: () => Boolean, nullable: false }) onlyImported: boolean,
+): Promise<Layer[]> {
   if (ids.length === 0) {
     return this.layerService.findDefaultShow();
   }
-  return this.layerService.findByIds(ids);
+  return this.layerService.findByIds(ids, onlyImported);
 }
 
   @Mutation(() => Layer)

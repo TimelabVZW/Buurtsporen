@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const GET_MAPS_DATA = gql`
-  query GetLayersDataByIDS($ids: [Int!]!) {
-    layersByIds(ids: $ids) {
+  query GetLayersDataByIDS($ids: [Int!]!, $onlyImported: Boolean!) {
+    layersByIds(ids: $ids, onlyImported: $onlyImported) {
       id
       name
       private
@@ -13,8 +13,6 @@ const GET_MAPS_DATA = gql`
         name
         type
         color
-        layerId
-        author
         createdAt
         icon {
           id
