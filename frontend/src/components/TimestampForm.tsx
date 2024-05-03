@@ -1,8 +1,8 @@
-import { ErrorMessage, FieldArray, Form, Formik } from "formik";
-import { MarkerFormProps, MarkerInput, TimestampFormInput, TimestampFormProps } from "../interfaces";
-import { Button, FormLabel, Input, MenuItem, TextField  } from '@mui/material';
+import { ErrorMessage, Form, Formik } from "formik";
+import { TimestampFormInput, TimestampFormProps } from "../interfaces";
+import { Button, FormLabel, TextField  } from '@mui/material';
 import * as yup from 'yup';
-import { mutationCreateTimestamp, mutationImportMarkers } from "../gql/mutations";
+import { mutationCreateTimestamp } from "../gql/mutations";
 import { useMutation } from "@apollo/client";
 import Tiptap from "./WYSIWYG/Tiptap";
 import UserMenu from "./WYSIWYG/UserMenu";

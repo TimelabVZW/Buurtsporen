@@ -1,8 +1,6 @@
-import React from 'react';
 import RasterLogoImage from '../assets/svg/BS_logo_raster_1.svg';
 import SpeurenButton from '../assets/svg/BS_SPEUREN.svg';
 import InfoGraphic from '../assets/svg/BS_WATER.svg';
-import MapLayout from '../assets/svg/BS_PLATTEGROND.svg'
 
 import '../sass/pages/home.scss'
 

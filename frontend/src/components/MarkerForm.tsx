@@ -1,6 +1,6 @@
 import { ErrorMessage, Form, Formik } from "formik";
 import { MarkerFormProps, MarkerInput } from "../interfaces";
-import { Button, FormLabel, MenuItem, TextField, ImageList, ImageListItem, ImageListItemBar, IconButton } from '@mui/material';
+import { Button, FormLabel, MenuItem, TextField, ImageList, ImageListItem } from '@mui/material';
 import * as yup from 'yup';
 import { mutationImportMarkers } from "../gql/mutations";
 import { useMutation } from "@apollo/client";

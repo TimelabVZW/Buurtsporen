@@ -1,4 +1,3 @@
-import React from 'react'
 import CloseButton from './CloseButton';
 import { MassModalProps } from '../interfaces';
 

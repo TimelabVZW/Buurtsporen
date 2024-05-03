@@ -1,5 +1,4 @@
-import React from 'react';
-import { MapContainer, Polygon, Rectangle, TileLayer } from 'react-leaflet';
+import { Polygon, Rectangle } from 'react-leaflet';
 import { LatLngBounds } from 'leaflet';
 import bounds from '../utils/bounds';
 

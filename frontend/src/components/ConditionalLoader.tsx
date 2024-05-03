@@ -1,4 +1,3 @@
-import React from 'react'
 import { ConditionalLoaderProps } from '../interfaces';
 
 const ConditionalLoader = (props: ConditionalLoaderProps) => {

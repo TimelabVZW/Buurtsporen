@@ -21,7 +21,6 @@ import {
 
 import '../sass/pages/dashboard.scss'
 import { useQuery } from '@apollo/client';
-import { LineController } from 'chart.js';
 
 ChartJS.register(
     CategoryScale,

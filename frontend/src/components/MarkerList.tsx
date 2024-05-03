@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import MapElement from './MapElement';
-import { MarkerInterface, MarkerListProps } from '../interfaces';
+import { MarkerListProps } from '../interfaces';
 
 const MarkerList = ({
   layers,

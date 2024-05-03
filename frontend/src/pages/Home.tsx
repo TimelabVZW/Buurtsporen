@@ -1,7 +1,7 @@
-import { MapContainer, TileLayer, Popup, Marker, useMapEvent, useMap } from 'react-leaflet';
-import { useState, useEffect, useRef, useMemo } from 'react';
-import { Icon, LatLng, latLng } from 'leaflet';
-import { Bounds, Button, ConditionalLoader, CustomCheckbox, LoadingMap, MarkerList, MassModal, SVGButton, TimestampForm } from '../components';
+import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet';
+import { useState, useEffect } from 'react';
+import { Icon } from 'leaflet';
+import { Bounds, ConditionalLoader, CustomCheckbox, LoadingMap, MarkerList, MassModal, SVGButton } from '../components';
 import { Button as MuiButton } from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
 import { GET_MAPS_DATA } from '../gql/queries';
@@ -10,8 +10,7 @@ import MarkerForm from '../components/MarkerForm';
 import bounds from "../utils/bounds"
 import classifyPoint from 'robust-point-in-polygon';
 import TimestampList from '../components/TimestampList';
-import { MarkerInterface, layer } from '../interfaces';
-import MapElement from '../components/MapElement';
+import { layer } from '../interfaces';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 

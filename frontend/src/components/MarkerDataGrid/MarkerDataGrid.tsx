@@ -1,10 +1,8 @@
 import React from 'react'
-import { TextareaAutosize } from '@mui/base';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import MassModal from '../MassModal';
 import { DeconstructedObject, MarkerDataGridProps } from '../../interfaces';
-import { Marker } from 'react-leaflet';
 import MarkerImportForm1 from './MarkerImportForm1';
 import MarkerImportForm2 from './MarkerImportForm2';
 

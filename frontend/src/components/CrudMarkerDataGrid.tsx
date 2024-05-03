@@ -1,5 +1,5 @@
 import { Button, FormLabel, TextField, ImageList, ImageListItem } from '@mui/material';
-import { DataGrid, GridCellParams, getGridNumericOperators, getGridStringOperators } from '@mui/x-data-grid';
+import { DataGrid, getGridStringOperators } from '@mui/x-data-grid';
 import React, { useMemo, useState } from 'react';
 import { CrudMarkerDataGridProps } from '../interfaces';
 import { mutationRemoveMarker, mutationUpdateMarker } from '../gql/mutations';

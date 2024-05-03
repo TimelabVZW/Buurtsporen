@@ -1,4 +1,3 @@
-import React from "react";
 import { ButtonProps } from "../interfaces";
 
 const Button = ({ type, disabled, children, onClick, className }: ButtonProps) => {
