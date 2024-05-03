@@ -30,13 +30,16 @@ const Home = () => {
   const [modal, setModal] = useState('');
   const [inBounds, setInBounds] = useState(false);
   const [onlyTimeLab, setOnlyTimeLab] = useState(false);
-  const [layers, setLayers] = useState<string[]>([]);
   const [dates, setDates] = useState<{start: any, end: any}>({ start: new Date(0), end: new Date(Date.now() + 3600000) });
   const [formVisible, setFormVisible] = useState('');
   const [activeMarker, setActiveMarker] = useState<number>();
   const [refresh, setRefresh] = useState(new Date());
   const [center, setCenter] = useState<[number, number]>([51.0591448, 3.7418415]);
-  const { loading, error, data, refetch } = useQuery(GET_MAPS_DATA);
+  const [layers, setLayers] = useState<number[]>([]);
+  const [layersSet, setLayersSet] = useState(false);
+  const { loading, error, data, refetch } = useQuery(GET_MAPS_DATA, {
+    variables: {ids: layers},
+  });
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -70,16 +73,13 @@ const Home = () => {
     });
   }, [refresh]);
 
-  useMemo(() => {
-      if (data) {
-        let defaultLayers = data.layers.filter((layer: any) => layer.defaultShow === true);
-        
-        if (defaultLayers.length > 0) {
-          setLayers(defaultLayers.map((layer: any) => layer.name));
-        }
-      }
-    }, [data]
-  )
+  useEffect(() => {
+    if (!layersSet && data && data.layersByIds) {
+      const layerIds = data.layersByIds.map((layer: layer) => layer.id);
+      setLayers(layerIds);
+      setLayersSet(true);
+    }
+  }, [data]);
 
   if (loading) return <LoadingMap/>;
 
@@ -94,14 +94,14 @@ const Home = () => {
     }
   };
 
-  const toggleLayer = (name: string) => {
-    let index = layers.indexOf(name);
+  const toggleLayer = (id: number) => {
+    let index = layers.indexOf(id);
     let newLayers = layers;
     if (index > -1) {
       newLayers.splice(index, 1);
       setLayers(newLayers)
     } else {
-      newLayers.push(name);
+      newLayers.push(id);
       setLayers(newLayers)
     }
   }
@@ -159,8 +159,7 @@ const Home = () => {
           
           <ConditionalLoader condition={data}>
             <MarkerList
-              layers={data.layers}
-              layersToShow={layers}
+              layers={data.layersByIds}
               filterMarkers={filterMarkers}
               setActiveMarker={setActiveMarker}
               setFormVisible={setFormVisible}
@@ -214,7 +213,7 @@ const Home = () => {
             <div className='flex filter__options'>
               <div className='flex flex-col filter__layers'>
                 {data.layers.map((layer: {id: number, name: string}) => (
-                    <CustomCheckbox key={layer.name} initialChecked={layers.indexOf(layer.name) > -1} onClick={() => toggleLayer(layer.name)} name={layer.name} />
+                    <CustomCheckbox key={layer.name} initialChecked={layers.indexOf(layer.id) > -1} onClick={() => toggleLayer(layer.id)} name={layer.name} />
                 ))}
               </div>
               <div className='flex flex-col filter__second'>
@@ -248,7 +247,9 @@ const Home = () => {
               color='primary'
               className='card-form-button'
               onClick={() => {
-                setModal('');
+                refetch().then(() => {
+                  setModal('');
+                })
               }}
               sx={{
                   position: 'absolute',

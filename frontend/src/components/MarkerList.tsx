@@ -4,7 +4,6 @@ import { MarkerInterface, MarkerListProps } from '../interfaces';
 
 const MarkerList = ({
   layers,
-  layersToShow,
   filterMarkers,
   setActiveMarker,
   setFormVisible,
@@ -13,7 +12,6 @@ const MarkerList = ({
   return (
     <>
       {layers
-        .filter((layer) => layersToShow.includes(layer.name))
         .map((layer) =>
           filterMarkers(layer.markers).map((marker) => (
             <MapElement

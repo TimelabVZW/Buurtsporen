@@ -23,6 +23,14 @@ export class LayerResolver {
     return this.layerService.findOne(id);
   }
 
+@Query(() => [Layer], { name: 'layersByIds' })
+findLayersByIds(@Args('ids', { type: () => [Int]}) ids: number[]): Promise<Layer[]> {
+  if (ids.length === 0) {
+    return this.layerService.findDefaultShow();
+  }
+  return this.layerService.findByIds(ids);
+}
+
   @Mutation(() => Layer)
   updateDefaultShow(@Args('updateLayerInput') updateLayerInput: UpdateLayerInput) {
     return this.layerService.updateDefaultShow(updateLayerInput.id, updateLayerInput);

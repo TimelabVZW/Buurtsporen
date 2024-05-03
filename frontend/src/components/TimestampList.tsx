@@ -10,6 +10,10 @@ import { useEffect, useState } from "react";
 import TimestampForm from "./TimestampForm";
 import SquareGreenLogo from '../assets/svg/BS_logo_square_green.svg';
 
+// 7584  puntjes:
+//          o backend voorzien van mogelijkheid om te zoeken naar specifieke layers byID
+//          - frontend voorzien van query
+//          - frontend query implementeren, en testen
 const TimestampList = ({coordinate, marker, visible, setFormVisible}: TimestampListProps) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [form, setForm] = useState(false);

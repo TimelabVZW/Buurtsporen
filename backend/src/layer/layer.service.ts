@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Layer } from './entities/layer.entity';
 import { CreateLayerInput } from './dto/create-layer.input';
 import { UpdateLayerInput } from './dto/update-layer.input';
@@ -28,6 +28,20 @@ export class LayerService {
   findOne(id: number): Promise<Layer> {
     return this.layerRepository.findOne({
       where: { id },
+      relations: ['markers', 'markers.coordinates', 'markers.timestamps'],
+    });
+  }
+
+  async findDefaultShow(): Promise<Layer[]> {
+    return this.layerRepository.find({
+      where: { defaultShow: true },
+      relations: ['markers', 'markers.coordinates', 'markers.timestamps'],
+    });
+  }
+
+  async findByIds(ids: number[]): Promise<Layer[]> {
+    return this.layerRepository.find({
+      where: { id: In(ids) },
       relations: ['markers', 'markers.coordinates', 'markers.timestamps'],
     });
   }

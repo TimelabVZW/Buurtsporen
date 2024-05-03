@@ -126,6 +126,7 @@ type Query {
   user(id: Int!): User!
   layers: [Layer!]!
   layer(id: Int!): Layer!
+  layersByIds(ids: [Int!]!): [Layer!]!
   markers: [Marker!]!
   paginatedMarkers(query: PaginateQuery!): [Marker!]!
   marker(id: Int!): Marker!
