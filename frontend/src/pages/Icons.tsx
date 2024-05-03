@@ -372,10 +372,10 @@ const Icons = () => {
                             variables: {
                                 id: icons.filter((icon: any) => icon.id === activeIcon)[0]?.id
                             }
+                        }).then(() => {
+                            setActiveIcon(null);
+                            refetch();
                         });
-
-                        setActiveIcon(null);
-                        refetch();
                     }}
                 >
                     Delete
