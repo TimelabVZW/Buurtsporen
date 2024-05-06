@@ -8,7 +8,6 @@ import App from './App'
 import { Dashboard, Home, ImportExport, LandingPage, Layers, Login, Markers, Timestamps } from './pages';
 import { AuthProvider } from './context/authContext';
 import { ThemeProvider } from '@mui/material/styles';
-// import options from './utils/apolloOptions';
 
 import './sass/main.scss'
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,6 +16,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Icons from './pages/Icons';
 import Test from './pages/Test';
+import sitemap from '../sitemap.txt';
+import robots from '../robots.txt';
 
 const client = new ApolloClient({
   uri: import.meta.env.VITE_REACT_APP_BACKEND_URL+'/graphql',
@@ -42,6 +43,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 <Route path='/timestamps' element={<Timestamps/>} />
                 <Route path='/icons' element={<Icons/>} />
                 <Route path='/test' element={<Test/>} />
+                <Route path='robots.txt' element={robots} />
+                <Route path='sitemap.txt' element={sitemap} />
                 <Route path='*' element={<Home/>} />
               </Route>
           </Routes>
