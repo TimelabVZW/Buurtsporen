@@ -31,7 +31,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <ThemeProvider theme={theme}>
           <BrowserRouter>
-          <Routes>
+            <Routes>
               <Route element={<App />}>
                 <Route path='/' element={<LandingPage/>} />
                 <Route path="/map" element={<Home />} />
@@ -43,11 +43,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 <Route path='/timestamps' element={<Timestamps/>} />
                 <Route path='/icons' element={<Icons/>} />
                 <Route path='/test' element={<Test/>} />
-                <Route path='/robots.txt' element={<Robots/>} />
-                <Route path='/sitemap.txt' element={<Sitemap/>} />
+                <Route path='/robots.txt' element={Robots} />
+                <Route path='/sitemap.txt' element={Sitemap} />
                 <Route path='*' element={<Home/>} />
               </Route>
-          </Routes>
+            </Routes>
           </BrowserRouter>
         </ThemeProvider>
       </LocalizationProvider>
