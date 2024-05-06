@@ -16,8 +16,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import Icons from './pages/Icons';
 import Test from './pages/Test';
-import sitemap from '../sitemap.txt';
-import robots from '../robots.txt';
+import Sitemap from '../sitemap.txt';
+import Robots from '../robots.txt';
 
 const client = new ApolloClient({
   uri: import.meta.env.VITE_REACT_APP_BACKEND_URL+'/graphql',
@@ -43,8 +43,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 <Route path='/timestamps' element={<Timestamps/>} />
                 <Route path='/icons' element={<Icons/>} />
                 <Route path='/test' element={<Test/>} />
-                <Route path='robots.txt' element={robots} />
-                <Route path='sitemap.txt' element={sitemap} />
+                <Route path='/robots.txt' element={<Robots/>} />
+                <Route path='/sitemap.txt' element={<Sitemap/>} />
                 <Route path='*' element={<Home/>} />
               </Route>
           </Routes>

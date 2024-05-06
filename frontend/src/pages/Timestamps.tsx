@@ -84,12 +84,12 @@ const Timestamps = () => {
     
   return (
     <div className='dashboard-container dashboard-container--markers'>
-    <Helmet>
-        <title>Buurtsporen - Timestamps</title>
-        <meta name='description' content='Timestamp dashboard for the buurtsporen app'/>
-        <meta name='robots' content='noindex'/>
-        <link rel="canonical" href="/timestamps" />
-    </Helmet>
+        <Helmet>
+            <title>Buurtsporen - Timestamps</title>
+            <meta name='description' content='Timestamp dashboard for the buurtsporen app'/>
+            <meta name='robots' content='noindex'/>
+            <link rel="canonical" href="/timestamps" />
+        </Helmet>
         <Header/>
         <DashboardMain active='timestamps'>
         <Grid container gap={1} style={{padding: '1rem'}}>
