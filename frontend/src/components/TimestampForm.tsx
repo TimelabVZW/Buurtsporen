@@ -43,7 +43,7 @@ return (
                 values.files.forEach((file, index) => {
                     data.append(`file${index}`, file)
                 });
-            
+
                 await fetch( backendURL + '/timestamp/upload', {
                 method: 'POST',
                 headers: {
@@ -53,12 +53,10 @@ return (
                 })
                 .then(async (response) => {
                     const responseBody = await response.json();
-                    
                     input['fileName'] = responseBody.fileName;
                     input['url'] = responseBody.url;
                 })
             }
-            
 
             const { data } = await createTimestamp({
                 variables: input

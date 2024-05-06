@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import RasterLogoImage from '../assets/svg/BS_logo_raster_1.svg';
 import SpeurenButton from '../assets/svg/BS_SPEUREN.svg';
 import InfoGraphic from '../assets/svg/BS_WATER.svg';
@@ -7,6 +8,11 @@ import '../sass/pages/home.scss'
 const LandingPage = () => {
   return (
     <div className='homepage'>
+      <Helmet>
+          <title>Buurtsporen - Markers</title>
+          <meta name='description' content='Ontdek alle sporen en belevenissen binnen de ... buurt'/>
+          <link rel="canonical" href="/" />
+      </Helmet>
       <div className='homepage--container flex'>
           <div className='homepage--container__title'>
             <img className='title' src={RasterLogoImage}/>

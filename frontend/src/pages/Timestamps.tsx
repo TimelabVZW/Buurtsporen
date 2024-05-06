@@ -11,6 +11,7 @@ import CrudDataGrid from '../components/CrudDataGrid';
 
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Helmet } from 'react-helmet';
 
 const Timestamps = () => {
     // NEEDS OPTIMIZATION USING PAGINATION
@@ -83,6 +84,12 @@ const Timestamps = () => {
     
   return (
     <div className='dashboard-container dashboard-container--markers'>
+    <Helmet>
+        <title>Buurtsporen - Timestamps</title>
+        <meta name='description' content='Timestamp dashboard for the buurtsporen app'/>
+        <meta name='robots' content='noindex'/>
+        <link rel="canonical" href="/timestamps" />
+    </Helmet>
         <Header/>
         <DashboardMain active='timestamps'>
         <Grid container gap={1} style={{padding: '1rem'}}>

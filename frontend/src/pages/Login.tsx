@@ -4,6 +4,7 @@ import axios from 'axios';
 import * as yup from 'yup';
 import { useAuth } from '../context/authContext';
 import { Button } from '../components';
+import { Helmet } from 'react-helmet';
 
 
 const Login = () => {
@@ -30,6 +31,12 @@ const Login = () => {
   return (
     <>
         <div className='main-content'>
+            <Helmet>
+                <title>Buurtsporen - Login</title>
+                <meta name='description' content='Login to the Buurtsporen dashboard.'/>
+                <meta name='robots' content='noindex'/>
+                <link rel="canonical" href="/login" />
+            </Helmet>
             <div className='main-container'>
                 <div className='form-container'>
                 <h2  >Buurtsporen</h2>

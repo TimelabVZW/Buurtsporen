@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 import '../sass/pages/dashboard.scss'
 import { Grid, Card } from "@mui/material";
+import { Helmet } from 'react-helmet';
 
 
 const Markers = () => {
@@ -23,6 +24,12 @@ const Markers = () => {
     
   return (
     <div className='dashboard-container dashboard-container--markers'>
+        <Helmet>
+            <title>Buurtsporen - Markers</title>
+            <meta name='description' content='Marker dashboard for the buurtsporen app'/>
+            <meta name='robots' content='noindex'/>
+            <link rel="canonical" href="/markers" />
+        </Helmet>
         <Header/>
         <DashboardMain active='markers'>
         <Grid container gap={1} style={{padding: '1rem'}}>

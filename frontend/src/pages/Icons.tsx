@@ -12,6 +12,7 @@ import { GET_ICONS_PAGE } from '../gql/queries';
 import { useState } from 'react';
 import * as yup from 'yup';
 import { IconFormInput, IconFormUpdate } from '../interfaces';
+import { Helmet } from 'react-helmet';
 
 const validationSchema = yup.object({
     name: yup.string().max(1000).required(),
@@ -57,6 +58,12 @@ const Icons = () => {
     
   return (
     <div className='dashboard-container dashboard-container--layers'>
+    <Helmet>
+        <title>Buurtsporen - Icons</title>
+        <meta name='description' content='Icon dashboard for the buurtsporen app'/>
+        <meta name='robots' content='noindex'/>
+        <link rel="canonical" href="/icons" />
+    </Helmet>
         <Header/>
         <DashboardMain active='icons'>
         <Grid container gap={1} style={{padding: '1rem'}}>

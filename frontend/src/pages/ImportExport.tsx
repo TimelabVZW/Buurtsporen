@@ -14,6 +14,7 @@ import * as XLSX from 'xlsx';
 import '../sass/pages/dashboard.scss'
 import { useRef, useState } from 'react';
 import { mutationImportMarkers } from '../gql/mutations';
+import { Helmet } from 'react-helmet';
 
 const ImportExport = () => {
     const [ jsonLoaded , setJsonLoaded ] = useState(false);
@@ -169,6 +170,12 @@ const validationSchema = yup.object({
     
   return (
     <div className='dashboard-container dashboard-container--import'>
+        <Helmet>
+            <title>Buurtsporen - Import</title>
+            <meta name='description' content='Import dashboard for the buurtsporen app'/>
+            <meta name='robots' content='noindex'/>
+            <link rel="canonical" href="/import-export" />
+        </Helmet>
         <Header/>
         <DashboardMain active='import-export'>
         <Grid container gap={1.16} style={{padding: '1rem', maxWidth: 'calc(100vw - 4rem)'}}>

@@ -21,6 +21,7 @@ import {
 
 import '../sass/pages/dashboard.scss'
 import { useQuery } from '@apollo/client';
+import { Helmet } from 'react-helmet';
 
 ChartJS.register(
     CategoryScale,
@@ -128,6 +129,12 @@ const Dashboard = () => {
     
   return (
     <div className='dashboard-container'>
+        <Helmet>
+            <title>Buurtsporen - Dashboard</title>
+            <meta name='description' content='Dashboard for the buurtsporen app'/>
+            <meta name='robots' content='noindex'/>
+            <link rel="canonical" href="/dashboard" />
+        </Helmet>
         <Header/>
         <DashboardMain active='dashboard'>
             <Grid container gap={1} style={{padding: '1rem'}}>

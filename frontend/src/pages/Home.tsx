@@ -13,6 +13,7 @@ import TimestampList from '../components/TimestampList';
 import { layer } from '../interfaces';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
+import { Helmet } from 'react-helmet';
 
 import FilterIcon from '@mui/icons-material/FilterList';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -114,6 +115,11 @@ const Home = () => {
 
     return (
     <div className='app-container'>
+      <Helmet>
+        <title>Buurtsporen - Map</title>
+        <meta name='description' content='Bezoek de sporen en belevingen binnen de ... omgeving.' />
+        <link rel="canonical" href="/map" />
+      </Helmet>
       <ToastContainer
         position="top-center"
         autoClose={5000}

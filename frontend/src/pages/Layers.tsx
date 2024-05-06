@@ -13,6 +13,7 @@ import { mutationCreateLayer, mutationRemoveLayer, mutationUpdateDefaultShow } f
 import { GET_LAYERS_DATA } from '../gql/queries';
 import { GridColDef } from '@mui/x-data-grid';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 const Layers = () => {
     const { authenticated, authLoading, user } = useAuth();
@@ -102,6 +103,12 @@ const Layers = () => {
     
   return (
     <div className='dashboard-container dashboard-container--layers'>
+        <Helmet>
+            <title>Buurtsporen - Layers</title>
+            <meta name='description' content='Layer dashboard for the buurtsporen app'/>
+            <meta name='robots' content='noindex'/>
+            <link rel="canonical" href="/layers" />
+        </Helmet>
         <Header/>
         <DashboardMain active='layers'>
             <Grid container gap={1} style={{padding: '1rem'}}>
