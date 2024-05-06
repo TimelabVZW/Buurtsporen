@@ -43,6 +43,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                 <Route path='/timestamps' element={<Timestamps/>} />
                 <Route path='/icons' element={<Icons/>} />
                 <Route path='/test' element={<Test/>} />
+                <Route path='/robots.txt'/>
+                <Route path='/sitemap.txt'/>
+                <Route path='*' element={<Home/>} />
               </Route>
             </Routes>
           </BrowserRouter>
