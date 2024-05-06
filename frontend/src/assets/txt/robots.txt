@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /login
+Disallow: /dashboard
+Disallow: /icons
+Disallow: /layers
+Disallow: /markers
+Disallow: /timestamps
+Disallow: /import-export
