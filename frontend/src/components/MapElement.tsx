@@ -1,11 +1,9 @@
 import React from 'react';
 import { MapElementProps } from '../interfaces';
 import { Marker, Polygon, Polyline, Popup } from 'react-leaflet';
-import Button from './Button';
 import { Icon, LatLngExpression } from 'leaflet';
 
 import BackupMarkerIconImage from '../assets/svg/BS_backup_icon.svg';
-import InfoIcon from '@mui/icons-material/Info';
 
 
 //   disabled === modal !== ''
