@@ -199,6 +199,7 @@ interface ParameterMenuProps {
 
 interface MarkerListProps {
   layers: layer[];
+  searchParams: URLSearchParams;
   setSearchParams: SetURLSearchParams;
   setActiveMarker: (id: number) => void;
   setFormVisible: (visible: string) => void;

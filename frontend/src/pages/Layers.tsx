@@ -68,7 +68,7 @@ const Layers = () => {
             sortable: false,
             filterable: false,
             renderCell: (params: any) => {
-              return <a className='datagrid--view' href={`/map?layer=${params.row.id}`} target='_blank'><ViewIcon sx={{ fill: '#0000ff'}}/></a>;
+              return <a className='datagrid--view' href={`/map?layers=${params.row.id}`} target='_blank'><ViewIcon sx={{ fill: '#0000ff'}}/></a>;
             }
         },
         { field: "id", headerName: "ID", width: 150 },

@@ -36,6 +36,7 @@ const Home = () => {
   const [dates, setDates] = useState<{start: any, end: any}>({ start: new Date(0), end: new Date(Date.now() + 3600000) });
   const [formVisible, setFormVisible] = useState('');
   const [activeMarker, setActiveMarker] = useState<number>();
+  const [activeMarkerSet, setActiveMarkerSet] = useState<boolean>(false);
   const [refresh, setRefresh] = useState(new Date());
   const [center, setCenter] = useState<[number, number]>([51.0591448, 3.7418415]);
   const [layers, setLayers] = useState<number[]>([]);
@@ -78,22 +79,25 @@ const Home = () => {
   }, [refresh]);
 
   useEffect(() => {
+    //Layer selection logic
     if (!layersSet && data && data.layersByIds) {
       const layerIds = data.layersByIds.map((layer: layer) => layer.id);
       setLayers(layerIds);
       setLayersSet(true);
     }
-  }, [data]);
 
-  useEffect(() => {
-    const layerId = searchParams.get('layer') || '';
-    if (layerId.length > 0) {
-      setLayers([parseInt(layerId)]);
+    //searchParam logic
+    const layerIds = searchParams.get('layers')?.split(',').filter((layer: string) => !isNaN(parseInt(layer))).map((layer: string) => parseInt(layer));
+    if (layerIds) {
+      setLayers(layerIds);
     }
     const markerId = searchParams.get('marker') || '';
-    if (markerId.length > 0) {
+    if (markerId.length > 0 && !isNaN(parseInt(markerId))) {
       setActiveMarker(parseInt(markerId));
-      setFormVisible('timestamp-list');
+      if (!activeMarkerSet) {
+        setFormVisible('timestamp-list');
+        setActiveMarkerSet(true);
+      }
     }
   }, [data]);
 
@@ -166,6 +170,7 @@ const Home = () => {
             <MarkerList
               layers={data.layersByIds}
               setSearchParams={setSearchParams}
+              searchParams={searchParams}
               setActiveMarker={setActiveMarker}
               setFormVisible={setFormVisible}
               modal={modal}
@@ -253,6 +258,12 @@ const Home = () => {
               className='card-form-button'
               onClick={() => {
                 refetch().then(() => {
+                  const markerId = searchParams.get('marker') || '';
+                  if (markerId.length > 0) {
+                    setSearchParams({ layers: layers.join(','), marker: markerId})
+                  } else {
+                    setSearchParams({ layers: layers.join(',')})
+                  }
                   setModal('');
                 })
               }}

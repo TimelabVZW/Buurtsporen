@@ -5,6 +5,7 @@ const MarkerList = ({
   layers,
   setActiveMarker,
   setFormVisible,
+  searchParams,
   setSearchParams,
   modal,
 }: MarkerListProps) => {
@@ -19,7 +20,12 @@ const MarkerList = ({
               onClick={() => {
                 setActiveMarker(marker.id);
                 setFormVisible('timestamp-list');
-                setSearchParams({marker: `${marker.id}`})
+              const layerIds = searchParams.get('layers') || '';
+                if (layerIds.length > 0) {
+                  setSearchParams({layers: layerIds, marker: `${marker.id}`})
+                } else {
+                  setSearchParams({marker: `${marker.id}`})
+                }
               }}
               disabled={modal !== ''}
             />
