@@ -5,6 +5,9 @@ export default defineConfig({
   plugins: [react()],
   assetsInclude: ['**/*.txt'],
   server: {
-    port: 3001
+    port: 3001,
+    fs: {
+      allow: ['.'] // Allow serving files from the root directory
+    }
   }
 });
