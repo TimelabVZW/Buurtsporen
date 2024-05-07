@@ -6,8 +6,5 @@ export default defineConfig({
   assetsInclude: ['**/*.txt'],
   server: {
     port: 3001,
-    fs: {
-      allow: ['.'] // Allow serving files from the root directory
-    }
   }
 });
