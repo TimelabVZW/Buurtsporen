@@ -10,13 +10,11 @@ const GET_MAPS_DATA = gql`
       createdAt
       markers {
         id
-        name
         type
         color
         createdAt
         icon {
           id
-          fileName
           url
         }
         coordinates {
@@ -34,7 +32,6 @@ const GET_MAPS_DATA = gql`
     icons {
       id
       name
-      fileName
       url
     }
   }
