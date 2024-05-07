@@ -1,8 +1,4 @@
-import { useState } from 'react'
 import { ParameterMenuProps } from '../../interfaces'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ConditionalLoader from '../ConditionalLoader';
-import TextAlign from '@tiptap/extension-text-align';
 
 const ParameterMenu = ({keys, editor}: ParameterMenuProps) => {
     if (!editor) {

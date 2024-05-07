@@ -1,6 +1,5 @@
 import { Field, Form, Formik } from 'formik';
 import {  Navigate, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import * as yup from 'yup';
 import { useAuth } from '../context/authContext';
 import { Button } from '../components';

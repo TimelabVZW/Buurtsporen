@@ -1,5 +1,5 @@
 import { useCurrentEditor } from '@tiptap/react'
-import { AlignCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon, BoldIcon, Heading1Icon, Heading2Icon, ItalicIcon, LinkIcon, ListIcon, ListMinusIcon, ListOrderedIcon, MinusIcon, QuoteIcon, RedoIcon, SquareCodeIcon, StrikethroughIcon, UnderlineIcon, UndoIcon, UnlinkIcon } from 'lucide-react'
+import { AlignCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon, BoldIcon, Heading1Icon, Heading2Icon, ItalicIcon, LinkIcon, ListIcon, ListMinusIcon, ListOrderedIcon, MinusIcon, QuoteIcon, RedoIcon, StrikethroughIcon, UnderlineIcon, UndoIcon, UnlinkIcon } from 'lucide-react'
 import { useCallback } from 'react'
 import ParameterMenu from './ParameterMenu'
 import { ImportMenuProps } from '../../interfaces'

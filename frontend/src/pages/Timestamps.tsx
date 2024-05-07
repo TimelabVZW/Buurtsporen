@@ -6,7 +6,7 @@ import '../sass/pages/dashboard.scss'
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_TIMESTAMPS_DATA } from '../gql/queries';
 import { mutationRemoveTimestamp } from '../gql/mutations';
-import { Button, Card, Grid } from '@mui/material';
+import { Card, Grid } from '@mui/material';
 import CrudDataGrid from '../components/CrudDataGrid';
 
 import DownloadIcon from '@mui/icons-material/Download';

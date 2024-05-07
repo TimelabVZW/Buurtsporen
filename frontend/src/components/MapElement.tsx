@@ -7,7 +7,7 @@ import BackupMarkerIconImage from '../assets/svg/BS_backup_icon.svg';
 
 
 //   disabled === modal !== ''
-const MapElement: React.FC<MapElementProps> = ({marker, onClick, disabled}: MapElementProps): JSX.Element | null => {
+const MapElement: React.FC<MapElementProps> = ({marker, onClick}: MapElementProps): JSX.Element | null => {
     const coordsForSort= [...marker.coordinates]
 
     let sortedCoordinates = coordsForSort.sort((a, b) => {

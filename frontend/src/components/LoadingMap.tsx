@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import SquareBlackLogo from '../assets/svg/BS_logo_square_black.svg';
 import FootstepAnimation from '../assets/animations/footsteps.json';
 import lottie from "lottie-web";

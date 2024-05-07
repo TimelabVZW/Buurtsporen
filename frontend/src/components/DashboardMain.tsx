@@ -1,12 +1,10 @@
-import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import React from "react";
+import { List, ListItem, ListItemButton, ListItemIcon } from "@mui/material";
 import LayersIcon from '@mui/icons-material/Layers';
 import HomeIcon from '@mui/icons-material/Home';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import MarkerIcon from '@mui/icons-material/Room';
 import TimestampIcon from '@mui/icons-material/AccessTimeFilled';
 import PaletteIcon from '@mui/icons-material/Palette';
-import ConditionalLoader from "./ConditionalLoader";
 import { DashboardMainProps } from "../interfaces";
 
 const DashboardMain = ({ children, active }: DashboardMainProps) => {

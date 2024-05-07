@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { MarkerImportFormProps, MarkerInput } from '../../interfaces'
 import { ErrorMessage, Form, Formik } from 'formik'
 import * as yup from 'yup';
@@ -17,9 +17,6 @@ const validationSchema = yup.object({
 const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModal, refetch, jsonType}: MarkerImportFormProps) => {
     const [focus, setFocus] = React.useState<'' | 'title' | 'description'>('');
     const [importMarkers] = useMutation(mutationImportMarkers);
-    const titleField = useRef<HTMLInputElement>(null);
-    const descriptionField = useRef<HTMLInputElement>(null);
-
 
     const templateString = (template: string, object: Record<string, number>): string => {
         return template.replace(/{([^}]+)}/g, (match: string, key: string) => {
@@ -158,7 +155,6 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
                     <TextField
                         name="title"
                         id="title"
-                        ref={titleField}
                         onFocus={() => {
                             setFocus('title');
                         }}

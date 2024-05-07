@@ -1,6 +1,4 @@
-import { Button } from '@mui/material';
-import { DataGrid, GridCellParams } from '@mui/x-data-grid';
-import React from 'react';
+import { DataGrid } from '@mui/x-data-grid';
 import { CrudDataGridProps } from '../interfaces';
 
 const CrudDataGrid = ({rows, columns, pageSize, pageSizeOptions}: CrudDataGridProps) => {
