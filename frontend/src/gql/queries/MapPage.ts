@@ -27,6 +27,7 @@ const GET_MAPS_DATA = gql`
     layers {
         id
         name
+        private
         defaultShow
     }
     icons {

@@ -28,6 +28,7 @@ const MarkerForm = ({coordinate, layers, icons, visible, setFormVisible, refetch
 
 const filteredLayers = layers?.filter((layer: {name: string, id: number, private: boolean}) => layer.private === false);
     
+console.log(layers)
 
 return (
     <>

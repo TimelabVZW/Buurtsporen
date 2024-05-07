@@ -22,6 +22,7 @@ import UserIconImage from '../assets/images/user-marker.png';
 import RasterLogoImage from '../assets/svg/BS_logo_raster_1.svg';
 
 import "leaflet/dist/leaflet.css";
+import { useSearchParams } from 'react-router-dom';
 
 //7584 Onderzoeken of ik de query nog eens moet updaten voor geimporteerde markers, als dat mogelijk is.
 //      Verminderd load op de user interface.
@@ -39,6 +40,7 @@ const Home = () => {
   const [center, setCenter] = useState<[number, number]>([51.0591448, 3.7418415]);
   const [layers, setLayers] = useState<number[]>([]);
   const [layersSet, setLayersSet] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
   const { loading, error, data, refetch } = useQuery(GET_MAPS_DATA, {
     variables: {ids: layers, onlyImported: onlyTimeLab},
   });
@@ -80,6 +82,18 @@ const Home = () => {
       const layerIds = data.layersByIds.map((layer: layer) => layer.id);
       setLayers(layerIds);
       setLayersSet(true);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    const layerId = searchParams.get('layer') || '';
+    if (layerId.length > 0) {
+      setLayers([parseInt(layerId)]);
+    }
+    const markerId = searchParams.get('marker') || '';
+    if (markerId.length > 0) {
+      setActiveMarker(parseInt(markerId));
+      setFormVisible('timestamp-list');
     }
   }, [data]);
 
