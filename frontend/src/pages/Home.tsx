@@ -88,7 +88,8 @@ const Home = () => {
 
     //searchParam logic
     const layerIds = searchParams.get('layers')?.split(',').filter((layer: string) => !isNaN(parseInt(layer))).map((layer: string) => parseInt(layer));
-    if (layerIds) {
+    if (layerIds && layerIds.length > 0) {
+      console.log(layerIds);
       setLayers(layerIds);
     }
     const markerId = searchParams.get('marker') || '';
