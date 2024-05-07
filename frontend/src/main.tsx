@@ -2,7 +2,8 @@ import ReactDOM from 'react-dom/client'
 import {
   BrowserRouter,
   Routes,
-  Route } from 'react-router-dom'
+  Route,
+  } from 'react-router-dom'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import App from './App'
 import { Dashboard, Home, ImportExport, LandingPage, Layers, Login, Markers, Timestamps } from './pages';
