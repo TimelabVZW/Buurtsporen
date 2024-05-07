@@ -9,6 +9,7 @@ import { GET_PAGINATED_MARKERS } from '../gql/queries';
 import debounce from 'lodash.debounce';
 import EditIcon from '@mui/icons-material/Edit';
 import MassModal from './MassModal';
+import ViewIcon from '@mui/icons-material/Visibility';
 import ConditionalLoader from "./ConditionalLoader";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { ErrorMessage, Form, Formik } from 'formik';
@@ -71,6 +72,8 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
     {
       field: "action",
       headerName: "",
+      width: 75,
+      cellClassName: 'mui-cell--icon',
       sortable: false,
       filterable: false,
       renderCell: (params: any) => {
@@ -82,12 +85,14 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
           });
           refetch();
         };
-        return <Button onClick={onClick}><DeleteIcon sx={{ fill: '#FF0000', '&::hover': "#AA0000"}}/></Button>;
+        return <DeleteIcon onClick={onClick} sx={{ fill: '#FF0000', '&::hover': "#AA0000"}}/>;
       }
     },
     {
       field: "edit",
       headerName: "",
+      width: 75,
+      cellClassName: 'mui-cell--icon',
       sortable: false,
       filterable: false,
       renderCell: (params: any) => {
@@ -96,8 +101,19 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
           setActiveIcon(data.paginatedMarkers.find((marker: any) => marker.id === params.row.id)?.icon.id)
           setModal('edit');
         };
-        return <Button onClick={onClick}><EditIcon sx={{ fill: '#4aa3df', '&::hover': "#2980b9"}}/></Button>;
+        return <EditIcon onClick={onClick} sx={{ fill: '#4aa3df', '&::hover': "#2980b9"}}/>;
       }
+    },
+    {
+        field: "link",
+        headerName: "",
+        width: 75,
+        cellClassName: 'mui-cell--icon',
+        sortable: false,
+        filterable: false,
+        renderCell: (params: any) => {
+          return <a className='datagrid--view' href={`/map?marker=${params.row.id}`} target='_blank'><ViewIcon sx={{ fill: '#0000ff'}}/></a>;
+        }
     },
     { field: "id", headerName: "ID", width: 150, filterable: true, filterOperators: idFilterOperator },
     { field: "name", headerName: "Name", width: 150, filterable: true, filterOperators: containsFilterOperator },

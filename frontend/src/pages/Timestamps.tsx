@@ -11,6 +11,7 @@ import CrudDataGrid from '../components/CrudDataGrid';
 
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ViewIcon from '@mui/icons-material/Visibility';
 import { Helmet } from 'react-helmet';
 
 const Timestamps = () => {
@@ -41,6 +42,8 @@ const Timestamps = () => {
         {
             field: "action",
             headerName: "",
+            width: 75,
+            cellClassName: 'mui-cell--icon',
             sortable: false,
             filterable: false,
             renderCell: (params: any) => {
@@ -52,7 +55,18 @@ const Timestamps = () => {
                 });
                 refetch();
               };
-              return <Button onClick={onClick}><DeleteIcon sx={{ fill: '#FF0000', '&::hover': "#AA0000"}}/></Button>;
+              return <DeleteIcon onClick={onClick} sx={{ fill: '#FF0000', '&::hover': "#AA0000"}}/>;
+            }
+        },
+        {
+            field: "link",
+            headerName: "",
+            width: 75,
+            cellClassName: 'mui-cell--icon',
+            sortable: false,
+            filterable: false,
+            renderCell: (params: any) => {
+              return <a className='datagrid--view' href={`/map?marker=${params.row.markerId}`} target='_blank'><ViewIcon sx={{ fill: '#0000ff'}}/></a>;
             }
         },
         { field: "id", headerName: "ID", width: 150 },
@@ -61,6 +75,8 @@ const Timestamps = () => {
         {
             field: "file",
             headerName: "File",
+            width: 75,
+            cellClassName: 'mui-cell--icon',
             sortable: false,
             filterable: false,
             renderCell: (params: any) => {
@@ -77,6 +93,7 @@ const Timestamps = () => {
         return {
             id: timestamp.id,
             description: timestamp.description,
+            markerId: timestamp.markerId,
             createdAt: `${new Date(timestamp.createdAt).toLocaleDateString()}\n ${new Date(timestamp.createdAt).toLocaleTimeString()}`,
             fileName: timestamp.fileName
         }

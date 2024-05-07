@@ -8,6 +8,7 @@ query GetTimestampsData {
         createdAt
         fileName
         url
+        markerId
     }
 }
 `;

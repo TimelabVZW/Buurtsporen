@@ -1,5 +1,6 @@
 import { Editor } from "@tiptap/react";
 import { ReactElement } from "react";
+import { SetURLSearchParams } from "react-router-dom";
 
 interface DeconstructedObject {
     [key: string]: any;
@@ -198,6 +199,7 @@ interface ParameterMenuProps {
 
 interface MarkerListProps {
   layers: layer[];
+  setSearchParams: SetURLSearchParams;
   setActiveMarker: (id: number) => void;
   setFormVisible: (visible: string) => void;
   modal: string;

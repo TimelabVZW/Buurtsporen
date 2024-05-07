@@ -12,6 +12,21 @@
     position: relative;
 }
 
+.datagrid--view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mui-cell--icon.MuiDataGrid-cell {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  svg:hover {
+    cursor: pointer;
+  }
+}
+
 .title--container {
   position: absolute;
   top: 0;

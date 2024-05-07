@@ -5,6 +5,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { Form, Formik } from 'formik';
 import { Button, Grid, Card, Checkbox, FormControlLabel, Input } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import ViewIcon from '@mui/icons-material/Visibility';
 import LayersIcon from '@mui/icons-material/Layers';
 import CountUp from 'react-countup';
 
@@ -46,15 +47,28 @@ const Layers = () => {
         {
             field: "action",
             headerName: "",
+            width: 75,
+            cellClassName: 'mui-cell--icon',
             sortable: false,
             filterable: false,
-            renderCell: (params) => {
+            renderCell: (params: any) => {
               const onClick = (e: any) => {
                 setActiveLayer(params.row.id);
                 setModal('deleteLayer');
               };
         
-              return <Button onClick={onClick}><DeleteIcon sx={{ fill: '#FF0000'}}/></Button>;
+              return <DeleteIcon onClick={onClick} sx={{ fill: '#FF0000'}}/>;
+            }
+        },
+        {
+            field: "link",
+            headerName: "",
+            width: 75,
+            cellClassName: 'mui-cell--icon',
+            sortable: false,
+            filterable: false,
+            renderCell: (params: any) => {
+              return <a className='datagrid--view' href={`/map?layer=${params.row.id}`} target='_blank'><ViewIcon sx={{ fill: '#0000ff'}}/></a>;
             }
         },
         { field: "id", headerName: "ID", width: 150 },
@@ -68,7 +82,7 @@ const Layers = () => {
             width: 150,
             sortable: false,
             filterable: false,
-            renderCell: (params) => {
+            renderCell: (params: any) => {
                 let disabled = false;
                 const onClick = async (e: any) => {
                     disabled = true;

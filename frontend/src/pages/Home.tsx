@@ -165,6 +165,7 @@ const Home = () => {
           <ConditionalLoader condition={data}>
             <MarkerList
               layers={data.layersByIds}
+              setSearchParams={setSearchParams}
               setActiveMarker={setActiveMarker}
               setFormVisible={setFormVisible}
               modal={modal}
