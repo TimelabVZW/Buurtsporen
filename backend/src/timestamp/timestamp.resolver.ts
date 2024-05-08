@@ -4,6 +4,7 @@ import { Timestamp } from './entities/timestamp.entity';
 import { CreateTimestampInput } from './dto/create-timestamp.input';
 import { UpdateTimestampInput } from './dto/update-timestamp.input';
 import { Marker } from 'src/marker/entities/marker.entity';
+import { PaginateQuery } from './dto/paginate-query';
 
 @Resolver(() => Timestamp)
 export class TimestampResolver {
@@ -17,6 +18,14 @@ export class TimestampResolver {
   @Query(() => [Timestamp], { name: 'timestamps' })
   findAll() {
     return this.timestampService.findAll();
+  }
+
+  @Query(() => [Timestamp], { name: 'paginatedMarkers' })
+  async findPaginatedMarkers(
+    @Args('query', { type: () => PaginateQuery }) query: PaginateQuery,
+  ): Promise<Timestamp[]> {
+    const { page, limit, sortBy, sortDirection, message, id } = query;
+    return this.timestampService.findPaginatedTimestamps(page, limit, sortBy, sortDirection, message, id);
   }
 
   @Query(() => Timestamp, { name: 'timestamp' })

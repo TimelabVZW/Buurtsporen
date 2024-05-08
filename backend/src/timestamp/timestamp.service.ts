@@ -3,7 +3,7 @@ import { CreateTimestampInput } from './dto/create-timestamp.input';
 import { UpdateTimestampInput } from './dto/update-timestamp.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Timestamp } from './entities/timestamp.entity';
-import { Repository } from 'typeorm';
+import { Equal, ILike, Repository } from 'typeorm';
 import { MarkerService } from 'src/marker/marker.service';
 import { Marker } from 'src/marker/entities/marker.entity';
 
@@ -38,6 +38,36 @@ export class TimestampService {
 
   getMarker(markerId: number): Promise<Marker> {
     return this.markerService.findOne(markerId);
+  }
+
+  async findPaginatedTimestamps(
+    page: number,
+    limit: number,
+    sortBy: string,
+    sortDirection: 'ASC' | 'DESC',
+    message?: string,
+    id?: string,
+  ): Promise<Timestamp[]> {
+    const skip = (page - 1) * limit;
+    
+    const filter: any = {};
+
+    if (message) {
+      filter.message = ILike(`%${message}%`);
+    }
+
+    if (id) {
+      filter.id = Equal(id);
+    }
+
+    return this.timestampRepository.find({
+      skip,
+      take: limit,
+      order: {
+        [sortBy]: sortDirection,
+      },
+      where: filter,
+    });
   }
 
   //   UPDATE
