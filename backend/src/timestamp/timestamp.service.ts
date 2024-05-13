@@ -45,15 +45,15 @@ export class TimestampService {
     limit: number,
     sortBy: string,
     sortDirection: 'ASC' | 'DESC',
-    message?: string,
+    description?: string,
     id?: string,
   ): Promise<Timestamp[]> {
     const skip = (page - 1) * limit;
     
     const filter: any = {};
 
-    if (message) {
-      filter.message = ILike(`%${message}%`);
+    if (description) {
+      filter.description = ILike(`%${description}%`);
     }
 
     if (id) {

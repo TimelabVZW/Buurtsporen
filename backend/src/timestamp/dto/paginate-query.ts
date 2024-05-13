@@ -1,7 +1,7 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
 
 @InputType()
-export class PaginateQuery {
+export class TimestampPaginateQuery {
   @Field(() => Int)
   page: number;
 
@@ -18,7 +18,7 @@ export class PaginateQuery {
   
   @Field(() => String, 
   { nullable: true })
-  message?: string;
+  description?: string;
 
   @Field(() => String, 
   { nullable: true })

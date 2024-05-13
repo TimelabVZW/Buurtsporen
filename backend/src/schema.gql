@@ -128,9 +128,10 @@ type Query {
   layer(id: Int!): Layer!
   layersByIds(ids: [Int!]!, onlyImported: Boolean!): [Layer!]!
   markers: [Marker!]!
-  paginatedMarkers(query: PaginateQuery!): [Timestamp!]!
+  paginatedMarkers(query: PaginateQuery!): [Marker!]!
   marker(id: Int!): Marker!
   timestamps: [Timestamp!]!
+  paginatedTimestamps(query: TimestampPaginateQuery!): [Timestamp!]!
   timestamp(id: Int!): Timestamp!
   coordinates: [Coordinate!]!
   coordinate(id: Int!): Coordinate!
@@ -143,7 +144,19 @@ input PaginateQuery {
   limit: Int!
   sortBy: String! = "createdAt"
   sortDirection: String! = "DESC"
-  message: String
+  name: String
+  author: String
+  description: String
+  type: String
+  id: String
+}
+
+input TimestampPaginateQuery {
+  page: Int!
+  limit: Int!
+  sortBy: String! = "createdAt"
+  sortDirection: String! = "DESC"
+  description: String
   id: String
 }
 

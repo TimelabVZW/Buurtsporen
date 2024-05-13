@@ -4,20 +4,38 @@ import { Navigate } from 'react-router-dom';
 
 import '../sass/pages/dashboard.scss'
 import { useMutation, useQuery } from '@apollo/client';
-import { GET_TIMESTAMPS_DATA } from '../gql/queries';
 import { mutationRemoveTimestamp } from '../gql/mutations';
-import { Card, Grid } from '@mui/material';
-import CrudDataGrid from '../components/CrudDataGrid';
 
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ViewIcon from '@mui/icons-material/Visibility';
 import { Helmet } from 'react-helmet';
+import GET_PAGINATED_TIMESTAMPS from '../gql/queries/PaginatedTimestamps';
+import { DataGrid } from '@mui/x-data-grid';
+import { useState } from 'react';
+import debounce from 'lodash.debounce';
+import { Card, Grid } from '@mui/material';
 
 const Timestamps = () => {
     // NEEDS OPTIMIZATION USING PAGINATION
     const { authenticated, authLoading, user } = useAuth();
-    const { loading, error, data, refetch } = useQuery(GET_TIMESTAMPS_DATA);
+    const [gridPage, setGridPage] = useState(0);
+    const [limit, setLimit] = useState(15);
+    const [sortBy, setSortBy] = useState("id");
+    const [sortDirection, setSortDirection] = useState("ASC");
+    const [filterModel, setfilterModel] = useState({items: []});
+    const [filter, setFilter] = useState({description: ''});
+    const { loading, error, data, refetch } = useQuery(GET_PAGINATED_TIMESTAMPS, {
+        variables: {
+        query: {
+            page: 1,
+            limit: limit,
+            sortBy: sortBy,
+            sortDirection: sortDirection,
+            ...filter
+        },
+        },
+    });
     const [removeTimestamp] = useMutation(mutationRemoveTimestamp);
 
     if (authLoading) {
@@ -89,7 +107,7 @@ const Timestamps = () => {
         },
     ];
 
-    const rows = data.timestamps.map((timestamp: any) => {
+    const rows = data.paginatedTimestamps.map((timestamp: any) => {
         return {
             id: timestamp.id,
             description: timestamp.description,
@@ -109,7 +127,7 @@ const Timestamps = () => {
         </Helmet>
         <Header/>
         <DashboardMain active='timestamps'>
-        <Grid container gap={1} style={{padding: '1rem'}}>
+            <Grid container gap={1} style={{padding: '1rem'}}>
                 <Grid xs={12}>
                     <Card 
                         sx={{
@@ -120,7 +138,52 @@ const Timestamps = () => {
                             maxWidth: '100%',
                         }}
                     >
-                        <CrudDataGrid rows={rows} columns={columns} pageSize={15} pageSizeOptions={[15]}
+                        <DataGrid
+                            rows={rows}
+                            columns={columns}
+                            disableRowSelectionOnClick
+                            autoHeight
+                            rowHeight={49} 
+                            rowCount={data.timestamps.length}
+                            paginationModel={
+                                {
+                                page: gridPage,
+                                pageSize: 15,
+                                }
+                            }
+                            
+                            onPaginationModelChange={(params, grid) => {
+                                if (params.page > gridPage && limit / params.pageSize <= params.page) {
+                                setLimit(limit + params.pageSize);
+                                }
+                                setGridPage(params.page);
+                            }}
+                            sortModel={[{ field: sortBy, sort: sortDirection.toLowerCase() as 'asc' | 'desc' }]}
+                            onSortModelChange={(params) => {
+                                setSortBy(params[0].field);
+                                if (params[0].sort) {
+                                setSortDirection(params[0].sort.toUpperCase());
+                                }
+                            }}
+                            filterModel={filterModel}
+                            onFilterModelChange={debounce((params) => {
+                                setfilterModel(params);
+                                let newFilter: any = {name: '', type: '', author: '', description: ''};
+                                params.items.forEach((item: any) => {
+                                newFilter[item.field] = item.value;
+                                });
+                                setFilter(newFilter);
+                            }, 2000)}
+                            sx={{
+                                width: '100%',
+                                height: '20rem',
+                            }}
+                            initialState={{
+                                pagination: {
+                                    paginationModel: { page: 0, pageSize: 15 },
+                                },
+                            }}
+                            pageSizeOptions= {[15]}
                         />
                     </Card>
                 </Grid>

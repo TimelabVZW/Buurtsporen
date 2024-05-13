@@ -28,12 +28,12 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
   const [activeIcon, setActiveIcon] = useState('');
   const [updateMarker] = useMutation(mutationUpdateMarker);
   const [removeMarker] = useMutation(mutationRemoveMarker);
-  const [page, setPage] = useState(1);
   const [gridPage, setGridPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(15);
-  const [filterModel, setfilterModel] = useState({items: []});
   const [sortBy, setSortBy] = useState("id");
   const [sortDirection, setSortDirection] = useState("ASC");
+  const [filterModel, setfilterModel] = useState({items: []});
   const [filter, setFilter] = useState({name: '', type: '', author: '', description: ''});
   const { loading, error, data, refetch } = useQuery(GET_PAGINATED_MARKERS, {
     variables: {
