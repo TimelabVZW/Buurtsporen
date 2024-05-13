@@ -12,7 +12,7 @@ const MapElement: React.FC<MapElementProps> = ({marker, onClick}: MapElementProp
 
     let sortedCoordinates = coordsForSort.sort((a, b) => {
         return a.id - b.id;
-    }); 
+    });
     
     let coordinates: LatLngExpression[] = sortedCoordinates.map((coordinate) => [coordinate.latitude, coordinate.longitude]);
 
@@ -38,7 +38,7 @@ const MapElement: React.FC<MapElementProps> = ({marker, onClick}: MapElementProp
         case 'LineString':
             return (
                 <Polyline 
-                    positions={coordinates} 
+                    positions={coordinates}
                     color={marker.color}
                     eventHandlers={{
                         click: () => {
@@ -66,6 +66,7 @@ const MapElement: React.FC<MapElementProps> = ({marker, onClick}: MapElementProp
                 <Polygon 
                     positions={coordinates} 
                     color={marker.color}
+                    pathOptions={{interactive: true}}
                     eventHandlers={{
                         click: () => {
                             onClick();

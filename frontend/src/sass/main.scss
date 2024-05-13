@@ -6,6 +6,11 @@
   display: flex;
 }
 
+.map-bounds {
+  pointer-events: none;
+  z-index: -500;
+}
+
 .app-container {
     width: 100vw;
     height: 100vh;

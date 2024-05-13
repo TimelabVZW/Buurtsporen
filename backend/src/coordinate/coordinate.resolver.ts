@@ -7,7 +7,9 @@ import { Marker } from 'src/marker/entities/marker.entity';
 
 @Resolver(() => Coordinate)
 export class CoordinateResolver {
-  constructor(private readonly coordinateService: CoordinateService) {}
+  constructor(
+    private readonly coordinateService: CoordinateService,
+  ) {}
 
   @Mutation(() => Coordinate)
   createCoordinate(@Args('createCoordinateInput') createCoordinateInput: CreateCoordinateInput) {

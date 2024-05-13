@@ -165,7 +165,7 @@ const Home = () => {
               </Popup>
             </Marker>
           </ConditionalLoader>
-          
+          <Bounds />
           <ConditionalLoader condition={data}>
             <MarkerList
               layers={data.layersByIds}
@@ -176,7 +176,6 @@ const Home = () => {
               modal={modal}
             />
           </ConditionalLoader>
-          <Bounds />
         </MapContainer>
           <div className='map-form-container'>
             <MarkerForm refetch={refetch} setFormVisible={setFormVisible} visible={formVisible === 'create-marker'} layers={data.layers} icons={data.icons} coordinate={location? location : [0, 0]}/>

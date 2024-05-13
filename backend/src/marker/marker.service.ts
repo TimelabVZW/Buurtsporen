@@ -12,7 +12,10 @@ import { Layer } from 'src/layer/entities/layer.entity';
 import bounds from './bounds';
 import { Icon } from 'src/icon/entities/icon.entity';
 import { Coordinate } from 'src/coordinate/entities/coordinate.entity';
+import { QueueService } from './queue.service';
+import { QueueProcessor } from './queue.processor';
 var classifyPoint = require("robust-point-in-polygon");
+const semaphore = require('semaphore')(1);
 
 @Injectable()
 export class MarkerService {
@@ -25,6 +28,8 @@ export class MarkerService {
     private layerService: LayerService,
     @Inject(forwardRef(() => CoordinateService))
     private coordinateService: CoordinateService,
+    private queueService: QueueService,
+    private queueProcessor: QueueProcessor,
   ) {}
 
   //   CREATE
@@ -39,8 +44,8 @@ export class MarkerService {
     return this.markerRepository.save(markers);
   } 
 
-  createManyWithCoords(createMarkerWithCoordsInputs: CreateMarkerWithCoordsInput[]): Promise<Marker[]> {
-    createMarkerWithCoordsInputs.map(async (createMarkerWithCoordsInput) => {
+  async createManyWithCoords(createMarkerWithCoordsInputs: CreateMarkerWithCoordsInput[]): Promise<Marker[]> {
+    createMarkerWithCoordsInputs.forEach(async (createMarkerWithCoordsInput) => {
       let valid = true;
       // check if marker is within map bounds
       
@@ -49,25 +54,26 @@ export class MarkerService {
           valid = false;
         }
       });
-    
-      const coordinatesWhere: FindOptionsWhere<Coordinate>[] = createMarkerWithCoordsInput.coords.map(coord => ({
-        latitude: coord[0],
-        longitude: coord[1],
-      }));
 
-      const existingMarker = await this.markerRepository.findOne({
-        relations: ['coordinates', 'layer'],
-        where: { coordinates: coordinatesWhere, layerId: createMarkerWithCoordsInput.layerId },
-      });
-
-      if (!existingMarker) {
-        if (valid) {
-          const newMarker = await this.create({...createMarkerWithCoordsInput, createdAt: new Date()})
-          const marker = await this.findOne(newMarker.id);
-          createMarkerWithCoordsInput.coords.forEach((coord) => {
-            this.coordinateService.create({latitude: coord[0], longitude: coord[1], markerId: marker.id })
-          })
-        }
+      if (valid) {
+        const newMarker = await this.create({...createMarkerWithCoordsInput, createdAt: new Date()})
+        const marker = await this.findOne(newMarker.id);
+        this.markerRepository.save({...marker, description: `${marker.id}`})
+        console.log(marker.id);
+        console.log(createMarkerWithCoordsInput.coords);
+        createMarkerWithCoordsInput.coords.forEach(async (coord) => {
+          // Acquire the semaphore before enqueuing
+          semaphore.take(() => {
+            this.queueService.enqueueCoordinate({
+              latitude: coord[0],
+              longitude: coord[1],
+              markerId: marker.id
+            });
+            // Release the semaphore after enqueuing
+            semaphore.leave();
+          });
+        })
+        await this.queueProcessor.processQueue();
       }
     })
     return this.findAllWithLayerId(createMarkerWithCoordsInputs[0].layerId);
