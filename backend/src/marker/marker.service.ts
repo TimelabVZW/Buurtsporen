@@ -56,11 +56,7 @@ export class MarkerService {
       });
 
       if (valid) {
-        const newMarker = await this.create({...createMarkerWithCoordsInput, createdAt: new Date()})
-        const marker = await this.findOne(newMarker.id);
-        this.markerRepository.save({...marker, description: `${marker.id}`})
-        console.log(marker.id);
-        console.log(createMarkerWithCoordsInput.coords);
+        const marker = await this.create({...createMarkerWithCoordsInput, createdAt: new Date()})
         createMarkerWithCoordsInput.coords.forEach(async (coord) => {
           // Acquire the semaphore before enqueuing
           semaphore.take(() => {
