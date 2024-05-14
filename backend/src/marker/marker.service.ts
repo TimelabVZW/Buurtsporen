@@ -15,7 +15,6 @@ import { Coordinate } from 'src/coordinate/entities/coordinate.entity';
 import { QueueService } from './queue.service';
 import { QueueProcessor } from './queue.processor';
 var classifyPoint = require("robust-point-in-polygon");
-const semaphore = require('semaphore')(1);
 
 @Injectable()
 export class MarkerService {
@@ -58,16 +57,11 @@ export class MarkerService {
       if (valid) {
         const marker = await this.create({...createMarkerWithCoordsInput, createdAt: new Date()})
         createMarkerWithCoordsInput.coords.forEach(async (coord) => {
-          // Acquire the semaphore before enqueuing
-          semaphore.take(() => {
             this.queueService.enqueueCoordinate({
               latitude: coord[0],
               longitude: coord[1],
               markerId: marker.id
             });
-            // Release the semaphore after enqueuing
-            semaphore.leave();
-          });
         })
         await this.queueProcessor.processQueue();
       }
