@@ -16,7 +16,12 @@ const ImageExpandContainer = ({src, alt}: ImageExpandContainerProps) => {
                 src={src} 
                 alt={alt}/>
             <ConditionalLoader condition={active}>
-                <div className="expanded-image-background">
+                <div 
+                    className="expanded-image-background"
+                    onClick={() => {
+                        setActive(false);
+                        document.body.classList.remove('expanded');
+                    }}>
                     <CloseButton 
                         onClick={() => {
                             setActive(false);

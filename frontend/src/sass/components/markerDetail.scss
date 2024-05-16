@@ -98,21 +98,23 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); // gray semi-transparent background
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; // adjust z-index as needed
+    z-index: 9999;
     
     .image-container--expanded {
-      width: 80%; // adjust image container width as needed
-      max-width: 800px; // adjust maximum width as needed
-      max-height: 80%; // adjust maximum height as needed
-      overflow: auto; // enable scrolling if image exceeds container size
+      width: 80%;
+      max-width: 1200px;
+      max-height: 80%;
+      overflow: hidden;
       
       .image--expanded {
         display: block;
-        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
         height: auto;
         margin: 0 auto;
       }
