@@ -11,7 +11,7 @@ const LandingPage = () => {
       <Helmet>
           <title>Buurtsporen - Markers</title>
           <meta name='description' content='Ontdek alle sporen en belevenissen binnen de ... buurt'/>
-          <link rel="canonical" href="/" />
+          <link rel="canonical" href={import.meta.env.VITE_REACT_APP_FRONTEND_URL} />
       </Helmet>
       <div className='homepage--container flex'>
           <div className='homepage--container__title'>

@@ -136,7 +136,7 @@ const Home = () => {
       <Helmet>
         <title>Buurtsporen - Map</title>
         <meta name='description' content='Bezoek de sporen en belevingen binnen de ... omgeving.' />
-        <link rel="canonical" href="/map" />
+        <link rel="canonical" href={`${import.meta.env.VITE_REACT_APP_FRONTEND_URL}/map`}/>
       </Helmet>
       <ToastContainer
         position="top-center"
