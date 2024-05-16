@@ -167,6 +167,7 @@ interface MassModalProps {
 
 interface SVGButtonProps {
     small?: boolean,
+    title?: string,
     onClick: () => void,
     children: React.ReactNode,
     className?: string,

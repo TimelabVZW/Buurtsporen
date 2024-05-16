@@ -188,11 +188,13 @@ const Home = () => {
             <img className='title' src={RasterLogoImage} alt='Buurtsporen logo'/>
             <div className='title--buttons flex flex-row'>
               <SVGButton
+                title='Refresh location'
                 onClick={onRefreshClick}
               >
                 <MyLocationIcon color='secondary'/>
               </SVGButton>
               <SVGButton
+                title='Filter map'
                 onClick={() => {
                   setModal('filters');
                 }}
@@ -202,6 +204,7 @@ const Home = () => {
               <div className='filler-square'>
                 <ConditionalLoader condition={inBounds && formVisible === ''}>
                   <SVGButton
+                    title='Create marker'
                     onClick={() => {
                       setFormVisible('create-marker');
                     }}
