@@ -34,6 +34,10 @@ spec:
               value: https://storage.googleapis.com
             - name: S3_BUCKET_NAME
               value: buurtsporen
+            - name: JWT_SECRET
+              value: {{JWT_SECRET}}
+            - name: JWT_SECRET_OR_KEY
+              value: {{JWT_SECRET_OR_KEY}}
           volumeMounts:
             - name: storage
               subPath: upload
