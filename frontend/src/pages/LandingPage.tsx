@@ -15,7 +15,7 @@ const LandingPage = () => {
       </Helmet>
       <div className='homepage--container flex'>
           <div className='homepage--container__title'>
-            <img className='title' src={RasterLogoImage}/>
+            <img className='title' src={RasterLogoImage} alt='buurtsporen logo'/>
             <div className='homepage--container__text'>
               <p>
                 Welkom op Buurtsporen, het kennisplatform van de buurt rondom Timelab. Het gaat over de straten Kogelstraat, Sarafijnstraat, Nieuwe Wijkstraat, 
