@@ -14,6 +14,7 @@ import ConditionalLoader from "./ConditionalLoader";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { ErrorMessage, Form, Formik } from 'formik';
 import * as yup from 'yup';
+import LoadingSmall from './LoadingSmall';
 
 const validationSchema = yup.object({
   name: yup.string().required().max(40),
@@ -51,7 +52,7 @@ const CrudMarkerDataGrid = ({ pageSize, pageSizeOptions }: CrudMarkerDataGridPro
     refetch();
   }, [page, limit, sortBy, sortDirection, filter]);
   
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <LoadingSmall/>;
 
   if (error) return <div>Error! {error.message}</div>;
   

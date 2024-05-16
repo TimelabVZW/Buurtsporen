@@ -9,7 +9,6 @@ const Test = () => {
     return (
         <>
             <ImageExpandContainer src={RasterLogoImage} alt="/assets/BS_logo_raster_1.dfb016d2.svg" />
-            <ImageExpandContainer src={RasterLogoImage} alt="/assets/BS_logo_raster_1.dfb016d2.svg" />
         </>
     )
 };

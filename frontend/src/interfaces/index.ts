@@ -1,3 +1,4 @@
+import { FetchResult } from "@apollo/client";
 import { Editor } from "@tiptap/react";
 import { ReactElement } from "react";
 import { SetURLSearchParams } from "react-router-dom";
@@ -182,6 +183,14 @@ interface CrudMarkerDataGridProps {
     pageSize: number;
     pageSizeOptions: number[];
 }
+
+interface LayersDataGridProps {
+    refetchTrigger: boolean;
+    setModal: (e: string) => void;
+    updateDefaultShow: (e: any) => Promise<FetchResult<any>>;
+    setActiveLayer: (e: number) => void;
+    setLayerCount: (e: number) => void;
+}
  
 interface TiptapProps {
     setInput: (e: string) => void;
@@ -241,4 +250,5 @@ export type {
     ParameterMenuProps,
     MarkerListProps,
     ImageExpandContainerProps,
+    LayersDataGridProps,
 }

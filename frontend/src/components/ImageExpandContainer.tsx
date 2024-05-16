@@ -22,7 +22,7 @@ const ImageExpandContainer = ({src, alt}: ImageExpandContainerProps) => {
                         setActive(false);
                         document.body.classList.remove('expanded');
                     }}>
-                    <CloseButton 
+                    <CloseButton
                         onClick={() => {
                             setActive(false);
                             document.body.classList.remove('expanded');

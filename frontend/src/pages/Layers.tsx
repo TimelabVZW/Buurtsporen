@@ -1,29 +1,26 @@
-import { CrudDataGrid, CustomCheckbox, DashboardMain, Header, MassModal } from '../components';
+import { DashboardMain, Header, LayersDataGrid, MassModal } from '../components';
 import { useAuth } from '../context/authContext';
 import { Navigate } from 'react-router-dom';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { Form, Formik } from 'formik';
 import { Button, Grid, Card, Checkbox, FormControlLabel, Input } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
-import ViewIcon from '@mui/icons-material/Visibility';
 import LayersIcon from '@mui/icons-material/Layers';
 import CountUp from 'react-countup';
 
 import '../sass/pages/dashboard.scss'
 import { mutationCreateLayer, mutationRemoveLayer, mutationUpdateDefaultShow } from '../gql/mutations';
-import { GET_LAYERS_DATA } from '../gql/queries';
-import { GridColDef } from '@mui/x-data-grid';
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 const Layers = () => {
-    const { authenticated, authLoading, user } = useAuth();
+    const { authenticated, authLoading } = useAuth();
     const [modal, setModal] = useState<string>('');
     const [activeLayer, setActiveLayer] = useState<null | number>(null);
+    const [layerCount, setLayerCount] = useState<number>(0);
+    const [refetchTrigger, setRefetchTrigger] = useState<boolean>(false);
     const [createLayer] = useMutation(mutationCreateLayer);
     const [removeLayer] = useMutation(mutationRemoveLayer);
     const [updateDefaultShow] = useMutation(mutationUpdateDefaultShow);
-    const { loading, error, data, refetch } = useQuery(GET_LAYERS_DATA);
 
     if (authLoading) {
         return (
@@ -36,84 +33,6 @@ const Layers = () => {
     if (!authenticated) {
         return <Navigate to="/login" replace/>;
     }
-
-    if (loading) return <p>Loading...</p>;
-
-    if (error) {
-        return <p>Error...</p>;
-    }
-
-    const columns: GridColDef[] = [
-        {
-            field: "action",
-            headerName: "",
-            width: 75,
-            cellClassName: 'mui-cell--icon',
-            sortable: false,
-            filterable: false,
-            renderCell: (params: any) => {
-              const onClick = (e: any) => {
-                setActiveLayer(params.row.id);
-                setModal('deleteLayer');
-              };
-        
-              return <DeleteIcon onClick={onClick} sx={{ fill: '#FF0000'}}/>;
-            }
-        },
-        {
-            field: "link",
-            headerName: "",
-            width: 75,
-            cellClassName: 'mui-cell--icon',
-            sortable: false,
-            filterable: false,
-            renderCell: (params: any) => {
-              return <a className='datagrid--view' href={`/map?layers=${params.row.id}`} target='_blank'><ViewIcon sx={{ fill: '#0000ff'}}/></a>;
-            }
-        },
-        { field: "id", headerName: "ID", width: 150 },
-        { field: "name", headerName: "Name", width: 150 },
-        { field: "createdAt", headerName: "Created at", width: 250 },
-        { field: "private", headerName: "Private", width: 150 },
-        { field: "markers", headerName: "Markers", width: 150 },
-        {
-            field: "defaultShow",
-            headerName: "Default to show",
-            width: 150,
-            sortable: false,
-            filterable: false,
-            renderCell: (params: any) => {
-                let disabled = false;
-                const onClick = async (e: any) => {
-                    disabled = true;
-                    await updateDefaultShow({
-                        variables: {
-                            id: params.row.id,
-                            defaultShow: !params.row.defaultShow
-                        }
-                    })
-                    params.row.defaultShow = !params.row.defaultShow;
-                    disabled = false;
-                };
-            
-                return (
-                    <CustomCheckbox
-                        name=''
-                        onClick={onClick}
-                        disabled={disabled}
-                        initialChecked={params.row.defaultShow}
-                    />
-                )
-            }
-        },
-    ]
-
-
-    let rows = data.layers.map((obj: any, index: number) => ({
-        ...obj,
-        markers: obj.markers.length,
-        createdAt: `${new Date(obj.createdAt).toLocaleDateString()}\n ${new Date(obj.createdAt).toLocaleTimeString()}`,
-    }));
     
   return (
     <div className='dashboard-container dashboard-container--layers'>
@@ -140,19 +59,20 @@ const Layers = () => {
                             }}
                             onSubmit={async (values, { setSubmitting }) => {
                                 setSubmitting(true);
-                                const { data: createData } = await createLayer({
+                                await createLayer({
                                     variables: {
                                         name: values.name,
                                         private: values.private
                                     }
-                                })
-                                refetch();
+                                }).then(() => {
+                                    setRefetchTrigger(!refetchTrigger);
+                                });
                                 setTimeout(() => {
                                     setSubmitting(false);
                                 }, 1000);
                             }}
                             >
-                            {({ values, handleChange, isSubmitting, errors }) => (
+                            {({ values, handleChange }) => (
                                 <Form className='card-form'>
                                     <FormControlLabel
                                     control={<Input sx={{width: '100%'}}/>}
@@ -202,10 +122,10 @@ const Layers = () => {
                         }}
                     >
                         <div className='countup-container'>
-                            <CountUp end={data.layers.length} duration={3} className='countup-number'/>
+                            <CountUp end={layerCount || 0} duration={3} className='countup-number'/>
                             <div className='flex countup-suffix'>
-                                <p className='countup-string'>{data.layers.length === 1? 'Layer': 'Layers'}</p>
-                                <LayersIcon 
+                                <p className='countup-string'>{layerCount === 1? 'Layer': 'Layers'}</p>
+                                <LayersIcon
                                     className='countup-icon'
                                     sx={{
                                         width: '3rem',
@@ -238,8 +158,7 @@ const Layers = () => {
                             maxWidth: '100%',
                         }}
                     >
-                        <CrudDataGrid rows={rows} columns={columns} pageSize={10} pageSizeOptions={[5, 10, 20]}
-                        />
+                        <LayersDataGrid setLayerCount={(e: number) => setLayerCount(e)} refetchTrigger={refetchTrigger} updateDefaultShow={(e: any) => updateDefaultShow(e)} setModal={(e: string) => setModal(e)} setActiveLayer={(e: number) => setActiveLayer(e)} />
                     </Card>
                 </Grid>
             </Grid>
@@ -264,14 +183,15 @@ const Layers = () => {
                         variant='contained'
                         color='error'
                         onClick={async () => {
-                            const { data: removedData } = await removeLayer({
+                            await removeLayer({
                                 variables: {
                                     id: activeLayer
                                 }
-                            })
-                            setModal('');
-                            refetch();
-                            setActiveLayer(null);
+                            }).then(() => {
+                                setModal('');
+                                setRefetchTrigger(!refetchTrigger);
+                                setActiveLayer(null);
+                            });
                         }}
                     >
                         Delete
