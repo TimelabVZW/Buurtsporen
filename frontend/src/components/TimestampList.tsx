@@ -9,6 +9,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useEffect, useState } from "react";
 import TimestampForm from "./TimestampForm";
 import SquareGreenLogo from '../assets/svg/BS_logo_square_green.svg';
+import ImageExpandContainer from "./ImageExpandContainer";
 
 const TimestampList = ({marker, visible, setFormVisible}: TimestampListProps) => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -108,7 +109,7 @@ return (
                                 <ConditionalLoader condition={timestamp.fileName? true : false}>
                                     {isImageFile(timestamp.fileName) && (
                                         <div className="timestamp__image-container">
-                                        <img src={`${timestamp.url}`} alt={`marker ${marker} timestamp ${index}`} />
+                                        <ImageExpandContainer src={`${timestamp.url}`} alt={`marker ${marker} timestamp ${index}`} />
                                         </div>
                                     )}
                                     {isAudioFile(timestamp.fileName) && (

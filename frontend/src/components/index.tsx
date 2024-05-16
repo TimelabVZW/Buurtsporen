@@ -16,6 +16,7 @@ import Tiptap from "./WYSIWYG/Tiptap";
 import ParameterMenu from "./WYSIWYG/ParameterMenu";
 import ImportMenu from "./WYSIWYG/ImportMenu";
 import MarkerList from "./MarkerList";
+import ImageExpandContainer from "./ImageExpandContainer";
 
 export {
     Button,
@@ -36,4 +37,5 @@ export {
     ParameterMenu,
     ImportMenu,
     MarkerList,
+    ImageExpandContainer,
 }

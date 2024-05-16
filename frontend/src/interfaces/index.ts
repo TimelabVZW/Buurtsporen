@@ -206,6 +206,11 @@ interface MarkerListProps {
   modal: string;
 }
 
+interface ImageExpandContainerProps {
+    src: string;
+    alt: string;
+}
+
 export type {
     DeconstructedObject,
     MarkerDataGridProps,
@@ -235,4 +240,5 @@ export type {
     ImportMenuProps,
     ParameterMenuProps,
     MarkerListProps,
+    ImageExpandContainerProps,
 }

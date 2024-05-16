@@ -6,6 +6,10 @@
   display: flex;
 }
 
+body.expanded {
+  overflow: hidden;
+}
+
 .map-bounds {
   pointer-events: none;
   z-index: -500;
