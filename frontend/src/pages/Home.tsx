@@ -24,9 +24,6 @@ import RasterLogoImage from '../assets/svg/BS_logo_raster_1.svg';
 import "leaflet/dist/leaflet.css";
 import { useSearchParams } from 'react-router-dom';
 
-//7584 Onderzoeken of ik de query nog eens moet updaten voor geimporteerde markers, als dat mogelijk is.
-//      Verminderd load op de user interface.
-
 const Home = () => {
   const [location, setLocation] = useState<null | [number, number]>(null);
   const [isLocationSet, setIsLocationSet] = useState(false);
@@ -188,7 +185,7 @@ const Home = () => {
       {/* UI COMPONENTS */}
         <ConditionalLoader condition={modal === '' && formVisible === ''}>
           <div className='title--container'>
-            <img className='title' src={RasterLogoImage}/>
+            <img className='title' src={RasterLogoImage} alt='Buurtsporen logo'/>
             <div className='title--buttons flex flex-row'>
               <SVGButton
                 onClick={onRefreshClick}
