@@ -70,6 +70,7 @@ jobs:
         cd ../frontend && \
         yarn install && \
         yarn build && \
+        cp robots.txt sitemap.txt dist && \
         ./krsync -rPavvz dist/ $(kubectl get pod | awk '/weynwebworks-shared-hosting/ {print $1}'):/domains/buurtsporen.be/public/
 
     # Push the Docker image to Google Artifact Registry
@@ -85,4 +86,6 @@ jobs:
         sed -i "s#{{DATABASE_URL}}#${{secrets.DATABASE_URL}}#g" backend/k8s/deployment.yaml
         sed -i "s#{{AWS_ACCESS_KEY_ID}}#${{secrets.AWS_ACCESS_KEY_ID}}#g" backend/k8s/deployment.yaml
         sed -i "s#{{AWS_SECRET_ACCESS_KEY}}#${{secrets.AWS_SECRET_ACCESS_KEY}}#g" backend/k8s/deployment.yaml
+        sed -i "s#{{JWT_SECRET}}#${{secrets.JWT_SECRET}}#g" backend/k8s/deployment.yaml
+        sed -i "s#{{JWT_SECRET_OR_KEY}}#${{secrets.JWT_SECRET_OR_KEY}}#g" backend/k8s/deployment.yaml
         kubectl apply -f backend/k8s
