@@ -1,5 +1,6 @@
-import MapElement from './MapElement';
 import { MarkerListProps } from '../interfaces';
+
+import MapElement from './MapElement';
 
 const MarkerList = ({
   layers,

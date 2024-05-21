@@ -1,5 +1,6 @@
-import { DataGrid } from '@mui/x-data-grid';
 import { CrudDataGridProps } from '../interfaces';
+
+import { DataGrid } from '@mui/x-data-grid';
 
 const CrudDataGrid = ({rows, columns, pageSize, pageSizeOptions}: CrudDataGridProps) => {
   return (

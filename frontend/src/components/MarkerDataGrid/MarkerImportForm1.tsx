@@ -1,11 +1,12 @@
-import React from 'react'
-import { Icon, MarkerImportFormProps } from '../../interfaces'
-import { ErrorMessage, Form, Formik } from 'formik'
+import React from 'react';
+import { Icon, MarkerImportFormProps } from '../../interfaces';
 import * as yup from 'yup';
-import { Button, FormLabel, MenuItem, TextField } from '@mui/material';
 import { useMutation, useQuery } from '@apollo/client';
 import { mutationImportMarkers } from '../../gql/mutations';
 import { GET_ICONS_PAGE } from '../../gql/queries';
+
+import { ErrorMessage, Form, Formik } from 'formik';
+import { Button, FormLabel, MenuItem, TextField } from '@mui/material';
 import { ColorBox } from "material-ui-color";
 
 

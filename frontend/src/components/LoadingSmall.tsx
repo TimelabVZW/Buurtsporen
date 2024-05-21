@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import '../sass/components/LoadingDiv.scss';
+import { useEffect, useRef } from 'react';
 import Lottie from 'lottie-web';
+
 import FootstepAnimation from '../assets/animations/footsteps.json';
 import SquareBlackLogo from '../assets/svg/BS_logo_square_black.svg';
+
+import '../sass/components/LoadingDiv.scss';
 
 const LoadingSmall = () => {
 

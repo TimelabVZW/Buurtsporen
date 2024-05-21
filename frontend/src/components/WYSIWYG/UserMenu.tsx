@@ -1,6 +1,23 @@
-import { useCurrentEditor } from '@tiptap/react'
-import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon, BoldIcon, Heading1Icon, Heading2Icon, ItalicIcon, LinkIcon, ListIcon, ListOrderedIcon, QuoteIcon, RedoIcon, UnderlineIcon, UndoIcon, UnlinkIcon } from 'lucide-react'
-import { useCallback } from 'react'
+import { useCurrentEditor } from '@tiptap/react';
+import { useCallback } from 'react';
+
+import { 
+    AlignCenterIcon,
+    AlignLeftIcon,
+    AlignRightIcon,
+    BoldIcon,
+    Heading1Icon,
+    Heading2Icon,
+    ItalicIcon,
+    LinkIcon,
+    ListIcon,
+    ListOrderedIcon,
+    QuoteIcon,
+    RedoIcon,
+    UnderlineIcon,
+    UndoIcon,
+    UnlinkIcon
+} from 'lucide-react';
 
 const UserMenu = () => {
   const { editor } = useCurrentEditor()

@@ -1,20 +1,13 @@
-import { DashboardMain, Header, LoadingSmall, TimestampDataGrid } from '../components';
 import { useAuth } from '../context/authContext';
 import { Navigate } from 'react-router-dom';
 
-import '../sass/pages/dashboard.scss'
-import { useMutation, useQuery } from '@apollo/client';
-import { mutationRemoveTimestamp } from '../gql/mutations';
-
-import DownloadIcon from '@mui/icons-material/Download';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ViewIcon from '@mui/icons-material/Visibility';
 import { Helmet } from 'react-helmet';
-import GET_PAGINATED_TIMESTAMPS from '../gql/queries/PaginatedTimestamps';
-import { DataGrid } from '@mui/x-data-grid';
-import { useState } from 'react';
-import debounce from 'lodash.debounce';
 import { Card, Grid } from '@mui/material';
+import { DashboardMain, Header, TimestampDataGrid } from '../components';
+
+import '../sass/components/datagrid.scss';
+import "../sass/components/dashboard.scss";
+import '../sass/pages/dashboard.scss';
 
 const Timestamps = () => {
     // NEEDS OPTIMIZATION USING PAGINATION

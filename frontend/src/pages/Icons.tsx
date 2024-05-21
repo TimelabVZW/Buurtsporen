@@ -1,18 +1,20 @@
-import { DashboardMain, Header, MassModal } from '../components';
 import { useAuth } from '../context/authContext';
 import { Navigate } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
-import { Form, Formik, ErrorMessage} from 'formik';
-import { Button, Grid, Card, FormLabel, TextField, ImageList, ImageListItem, ImageListItemBar, IconButton} from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-
-import '../sass/pages/dashboard.scss'
 import { mutationCreateIcon, mutationRemoveIcon, mutationUpdateIcon } from '../gql/mutations';
 import { GET_ICONS_PAGE } from '../gql/queries';
 import { useState } from 'react';
 import * as yup from 'yup';
-import { IconFormInput, IconFormUpdate } from '../interfaces';
+
 import { Helmet } from 'react-helmet';
+import { DashboardMain, Header, MassModal } from '../components';
+import { IconFormInput, IconFormUpdate } from '../interfaces';
+import { Button, Grid, Card, FormLabel, TextField, ImageList, ImageListItem, ImageListItemBar, IconButton} from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
+import { Form, Formik, ErrorMessage} from 'formik';
+
+import '../sass/components/datagrid.scss';
+import "../sass/components/dashboard.scss";
 
 const validationSchema = yup.object({
     name: yup.string().max(1000).required(),

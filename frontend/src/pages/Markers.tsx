@@ -1,11 +1,13 @@
-import { CrudMarkerDataGrid, DashboardMain, Header } from '../components';
 import { useAuth } from '../context/authContext';
 import { Navigate } from 'react-router-dom';
 
-import '../sass/pages/dashboard.scss'
-import { Grid, Card } from "@mui/material";
 import { Helmet } from 'react-helmet';
+import { CrudMarkerDataGrid, DashboardMain, Header } from '../components';
+import { Grid, Card } from "@mui/material";
 
+import '../sass/components/datagrid.scss';
+import "../sass/components/dashboard.scss";
+import '../sass/pages/dashboard.scss';
 
 const Markers = () => {
     const { authenticated, authLoading } = useAuth();

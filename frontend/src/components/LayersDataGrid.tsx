@@ -1,13 +1,14 @@
 import { LayersDataGridProps } from "../interfaces";
-import { CrudDataGrid, CustomCheckbox, LoadingSmall } from '../components';
 import { useQuery } from '@apollo/client';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ViewIcon from '@mui/icons-material/Visibility';
-
-import '../sass/pages/dashboard.scss'
 import { GET_LAYERS_DATA } from '../gql/queries';
 import { GridColDef } from '@mui/x-data-grid';
 import { useMemo } from "react";
+
+import DeleteIcon from '@mui/icons-material/Delete';
+import ViewIcon from '@mui/icons-material/Visibility';
+import { CrudDataGrid, CustomCheckbox, LoadingSmall } from '../components';
+
+import "../sass/components/dashboard.scss"
 
 
 const LayersDataGrid = ({setLayerCount, refetchTrigger, setActiveLayer, updateDefaultShow, setModal}: LayersDataGridProps) => {

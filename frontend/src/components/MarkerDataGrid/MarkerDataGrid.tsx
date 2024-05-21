@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import { DeconstructedObject, MarkerDataGridProps } from '../../interfaces';
+
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import MassModal from '../MassModal';
-import { DeconstructedObject, MarkerDataGridProps } from '../../interfaces';
 import MarkerImportForm1 from './MarkerImportForm1';
 import MarkerImportForm2 from './MarkerImportForm2';
 

@@ -1,16 +1,21 @@
-import { DashboardMain, Header, LayersDataGrid, MassModal } from '../components';
 import { useAuth } from '../context/authContext';
 import { Navigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { Form, Formik } from 'formik';
-import { Button, Grid, Card, Checkbox, FormControlLabel, Input } from "@mui/material";
-import LayersIcon from '@mui/icons-material/Layers';
-import CountUp from 'react-countup';
-
-import '../sass/pages/dashboard.scss'
 import { mutationCreateLayer, mutationRemoveLayer, mutationUpdateDefaultShow } from '../gql/mutations';
 import { useState } from 'react';
+
 import { Helmet } from 'react-helmet';
+import { DashboardMain, Header, LayersDataGrid, MassModal } from '../components';
+import { Button, Grid, Card, Checkbox, FormControlLabel, Input } from "@mui/material";
+import LayersIcon from '@mui/icons-material/Layers';
+import { Form, Formik } from 'formik';
+import CountUp from 'react-countup';
+
+import '../sass/components/confirmationModal.scss';
+import "../sass/components/dashboard.scss";
+import '../sass/components/datagrid.scss';
+import "../sass/components/countup.scss";
+import '../sass/pages/dashboard.scss';
 
 const Layers = () => {
     const { authenticated, authLoading } = useAuth();

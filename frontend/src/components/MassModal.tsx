@@ -1,5 +1,6 @@
-import CloseButton from './CloseButton';
 import { MassModalProps } from '../interfaces';
+
+import CloseButton from './CloseButton';
 
 const MassModal = (props: MassModalProps) => {
 

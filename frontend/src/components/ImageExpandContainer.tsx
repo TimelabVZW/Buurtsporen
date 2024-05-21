@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { ImageExpandContainerProps } from "../interfaces";
+
 import ConditionalLoader from "./ConditionalLoader";
 import CloseButton from "./CloseButton";
 

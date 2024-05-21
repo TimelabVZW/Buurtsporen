@@ -1,12 +1,13 @@
-import { ErrorMessage, Form, Formik } from "formik";
 import { TimestampFormInput, TimestampFormProps } from "../interfaces";
-import { Button, FormLabel, TextField  } from '@mui/material';
 import * as yup from 'yup';
 import { mutationCreateTimestamp } from "../gql/mutations";
 import { useMutation } from "@apollo/client";
+import DOMPurify from "dompurify";
+
+import { Button, FormLabel, TextField  } from '@mui/material';
 import Tiptap from "./WYSIWYG/Tiptap";
 import UserMenu from "./WYSIWYG/UserMenu";
-import DOMPurify from "dompurify";
+import { ErrorMessage, Form, Formik } from "formik";
 
 const validationSchema = yup.object({
     description: yup.string().max(1000).required(),

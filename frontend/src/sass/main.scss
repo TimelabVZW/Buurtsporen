@@ -1,6 +1,5 @@
 @import './base/index.scss';
 @import './components/index.scss';
-@import './layout/index.scss';
 
 .flex {
   display: flex;
@@ -23,21 +22,6 @@ body.expanded {
     width: 100vw;
     height: 100vh;
     position: relative;
-}
-
-.datagrid--view {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mui-cell--icon.MuiDataGrid-cell {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  svg:hover {
-    cursor: pointer;
-  }
 }
 
 .title--container {

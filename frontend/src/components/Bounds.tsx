@@ -1,6 +1,7 @@
-import { Polygon, Rectangle } from 'react-leaflet';
 import { LatLngBounds } from 'leaflet';
 import bounds from '../utils/bounds';
+
+import { Polygon, Rectangle } from 'react-leaflet';
 
 const Bounds = () => {
   const fullBounds = new LatLngBounds([

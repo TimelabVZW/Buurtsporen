@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { ImageExpandContainer, Tiptap } from "../components";
-import UserMenu from "../components/WYSIWYG/UserMenu";
-import { Helmet } from "react-helmet";
+import { ImageExpandContainer } from "../components";
 import RasterLogoImage from '../assets/svg/BS_logo_raster_1.svg';
+
+import '../sass/components/markerDetail.scss';
 
 
 const Test = () => {

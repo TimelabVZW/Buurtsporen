@@ -9,7 +9,7 @@ const LandingPage = () => {
   return (
     <div className='homepage'>
       <Helmet>
-          <title>Buurtsporen - Markers</title>
+          <title>Buurtsporen - Home</title>
           <meta name='description' content='Ontdek alle sporen en belevenissen binnen de ... buurt'/>
           <link rel="canonical" href={import.meta.env.VITE_REACT_APP_FRONTEND_URL} />
       </Helmet>

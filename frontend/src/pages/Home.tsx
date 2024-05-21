@@ -1,19 +1,29 @@
-import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet';
 import { useState, useEffect } from 'react';
-import { Icon } from 'leaflet';
-import { Bounds, ConditionalLoader, CustomCheckbox, LoadingMap, MarkerList, MassModal, SVGButton } from '../components';
-import { Button as MuiButton } from '@mui/material';
-import { toast, ToastContainer } from 'react-toastify';
 import { GET_MAPS_DATA } from '../gql/queries';
 import { useQuery } from '@apollo/client';
-import MarkerForm from '../components/MarkerForm';
 import bounds from "../utils/bounds"
 import classifyPoint from 'robust-point-in-polygon';
-import TimestampList from '../components/TimestampList';
 import { layer } from '../interfaces';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
+import { useSearchParams } from 'react-router-dom';
+
 import { Helmet } from 'react-helmet';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { 
+  Bounds, 
+  ConditionalLoader, 
+  CustomCheckbox, 
+  LoadingMap, 
+  MarkerList, 
+  MassModal, 
+  SVGButton, 
+  MarkerForm, 
+  TimestampList 
+} from '../components';
+import { Button as MuiButton } from '@mui/material';
+import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet';
+import { Icon } from 'leaflet';
+import { toast, ToastContainer } from 'react-toastify';
 
 import FilterIcon from '@mui/icons-material/FilterList';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -22,7 +32,8 @@ import UserIconImage from '../assets/images/user-marker.png';
 import RasterLogoImage from '../assets/svg/BS_logo_raster_1.svg';
 
 import "leaflet/dist/leaflet.css";
-import { useSearchParams } from 'react-router-dom';
+import "../sass/components/toast.scss";
+import "../sass/components/mapFilter.scss";
 
 const Home = () => {
   const [location, setLocation] = useState<null | [number, number]>(null);

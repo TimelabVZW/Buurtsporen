@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { DataGrid } from '@mui/x-data-grid';
 import debounce from 'lodash.debounce';
-
 import { mutationRemoveTimestamp } from '../gql/mutations';
 import GET_PAGINATED_TIMESTAMPS from '../gql/queries/PaginatedTimestamps';
+
 import LoadingSmall from './LoadingSmall';
+import { DataGrid } from '@mui/x-data-grid';
 
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';

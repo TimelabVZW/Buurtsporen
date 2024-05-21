@@ -1,4 +1,5 @@
 import { CloseButtonProps } from '../interfaces';
+
 import SVGButton from './SVGButton'
 
 const CloseButton = (props: CloseButtonProps) => {

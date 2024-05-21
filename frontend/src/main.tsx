@@ -11,6 +11,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Icons from './pages/Icons';
 import Test from './pages/Test';
+import { LoadingMap } from './components';
 
 // Lazy load pages
 const App = React.lazy(() => import('./App'));
@@ -34,7 +35,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <ThemeProvider theme={theme}>
           <BrowserRouter>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<LoadingMap/>}>
               <Routes>
                 <Route element={<App />}>
                   <Route path='/' element={<LandingPage/>} />

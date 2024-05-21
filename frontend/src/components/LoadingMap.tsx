@@ -1,7 +1,10 @@
 import { useEffect, useRef } from "react";
+import lottie from "lottie-web";
+
 import SquareBlackLogo from '../assets/svg/BS_logo_square_black.svg';
 import FootstepAnimation from '../assets/animations/footsteps.json';
-import lottie from "lottie-web";
+
+import '../sass/components/loadingMap.scss'
 
 const LoadingMap = () => {
 

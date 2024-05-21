@@ -1,12 +1,16 @@
-import { DashboardMain, Header } from '../components';
 import { useAuth } from '../context/authContext';
 import { Navigate } from 'react-router-dom';
+import { GET_DASHBOARD_DATA } from '../gql/queries';
+import { useQuery } from '@apollo/client';
+
+import '../sass/pages/dashboard.scss'
+import { Helmet } from 'react-helmet';
+import { DashboardMain, Header } from '../components';
 import MarkerIcon from '@mui/icons-material/Room';
 import TimestampIcon from '@mui/icons-material/AccessTimeFilled';
 import LayersIcon from '@mui/icons-material/Layers';
 import { Button, Grid, Card } from "@mui/material";
 import CountUp from 'react-countup';
-import { GET_DASHBOARD_DATA } from '../gql/queries';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -16,12 +20,12 @@ import {
     Title,
     Tooltip,
     Legend,
-  } from 'chart.js';
-  import { Line } from 'react-chartjs-2';
+} from 'chart.js';
 
-import '../sass/pages/dashboard.scss'
-import { useQuery } from '@apollo/client';
-import { Helmet } from 'react-helmet';
+import { Line } from 'react-chartjs-2';
+
+import "../sass/components/dashboard.scss";
+import "../sass/components/countup.scss";
 
 ChartJS.register(
     CategoryScale,

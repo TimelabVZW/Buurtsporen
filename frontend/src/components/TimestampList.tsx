@@ -1,15 +1,19 @@
 import { useQuery } from "@apollo/client";
 import { TimestampListProps } from "../interfaces";
 import { GET_MARKER_DETAIL } from "../gql/queries";
-import ConditionalLoader from "./ConditionalLoader";
-import Button from "./Button";
+import { useEffect, useState } from "react";
 
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useEffect, useState } from "react";
 import TimestampForm from "./TimestampForm";
 import SquareGreenLogo from '../assets/svg/BS_logo_square_green.svg';
+import ConditionalLoader from "./ConditionalLoader";
+import Button from "./Button";
+// ImageExpandContainer needs the markerDetail scss
 import ImageExpandContainer from "./ImageExpandContainer";
+
+import '../sass/components/timestampList.scss';
+import '../sass/components/markerDetail.scss';
 
 const TimestampList = ({marker, visible, setFormVisible}: TimestampListProps) => {
     const [isLoaded, setIsLoaded] = useState(false);

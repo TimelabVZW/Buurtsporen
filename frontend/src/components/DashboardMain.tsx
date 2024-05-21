@@ -1,3 +1,5 @@
+import { DashboardMainProps } from "../interfaces";
+
 import { List, ListItem, ListItemButton, ListItemIcon } from "@mui/material";
 import LayersIcon from '@mui/icons-material/Layers';
 import HomeIcon from '@mui/icons-material/Home';
@@ -5,11 +7,11 @@ import ImportExportIcon from '@mui/icons-material/ImportExport';
 import MarkerIcon from '@mui/icons-material/Room';
 import TimestampIcon from '@mui/icons-material/AccessTimeFilled';
 import PaletteIcon from '@mui/icons-material/Palette';
-import { DashboardMainProps } from "../interfaces";
+
+import "../sass/components/dashboard.scss"
 
 const DashboardMain = ({ children, active }: DashboardMainProps) => {
-    
-    const pages = ['dashboard', 'layers', 'markers', 'timestamps', 'icons', 'import-export']
+    const pages = ['dashboard', 'layers', 'markers', 'timestamps', 'icons', 'import-export'];
 
     const getIcon = (name: string) => {
         switch (name) {

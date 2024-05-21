@@ -1,13 +1,14 @@
-import React from 'react'
-import { MarkerImportFormProps, MarkerInput } from '../../interfaces'
-import { ErrorMessage, Form, Formik } from 'formik'
+import React from 'react';
+import { MarkerImportFormProps, MarkerInput } from '../../interfaces';
 import * as yup from 'yup';
-import { Button, FormLabel, TextField  } from '@mui/material';
 import { useMutation } from '@apollo/client';
 import { mutationImportMarkers } from '../../gql/mutations';
+import DOMPurify from "dompurify";
+
 import Tiptap from '../WYSIWYG/Tiptap';
 import ImportMenu from '../WYSIWYG/ImportMenu';
-import DOMPurify from "dompurify";
+import { ErrorMessage, Form, Formik } from 'formik';
+import { Button, FormLabel, TextField  } from '@mui/material';
 
 const validationSchema = yup.object({
     title: yup.string().required(),

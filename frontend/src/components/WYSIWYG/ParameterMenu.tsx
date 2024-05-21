@@ -1,4 +1,4 @@
-import { ParameterMenuProps } from '../../interfaces'
+import { ParameterMenuProps } from '../../interfaces';
 
 const ParameterMenu = ({keys, editor}: ParameterMenuProps) => {
     if (!editor) {

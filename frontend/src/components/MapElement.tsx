@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapElementProps } from '../interfaces';
-import { Marker, Polygon, Polyline, Popup } from 'react-leaflet';
+import { Marker, Polygon, Polyline } from 'react-leaflet';
 import { Icon, LatLngExpression } from 'leaflet';
 
 import BackupMarkerIconImage from '../assets/svg/BS_backup_icon.svg';

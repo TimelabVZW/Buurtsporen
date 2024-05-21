@@ -1,14 +1,14 @@
-import { Color } from '@tiptap/extension-color'
-import TextStyle from '@tiptap/extension-text-style'
-import { EditorProvider } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import { TiptapProps } from '../../interfaces'
-import Underline from '@tiptap/extension-underline'
-import Link from '@tiptap/extension-link'
-import TextAlign from '@tiptap/extension-text-align'
-import Typography from '@tiptap/extension-typography'
+import { TiptapProps } from '../../interfaces';
+import { EditorProvider } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import Underline from '@tiptap/extension-underline';
+import Link from '@tiptap/extension-link';
+import TextAlign from '@tiptap/extension-text-align';
+import Typography from '@tiptap/extension-typography';
+import { Color } from '@tiptap/extension-color';
+import TextStyle from '@tiptap/extension-text-style';
 
-
+import '../../sass/components/wysiwyg.scss';
   
 const extensions = [
   Color.configure({}),
