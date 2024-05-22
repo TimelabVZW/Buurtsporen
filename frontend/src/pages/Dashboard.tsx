@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client';
 
 import '../sass/pages/dashboard.scss'
 import { Helmet } from 'react-helmet';
-import { DashboardMain, Header } from '../components';
+import { DashboardMain, Header, LoadingMap } from '../components';
 import MarkerIcon from '@mui/icons-material/Room';
 import TimestampIcon from '@mui/icons-material/AccessTimeFilled';
 import LayersIcon from '@mui/icons-material/Layers';
@@ -42,20 +42,11 @@ const Dashboard = () => {
     const { authenticated, authLoading, user } = useAuth();
     const { loading, error, data, refetch } = useQuery(GET_DASHBOARD_DATA);
 
-    if (authLoading) {
-        return (
-            <div>
-                <div>Loading...</div>
-            </div>
-        );
-    }
+    if (authLoading) return ( <LoadingMap/> );
     
-    if (!authenticated) {
-        return <Navigate to="/login" replace/>;
-    }
+    if (!authenticated) return <Navigate to="/login" replace/>
     
-
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <LoadingMap/>;
 
     if (error) {
         return <p>Error...</p>;
@@ -66,7 +57,6 @@ const Dashboard = () => {
     for (let i = 28; i >= 0; i--) {
         const date = new Date();
         date.setTime(date.getTime() - (i * 24 * 60 * 60 * 1000));
-        
         dates.push(date);
     }
 

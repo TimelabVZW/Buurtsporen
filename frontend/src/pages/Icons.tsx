@@ -7,7 +7,7 @@ import { useState } from 'react';
 import * as yup from 'yup';
 
 import { Helmet } from 'react-helmet';
-import { DashboardMain, Header, MassModal } from '../components';
+import { DashboardMain, Header, LoadingMap, MassModal } from '../components';
 import { IconFormInput, IconFormUpdate } from '../interfaces';
 import { Button, Grid, Card, FormLabel, TextField, ImageList, ImageListItem, ImageListItemBar, IconButton} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
@@ -36,19 +36,11 @@ const Icons = () => {
     const [removeIcon] = useMutation(mutationRemoveIcon);
     const { loading, error, data, refetch } = useQuery(GET_ICONS_PAGE);
 
-    if (authLoading) {
-        return (
-            <div>
-                <div>Loading...</div>
-            </div>
-        );
-    }
+    if (authLoading) return <LoadingMap/>;
     
-    if (!authenticated) {
-        return <Navigate to="/login" replace/>;
-    }
+    if (!authenticated) return <Navigate to="/login" replace/>;
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <LoadingMap/>;
 
     if (error) {
         return <p>Error...</p>;

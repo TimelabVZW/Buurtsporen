@@ -138,3 +138,14 @@
         border-bottom: solid 1px #ccc;
     }
 }
+
+.form-loading-container {
+    display: flex;
+    height: 80vh;
+    align-items: center;
+    justify-content: center;
+    .form-loading {
+        height: 50%;
+        width: 100%;
+    }
+}

@@ -165,7 +165,6 @@ const Home = () => {
             url='https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png'
             maxZoom={23}
           />
-
           <ConditionalLoader condition={isLocationSet}>
             <Marker icon={userIcon} position={location !== null ? location : [0 , 0]}>
               <Popup>
@@ -187,9 +186,7 @@ const Home = () => {
         </MapContainer>
           <div className='map-form-container'>
             <MarkerForm refetch={refetch} setFormVisible={setFormVisible} visible={formVisible === 'create-marker'} layers={data.layers} icons={data.icons} coordinate={location? location : [0, 0]}/>
-            <ConditionalLoader condition={formVisible === 'timestamp-list'}>
-              <TimestampList setFormVisible={setFormVisible} visible={formVisible === 'timestamp-list'} marker={activeMarker? activeMarker : 0} />
-            </ConditionalLoader>
+            <TimestampList setFormVisible={setFormVisible} visible={formVisible === 'timestamp-list'} marker={activeMarker? activeMarker : 0} />
           </div>
       </div>
 

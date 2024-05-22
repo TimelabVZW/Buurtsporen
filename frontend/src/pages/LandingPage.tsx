@@ -9,9 +9,9 @@ const LandingPage = () => {
   return (
     <div className='homepage'>
       <Helmet>
-          <title>Buurtsporen - Home</title>
-          <meta name='description' content='Ontdek alle sporen en belevenissen binnen de ... buurt'/>
-          <link rel="canonical" href={import.meta.env.VITE_REACT_APP_FRONTEND_URL} />
+        <title>Buurtsporen - Home</title>
+        <meta name='description' content='Ontdek alle sporen en belevenissen binnen de ... buurt'/>
+        <link rel="canonical" href={import.meta.env.VITE_REACT_APP_FRONTEND_URL} />
       </Helmet>
       <div className='homepage--container flex'>
           <div className='homepage--container__title'>
@@ -55,7 +55,7 @@ const LandingPage = () => {
             </div>
           </div>
           <div className='homepage--container__image'>
-              <img src={InfoGraphic} alt='info graphic'/>
+            <img src={InfoGraphic} alt='info graphic'/>
           </div>
           <a className='non-desktop' href='/map'>
             <img src={SpeurenButton} alt='speuren button'/>

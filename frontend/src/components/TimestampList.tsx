@@ -14,6 +14,7 @@ import ImageExpandContainer from "./ImageExpandContainer";
 
 import '../sass/components/timestampList.scss';
 import '../sass/components/markerDetail.scss';
+import LoadingSmall from "./LoadingSmall";
 
 const TimestampList = ({marker, visible, setFormVisible}: TimestampListProps) => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -32,10 +33,41 @@ const TimestampList = ({marker, visible, setFormVisible}: TimestampListProps) =>
         }
     });
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) {
+        return (
+            <div style={{display: visible? 'block' : 'none'}}>
+                <div className="flex flex-row map-form-container__header">
+                    <div className='map-form-container__close' onClick={() => {
+                        if (!form) {
+                            setFormVisible('')
+                        } else {
+                            setForm(false)
+                        }}
+                        }>
+                        <ArrowForwardIosIcon  color='secondary' sx={{
+                        visibility: visible? 'visible': 'hidden',
+                        width: visible? '2rem': '0',
+                        }}/>
+                    </div>
+                    <div className="small-logo--container" style={{display: visible? 'block' : 'none'}} >
+                        <img src={SquareGreenLogo} />
+                    </div>
+                </div>
+                <div className="form-loading-container">
+                    <div className="form-loading">
+                        <LoadingSmall/>
+                    </div>
+                </div>
+            </div>
+        )
+    };
 
     if (error) {
-        return <p>Error...</p>;
+        return (
+        <div style={{display: visible? 'block' : 'none'}}>
+            <p>Error...</p>
+        </div>
+    );
     }
     
     const isImageFile = (filename: string) => {
