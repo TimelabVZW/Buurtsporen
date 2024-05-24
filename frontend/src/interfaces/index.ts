@@ -1,6 +1,5 @@
 import { FetchResult } from "@apollo/client";
 import { Editor } from "@tiptap/react";
-import { ReactElement } from "react";
 import { SetURLSearchParams } from "react-router-dom";
 
 interface DeconstructedObject {

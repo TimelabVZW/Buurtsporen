@@ -16,7 +16,6 @@ const validationSchema = yup.object({
 });
 
 const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModal, refetch, jsonType}: MarkerImportFormProps) => {
-    const [focus, setFocus] = React.useState<'' | 'title' | 'description'>('');
     const [importMarkers] = useMutation(mutationImportMarkers);
 
     const templateString = (template: string, object: Record<string, number>): string => {
@@ -31,8 +30,6 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
             return value;
         });
     }
-
-    let rowKeys: string[] = Object.keys(selectedRows[0]);
 
     return (
         <Formik
@@ -131,7 +128,7 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
             });
             
 
-            const { data, errors } = await importMarkers({
+            const { data } = await importMarkers({
                 variables: {
                     createMarkerWithCoordsInputs: validInputs,
                 }
@@ -148,7 +145,7 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
             }, 1000);
         }}
         >
-        {({ values, handleChange, setFieldValue, isSubmitting, errors, touched }) => (
+        {({ values, handleChange, isSubmitting }) => (
             <Form className='parameter-card-form' style={{paddingTop: '2rem'}}>
                 <div className='card-form-form'>
                     <FormLabel sx={{px: '1rem'}} htmlFor='title'>Enter the desired title for the markers</FormLabel>
@@ -156,9 +153,6 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
                     <TextField
                         name="title"
                         id="title"
-                        onFocus={() => {
-                            setFocus('title');
-                        }}
                         value={values.title}
                         onChange={handleChange}
                         multiline
@@ -176,7 +170,6 @@ const MarkerImportForm2 = ({selectedRows, layers, formData, setFormData, setModa
                             disabled={isSubmitting}
                             onClick={() => {
                                 setFormData({...formData, ...values});
-                                setFocus('');
                                 setModal('import-1');
                             }}
                             sx={{width: '100%', mt: '1rem', mb: '2rem'}}

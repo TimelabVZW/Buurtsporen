@@ -1,8 +1,7 @@
 import React from 'react';
 import { Icon, MarkerImportFormProps } from '../../interfaces';
 import * as yup from 'yup';
-import { useMutation, useQuery } from '@apollo/client';
-import { mutationImportMarkers } from '../../gql/mutations';
+import { useQuery } from '@apollo/client';
 import { GET_ICONS_PAGE } from '../../gql/queries';
 
 import { ErrorMessage, Form, Formik } from 'formik';
@@ -18,10 +17,9 @@ const validationSchema = yup.object({
 });
 
 const MarkerImportForm1 = ({selectedRows, layers, setModal, formData, setFormData, jsonType}: MarkerImportFormProps) => {
-    const [importMarkers] = useMutation(mutationImportMarkers);
     const [colorValue, setColorValue] = React.useState<number>(0);
 
-    const { loading, error, data, refetch } = useQuery(GET_ICONS_PAGE);
+    const { loading, error, data } = useQuery(GET_ICONS_PAGE);
 
     if (loading) return <p>Loading...</p>;
     
@@ -67,7 +65,7 @@ const MarkerImportForm1 = ({selectedRows, layers, setModal, formData, setFormDat
             }, 1000);
         }}
         >
-        {({ values, handleChange, setFieldValue, isSubmitting, errors, touched }) => (
+        {({ values, handleChange }) => (
             <Form className='card-form' style={{paddingTop: '2rem'}}>
                 <FormLabel sx={{px: '1rem'}} htmlFor='layerId'>Choose the layer you want to import to</FormLabel>
                 <ErrorMessage name="layerId" component="div" className='errorfield'/>

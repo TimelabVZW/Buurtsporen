@@ -27,7 +27,7 @@ const validationSchema2 = yup.object({
 });
 
 const Icons = () => {
-    const { authenticated, authLoading, user } = useAuth();
+    const { authenticated, authLoading } = useAuth();
     const [search, setSearch] = useState<string>('');
     const [modalVisible, setModalVisible] = useState<string>('');
     const [activeIcon, setActiveIcon] = useState<null | number>(null);
@@ -116,7 +116,7 @@ const Icons = () => {
                             }, 1000);
                         }}
                         >
-                        {({ values, handleChange, setFieldValue, isSubmitting, errors, touched }) => (
+                        {({ values, handleChange, setFieldValue, isSubmitting }) => (
                             <Form className='marker-form' style={{paddingTop: '2rem'}}>
                                 <div className='flex flex-row' style={{justifyContent: 'space-between', alignItems: 'center'}}>
                                     <div style={{width: '50%'}}>
@@ -289,7 +289,7 @@ const Icons = () => {
                     }, 1000);
                 }}
                 >
-                {({ values, handleChange, setFieldValue, isSubmitting, errors, touched }) => (
+                {({ values, handleChange, setFieldValue, isSubmitting }) => (
                     <Form className='marker-form' style={{paddingTop: '2rem'}}>
                         <div className='flex flex-row' style={{justifyContent: 'space-between', alignItems: 'center'}}>
                             <div style={{width: '50%'}}>

@@ -24,7 +24,7 @@ const ImportExport = () => {
     const [ jsonKeys , setJsonKeys ] = useState<string[] | null>(null); 
     const [ jsonData , setJsonData ]  = useState([]); 
     const [ jsonType , setJsonType ]  = useState(''); 
-    const { authenticated, authLoading, user } = useAuth();
+    const { authenticated, authLoading } = useAuth();
     const [importMarkers] = useMutation(mutationImportMarkers);
     const fileRef = useRef<HTMLInputElement | null>(null);
     const { loading, error, data, refetch } = useQuery(GET_IMPORTEXPORT_DATA);

@@ -39,8 +39,8 @@ ChartJS.register(
 
 
 const Dashboard = () => {
-    const { authenticated, authLoading, user } = useAuth();
-    const { loading, error, data, refetch } = useQuery(GET_DASHBOARD_DATA);
+    const { authenticated, authLoading } = useAuth();
+    const { loading, error, data } = useQuery(GET_DASHBOARD_DATA);
 
     if (authLoading) return ( <LoadingMap/> );
     

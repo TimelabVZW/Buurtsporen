@@ -58,7 +58,7 @@ const Login = () => {
                         }, 1000);
                     }}
                     >
-                    {({ values, handleChange, isSubmitting, errors }) => (
+                    {({isSubmitting }) => (
                         <Form>
                             <div className='form__input-container'>
                                 <label htmlFor="email">Email address</label>

@@ -73,7 +73,7 @@ return (
             }, 1000);
         }}
         >
-        {({ values, handleChange, setFieldValue, isSubmitting, errors, touched }) => (
+        {({ values, handleChange, setFieldValue, isSubmitting }) => (
             <Form className='marker-form' style={{paddingTop: '2rem'}}>
                 <FormLabel sx={{px: '1rem'}} htmlFor='description'>Enter your message</FormLabel>
                 <ErrorMessage name="description" component="div" className='errorfield' />

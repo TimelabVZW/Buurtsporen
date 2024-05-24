@@ -87,7 +87,7 @@ return (
                 }, 1000);
             }}
             >
-            {({ values, handleChange, setFieldValue, isSubmitting, errors, touched }) => (
+            {({ values, handleChange, setFieldValue, isSubmitting }) => (
                 <Form className='marker-form' style={{paddingTop: '2rem'}}>
                     <FormLabel sx={{px: '1rem'}} htmlFor='layerId'>Aan welke laag wil je een punt toevoegen?<span className="text-red">*</span></FormLabel>
                     <ErrorMessage name="layerId" component="div" className='errorfield' />
