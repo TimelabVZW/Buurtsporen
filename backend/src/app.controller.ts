@@ -11,12 +11,12 @@ export class AppController {
     private authService: AuthService,
   ) {}
 
-  @UseGuards(LocalAuthGuard)
   @Post('login')
   login(@Request() req): any {
-    return this.authService.login(req.user);
+    return this.authService.login(req.body);
   }
   
+  @UseGuards(JwtAuthGuard)
   @Get()
   getHello(): string {
     // TODO: require a access token, validate token

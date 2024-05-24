@@ -34,7 +34,6 @@ export const AuthProvider = ({ children }: any) => {
         }
         setAuthLoading(false);
     }
-    
         getLocalToken();
     }, []);
     const Login = async ({ username, password }: LoginProps) => {
