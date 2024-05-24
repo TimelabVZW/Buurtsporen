@@ -23,6 +23,7 @@ $modal-container-background: rgba(0, 0, 0, 0.6);
   padding-top: 2rem;
   padding-bottom: 3rem;
   max-height: 80vh;
+  overflow-y: auto;
   .submit__button {
     margin-left: auto;
     width: max-content;
