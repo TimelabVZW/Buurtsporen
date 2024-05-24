@@ -1,7 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
-import axios, { HttpStatusCode } from "axios";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export type LoginProps = {
     username: string;
@@ -28,7 +27,7 @@ export const AuthProvider = ({ children }: any) => {
     const [user, setUser] = useState<User | null>(null);
     useEffect(() => {
         async function getLocalToken() {
-        const jwtToken = localStorage.getItem("jwt-token"); // name needs to be put into env file
+        const jwtToken = localStorage.getItem(import.meta.env.VITE_REACT_APP_JWT_NAME); // name needs to be put into env file
         const user: User | null = (jwtToken? jwtDecode(jwtToken): null)
         if (user && jwtToken) {
             setUser(user);
@@ -45,8 +44,8 @@ export const AuthProvider = ({ children }: any) => {
             password
         })
         if (token) {
-            localStorage.setItem('jwt-token', JSON.stringify(token?.data?.access_token)) // name needs to go into env
-            const jwtToken = localStorage.getItem("jwt-token"); // name needs to be put into env file
+            localStorage.setItem(import.meta.env.VITE_REACT_APP_JWT_NAME, JSON.stringify(token?.data?.access_token)) // name needs to go into env
+            const jwtToken = localStorage.getItem(import.meta.env.VITE_REACT_APP_JWT_NAME); // name needs to be put into env file
             const user: User | null = (jwtToken? jwtDecode(jwtToken): null)
             if (user && jwtToken) {
                 setUser(user);

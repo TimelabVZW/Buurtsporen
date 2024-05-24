@@ -11,7 +11,7 @@ import { LocalStrategy } from './local.strategy';
     UserModule,
     PassportModule,
     JwtModule.register({
-      secret: 'Chocolade321', // needs to be put into env
+      secret:  process.env.JWT_SECRET,
     }),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
