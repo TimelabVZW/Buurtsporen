@@ -4,14 +4,12 @@ import { UpdateMarkerInput } from './dto/update-marker.input';
 import { CreateMarkerWithCoordsInput } from './dto/create-marker-with-coords';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Marker } from './entities/marker.entity';
-import { Equal, FindOptionsWhere, ILike, Repository } from 'typeorm';
+import { Equal, ILike, Repository } from 'typeorm';
 import { LayerService } from 'src/layer/layer.service';
 import { IconService } from './../icon/icon.service';
-import { CoordinateService } from './../coordinate/coordinate.service';
 import { Layer } from 'src/layer/entities/layer.entity';
 import bounds from './bounds';
 import { Icon } from 'src/icon/entities/icon.entity';
-import { Coordinate } from 'src/coordinate/entities/coordinate.entity';
 import { QueueService } from './queue.service';
 import { QueueProcessor } from './queue.processor';
 var classifyPoint = require("robust-point-in-polygon");
@@ -25,8 +23,6 @@ export class MarkerService {
     private iconService: IconService,
     @Inject(forwardRef(() => LayerService))
     private layerService: LayerService,
-    @Inject(forwardRef(() => CoordinateService))
-    private coordinateService: CoordinateService,
     private queueService: QueueService,
     private queueProcessor: QueueProcessor,
   ) {}

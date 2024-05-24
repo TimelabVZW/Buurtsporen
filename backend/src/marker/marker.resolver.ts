@@ -6,7 +6,6 @@ import { UpdateMarkerInput } from './dto/update-marker.input';
 import { PaginateQuery } from './dto/paginate-query';
 import { Layer } from 'src/layer/entities/layer.entity';
 import { CreateMarkerWithCoordsInput } from './dto/create-marker-with-coords';
-import { Paginate, Paginated } from 'nestjs-paginate'
 import { Icon } from 'src/icon/entities/icon.entity';
 
 @Resolver(() => Marker)

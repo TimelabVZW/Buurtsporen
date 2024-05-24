@@ -3,7 +3,6 @@ import {
   Field,
   Int,
   InputType,
-  Float,
 } from '@nestjs/graphql';
 import { Coordinate } from 'src/coordinate/entities/coordinate.entity';
 import { Icon } from 'src/icon/entities/icon.entity';

@@ -3,7 +3,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { LayerService } from './layer.service';
 import { LayerResolver } from './layer.resolver';
 import { Layer } from './entities/layer.entity';
-import { DateScalar } from 'src/scalar-date/scalar-date';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Layer])],

@@ -1,6 +1,6 @@
 import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
 import { Marker } from 'src/marker/entities/marker.entity';
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 
 @Entity()

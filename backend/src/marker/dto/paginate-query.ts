@@ -1,5 +1,4 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { DateScalar } from 'src/scalar-date/scalar-date';
 
 @InputType()
 export class PaginateQuery {
