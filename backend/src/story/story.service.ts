@@ -28,11 +28,13 @@ create(createStoryInput: CreateStoryInput): Promise<Story> {
   // nested forEach, kind of meh but not meant to be called a lot (only when importing/duplicating pages).
 async createStoryWithBlocksProperties(createStoryWithBlocksInput: CreateStoryWithBlocksInput): Promise<Story> {
   const {blocks, ...createStoryInput} = createStoryWithBlocksInput;
+
   const newStory = await this.create(createStoryInput);
   blocks.forEach(async (block) => {
     await this.blockService.createBlockWithProperties({...block, storyId: newStory.id})
   });
   const resultStory = this.findOne(newStory.id);
+  
   return resultStory;
 }
 

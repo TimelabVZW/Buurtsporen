@@ -22,7 +22,7 @@ import {
 } from '../components';
 import { Button as MuiButton } from '@mui/material';
 import { MapContainer, TileLayer, Popup, Marker } from 'react-leaflet';
-import { Icon } from 'leaflet';
+import { Icon, IconOptions } from 'leaflet';
 import { toast, ToastContainer } from 'react-toastify';
 
 import FilterIcon from '@mui/icons-material/FilterList';
@@ -134,10 +134,10 @@ const Home = () => {
     }
   }
 
-  const userIcon = new Icon({
+  const userIcon: Icon<IconOptions> = new Icon<IconOptions>({
     iconUrl: UserIconImage,
     iconSize: [32, 32]
-  })
+  });
 
     return (
     <div className='app-container'>
@@ -166,6 +166,11 @@ const Home = () => {
             maxZoom={23}
           />
           <ConditionalLoader condition={isLocationSet}>
+            <Marker icon={userIcon} position={location !== null ? location : [0 , 0]}>
+              <Popup>
+                Jouw locatie
+              </Popup>
+            </Marker>
           </ConditionalLoader>
           <Bounds />
           <ConditionalLoader condition={data}>
