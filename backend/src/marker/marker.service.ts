@@ -145,7 +145,7 @@ export class MarkerService {
     return this.markerRepository.save({...marker, iconId});
   }
 
-  update(id: number, updateMarkerInput: UpdateMarkerInput) {
+  update(id: number, updateMarkerInput: UpdateMarkerInput): Promise<Marker> {
     let oldMarker = this.markerRepository.findOne({
       where: { id },
     });

@@ -14,6 +14,8 @@ import { CoordinateModule } from './coordinate/coordinate.module';
 import { TimestampModule } from './timestamp/timestamp.module';
 import { DateScalar } from './scalar-date/scalar-date';
 import { IconModule } from './icon/icon.module';
+import { StoryModule } from './story/story.module';
+import { BlockModule } from './block/block.module';
 
 @Module({
   imports: [
@@ -46,6 +48,8 @@ import { IconModule } from './icon/icon.module';
     CoordinateModule,
     TimestampModule,
     IconModule,
+    StoryModule,
+    BlockModule,
   ],
   controllers: [AppController],
   providers: [AppService, DateScalar],

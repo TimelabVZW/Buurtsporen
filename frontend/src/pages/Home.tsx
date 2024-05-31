@@ -166,11 +166,6 @@ const Home = () => {
             maxZoom={23}
           />
           <ConditionalLoader condition={isLocationSet}>
-            <Marker icon={userIcon} position={location !== null ? location : [0 , 0]}>
-              <Popup>
-                Jouw locatie
-              </Popup>
-            </Marker>
           </ConditionalLoader>
           <Bounds />
           <ConditionalLoader condition={data}>

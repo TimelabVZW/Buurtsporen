@@ -60,6 +60,34 @@ type Layer {
   markers: [Marker!]
 }
 
+type Property {
+  id: Int!
+  name: String!
+  value: String!
+  type: String!
+  createdAt: Date!
+  blockId: Int!
+  block: Block!
+}
+
+type Block {
+  id: Int!
+  type: String!
+  position: Int!
+  createdAt: Date!
+  storyId: Int!
+  story: Story!
+  properties: [Property!]
+}
+
+type Story {
+  id: Int!
+  title: String!
+  slug: String!
+  createdAt: Date!
+  blocks: [Block!]
+}
+
 input UserInput {
   id: Int!
   email: String!
@@ -118,6 +146,34 @@ input LayerInput {
   markers: [MarkerInput!]
 }
 
+input PropertyInput {
+  id: Int!
+  name: String!
+  value: String!
+  type: String!
+  createdAt: Date!
+  blockId: Int!
+  block: BlockInput!
+}
+
+input BlockInput {
+  id: Int!
+  type: String!
+  position: Int!
+  createdAt: Date!
+  storyId: Int!
+  story: StoryInput!
+  properties: [PropertyInput!]
+}
+
+input StoryInput {
+  id: Int!
+  title: String!
+  slug: String!
+  createdAt: Date!
+  blocks: [BlockInput!]
+}
+
 """Date custom scalar type"""
 scalar Date
 
@@ -137,6 +193,10 @@ type Query {
   coordinate(id: Int!): Coordinate!
   icons: [Icon!]!
   icon(id: Int!): Icon!
+  stories: [Story!]!
+  story(id: Int!): Story!
+  blocks: [Block!]!
+  block(id: Int!): Block!
 }
 
 input PaginateQuery {
@@ -181,6 +241,14 @@ type Mutation {
   createIcon(createIconInput: CreateIconInput!): Icon!
   updateIcon(updateIconInput: UpdateIconInput!): Icon!
   removeIcon(id: Int!): Icon!
+  createStory(createStoryInput: CreateStoryInput!): Story!
+  createStoryWithBlocks(createStoryWithBlocksInput: CreateStoryWithBlocksInput!): Story!
+  updateStory(updateStoryInput: UpdateStoryInput!): Story!
+  removeStory(id: Int!): Story!
+  createBlock(createBlockInput: CreateBlockInput!): Block!
+  createBlockWithProperties(createBlockWithPropertiesInput: CreateBlockWithPropertiesInput!): Block!
+  updateBlock(updateBlockInput: UpdateBlockInput!): Block!
+  removeBlock(id: Int!): Block!
 }
 
 input CreateUserInput {
@@ -282,4 +350,59 @@ input UpdateIconInput {
   name: String
   fileName: String
   url: String
+}
+
+input CreateStoryInput {
+  title: String!
+  slug: String!
+}
+
+input CreateStoryWithBlocksInput {
+  blocks: [StoryBlockWithPropertiesInput!]
+  title: String!
+  slug: String!
+}
+
+input StoryBlockWithPropertiesInput {
+  properties: [StoryPropertyInput!]
+  type: String!
+  position: Int!
+}
+
+input StoryPropertyInput {
+  name: String!
+  value: String!
+  type: String!
+}
+
+input UpdateStoryInput {
+  title: String
+  slug: String
+  id: Int!
+}
+
+input CreateBlockInput {
+  type: String!
+  position: Int!
+  storyId: Int!
+}
+
+input CreateBlockWithPropertiesInput {
+  properties: [BlockPropertyInput!]
+  type: String!
+  position: Int!
+  storyId: Int!
+}
+
+input BlockPropertyInput {
+  name: String!
+  value: String!
+  type: String!
+}
+
+input UpdateBlockInput {
+  type: String
+  position: Int
+  storyId: Int
+  id: Int!
 }
