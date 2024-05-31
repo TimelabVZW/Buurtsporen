@@ -50,7 +50,7 @@ const TimestampList = ({marker, visible, setFormVisible}: TimestampListProps) =>
                         }}/>
                     </div>
                     <div className="small-logo--container" style={{display: visible? 'block' : 'none'}} >
-                        <img src={SquareGreenLogo} />
+                        <a href="/"><img src={SquareGreenLogo} /></a>
                     </div>
                 </div>
                 <div className="form-loading-container">
@@ -119,7 +119,7 @@ return (
                 }}/>
             </div>
             <div className="small-logo--container" style={{display: visible? 'block' : 'none'}} >
-                <img src={SquareGreenLogo} />
+                <a href="/"><img src={SquareGreenLogo} /></a>
             </div>
         </div>
         <ConditionalLoader condition={!form}>

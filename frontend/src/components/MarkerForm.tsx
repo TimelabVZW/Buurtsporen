@@ -38,7 +38,7 @@ return (
                 }}/>
             </div>
             <div className="small-logo--container" style={{display: visible? 'block' : 'none'}} >
-                <img src={SquareGreenLogo} />
+                <a href="/"><img src={SquareGreenLogo} /></a>
             </div>
         </div>
         <div className="map-markerform" style={{display: visible? 'block' : 'none'}}>

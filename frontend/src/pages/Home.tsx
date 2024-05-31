@@ -34,6 +34,7 @@ import RasterLogoImage from '../assets/svg/BS_logo_raster_1.svg';
 import "leaflet/dist/leaflet.css";
 import "../sass/components/toast.scss";
 import "../sass/components/mapFilter.scss";
+import MarkerClusterGroup from 'react-leaflet-cluster';
 
 const Home = () => {
   const [location, setLocation] = useState<null | [number, number]>(null);
@@ -173,16 +174,16 @@ const Home = () => {
             </Marker>
           </ConditionalLoader>
           <Bounds />
-          <ConditionalLoader condition={data}>
-            <MarkerList
-              layers={data.layersByIds}
-              setSearchParams={setSearchParams}
-              searchParams={searchParams}
-              setActiveMarker={setActiveMarker}
-              setFormVisible={setFormVisible}
-              modal={modal}
-            />
-          </ConditionalLoader>
+            <ConditionalLoader condition={data}>
+                <MarkerList
+                  layers={data.layersByIds}
+                  setSearchParams={setSearchParams}
+                  searchParams={searchParams}
+                  setActiveMarker={setActiveMarker}
+                  setFormVisible={setFormVisible}
+                  modal={modal}
+                />
+            </ConditionalLoader>
         </MapContainer>
           <div className='map-form-container'>
             <MarkerForm refetch={refetch} setFormVisible={setFormVisible} visible={formVisible === 'create-marker'} layers={data.layers} icons={data.icons} coordinate={location? location : [0, 0]}/>
@@ -193,7 +194,7 @@ const Home = () => {
       {/* UI COMPONENTS */}
         <ConditionalLoader condition={modal === '' && formVisible === ''}>
           <div className='title--container'>
-            <img className='title' src={RasterLogoImage} alt='Buurtsporen logo'/>
+            <a href='/'><img className='title' src={RasterLogoImage} alt='Buurtsporen logo'/></a>
             <div className='title--buttons flex flex-row'>
               <SVGButton
                 title='Refresh location'
