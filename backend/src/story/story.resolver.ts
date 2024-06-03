@@ -4,6 +4,7 @@ import { Story } from './entities/story.entity';
 import { CreateStoryInput } from './dto/create-story.input';
 import { UpdateStoryInput } from './dto/update-story.input';
 import { CreateStoryWithBlocksInput } from './dto/create-story-with-blocks.input';
+import { UpdateStoryWithBlocksInput } from './dto/update-story-with-blocks.input';
 
 @Resolver(() => Story)
 export class StoryResolver {
@@ -32,6 +33,11 @@ export class StoryResolver {
   @Mutation(() => Story)
   updateStory(@Args('updateStoryInput') updateStoryInput: UpdateStoryInput) {
     return this.storyService.update(updateStoryInput.id, updateStoryInput);
+  }
+
+  @Mutation(() => Story)
+  updateStoryWithBlocks(@Args('updateStoryWithBlocksInput') updateStoryWithBlocksInput: UpdateStoryWithBlocksInput) {
+    return this.storyService.updateWithBlocks(updateStoryWithBlocksInput);
   }
 
   @Mutation(() => Story)

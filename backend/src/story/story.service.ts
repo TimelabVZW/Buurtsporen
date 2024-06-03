@@ -6,6 +6,7 @@ import { Story } from './entities/story.entity';
 import { Repository } from 'typeorm';
 import { BlockService } from 'src/block/block.service';
 import { CreateStoryWithBlocksInput } from './dto/create-story-with-blocks.input';
+import { UpdateStoryWithBlocksInput } from './dto/update-story-with-blocks.input';
 
 
 // 8468
@@ -59,6 +60,18 @@ update(id: number, updateStoryInput: UpdateStoryInput): Promise<Story> {
   });
 
   return this.storyRepository.save({...oldStory, ...updateStoryInput});
+}
+
+// nested forEach, cant work around it.
+async updateWithBlocks(updateStoryWithBlocksInput: UpdateStoryWithBlocksInput): Promise<Story> {
+  let {blocks, ...updateStoryInput} = updateStoryWithBlocksInput;
+  await this.update(updateStoryInput.id, updateStoryInput);
+
+  blocks.forEach(async (block) => {
+    await this.blockService.updateWithProperties(block);
+  });
+
+  return this.findOne(updateStoryInput.id);
 }
 
 //   DELETE

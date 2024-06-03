@@ -244,6 +244,7 @@ type Mutation {
   createStory(createStoryInput: CreateStoryInput!): Story!
   createStoryWithBlocks(createStoryWithBlocksInput: CreateStoryWithBlocksInput!): Story!
   updateStory(updateStoryInput: UpdateStoryInput!): Story!
+  updateStoryWithBlocks(updateStoryWithBlocksInput: UpdateStoryWithBlocksInput!): Story!
   removeStory(id: Int!): Story!
   createBlock(createBlockInput: CreateBlockInput!): Block!
   createBlockWithProperties(createBlockWithPropertiesInput: CreateBlockWithPropertiesInput!): Block!
@@ -379,6 +380,27 @@ input UpdateStoryInput {
   title: String
   slug: String
   id: Int!
+}
+
+input UpdateStoryWithBlocksInput {
+  id: Int!
+  blocks: [UpdateStoryBlockWithPropertiesInput!]
+  title: String
+  slug: String
+}
+
+input UpdateStoryBlockWithPropertiesInput {
+  id: Int!
+  properties: [UpdateStoryPropertyInput!]
+  type: String
+  position: Int
+}
+
+input UpdateStoryPropertyInput {
+  id: Int!
+  name: String
+  value: String
+  type: String
 }
 
 input CreateBlockInput {

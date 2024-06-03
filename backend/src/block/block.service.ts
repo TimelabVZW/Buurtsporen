@@ -6,6 +6,7 @@ import { Block } from './entities/block.entity';
 import { Repository } from 'typeorm';
 import { CreateBlockWithPropertiesInput } from './dto/create-block-with-properties';
 import { PropertyService } from './property.service';
+import { UpdateBlockWithPropertiesInput } from './dto/update-block-with-properties';
 
 @Injectable()
 export class BlockService {
@@ -49,11 +50,22 @@ export class BlockService {
 
   //   UPDATE
   
-  update(id: number, updateBlockInput: UpdateBlockInput) {
+  update(id: number, updateBlockInput: UpdateBlockInput): Promise<Block> {
     let oldBlock = this.blockRepository.findOne({
       where: { id },
     });
     return this.blockRepository.save({...oldBlock, ...updateBlockInput});
+  }
+
+  async updateWithProperties(updateBlockWithPropertiesInput: UpdateBlockWithPropertiesInput): Promise<Block> {
+    let {properties, ...updateBlockInput} = updateBlockWithPropertiesInput;
+    await this.update(updateBlockInput.id, updateBlockInput);
+
+    properties.forEach(async (property) => {
+      await this.propertyService.update(updateBlockInput.id, property)
+    });
+
+    return this.findOne(updateBlockInput.id);
   }
 
   //   DELETE
