@@ -10,7 +10,7 @@ spec:
     matchLabels:
       app: timelab-buurtsporen
   strategy:
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       labels:
@@ -42,6 +42,9 @@ spec:
             - name: storage
               subPath: upload
               mountPath: /app/upload
+          resources:
+            requests:
+              cpu: 1m
       volumes:
         - name: storage
           persistentVolumeClaim:
