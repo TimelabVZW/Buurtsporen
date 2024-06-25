@@ -31,6 +31,18 @@ class UpdateStoryBlockWithPropertiesInput {
 }
 
 @InputType()
+export class UpdateMarkerPropertyInput {
+    @Field(() => Int, {nullable: true})
+    id?: number;
+    
+    @Field(() => Int)
+    markerId?: number;
+
+    @Field({nullable: true})
+    anchor?: string;
+}
+
+@InputType()
 export class UpdateStoryWithBlocksInput {
     @Field(() => Int)
     id: number;
@@ -43,4 +55,7 @@ export class UpdateStoryWithBlocksInput {
 
     @Field({nullable: true})
     slug?: string;
+
+    @Field(() => [UpdateMarkerPropertyInput] ,{nullable: true})
+    markers?: UpdateMarkerPropertyInput[];
 }

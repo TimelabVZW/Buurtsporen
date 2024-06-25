@@ -25,13 +25,34 @@ class StoryBlockWithPropertiesInput {
 }
 
 @InputType()
+export class MarkerPropertyInput {
+    @Field(() => Int)
+    markerId?: number;
+
+    @Field({nullable: true})
+    anchor: string;
+}
+
+@InputType()
 export class CreateStoryWithBlocksInput {
     @Field(() => [StoryBlockWithPropertiesInput], {nullable: true})
     blocks?: StoryBlockWithPropertiesInput[];
+
+    @Field(() => [MarkerPropertyInput], {nullable: true})
+    markers?: MarkerPropertyInput[];
 
     @Field()
     title: string;
 
     @Field()
     slug: string;
+
+    @Field({nullable: true})
+    description?: string;
+
+    @Field({nullable: true})
+    author?: string;
+
+    @Field({nullable: true})
+    imgaeUrl?: string;
 }

@@ -24,6 +24,49 @@ type Icon {
   markers: [Marker!]
 }
 
+type Property {
+  id: Int!
+  name: String!
+  value: String!
+  type: String!
+  createdAt: Date!
+  blockId: Int!
+  block: Block!
+}
+
+type Block {
+  id: Int!
+  type: String!
+  position: Int!
+  createdAt: Date!
+  storyId: Int!
+  story: Story!
+  properties: [Property!]
+}
+
+type Story {
+  id: Int!
+  title: String!
+  slug: String!
+  description: String
+  author: String
+  imageUrl: String
+  isHighlighted: Boolean!
+  isPublished: Boolean!
+  createdAt: Date!
+  blocks: [Block!]
+  storyMarkers: [Storymarker!]
+}
+
+type Storymarker {
+  id: Int!
+  anchor: String
+  storyId: Int!
+  story: Story!
+  markerId: Int!
+  marker: Marker!
+}
+
 type Timestamp {
   id: Int!
   createdAt: Date!
@@ -49,6 +92,7 @@ type Marker {
   icon: Icon
   coordinates: [Coordinate!]
   timestamps: [Timestamp!]
+  storyMarkers: [Storymarker!]
 }
 
 type Layer {
@@ -58,34 +102,6 @@ type Layer {
   private: Boolean!
   defaultShow: Boolean!
   markers: [Marker!]
-}
-
-type Property {
-  id: Int!
-  name: String!
-  value: String!
-  type: String!
-  createdAt: Date!
-  blockId: Int!
-  block: Block!
-}
-
-type Block {
-  id: Int!
-  type: String!
-  position: Int!
-  createdAt: Date!
-  storyId: Int!
-  story: Story!
-  properties: [Property!]
-}
-
-type Story {
-  id: Int!
-  title: String!
-  slug: String!
-  createdAt: Date!
-  blocks: [Block!]
 }
 
 input UserInput {
@@ -107,42 +123,6 @@ input IconInput {
   name: String!
   fileName: String!
   url: String!
-  markers: [MarkerInput!]
-}
-
-input TimestampInput {
-  id: Int!
-  createdAt: Date!
-  author: String
-  description: String
-  fileName: String
-  url: String
-  markerId: Int!
-  marker: MarkerInput!
-}
-
-input MarkerInput {
-  id: Int!
-  name: String!
-  createdAt: Date!
-  author: String
-  description: String
-  type: String
-  color: String
-  layerId: Int!
-  layer: LayerInput!
-  iconId: Int
-  icon: IconInput
-  coordinates: [CoordinateInput!]
-  timestamps: [TimestampInput!]
-}
-
-input LayerInput {
-  id: Int!
-  name: String!
-  createdAt: Date!
-  private: Boolean!
-  defaultShow: Boolean!
   markers: [MarkerInput!]
 }
 
@@ -170,8 +150,60 @@ input StoryInput {
   id: Int!
   title: String!
   slug: String!
+  description: String
+  author: String
+  imageUrl: String
+  isHighlighted: Boolean!
+  isPublished: Boolean!
   createdAt: Date!
   blocks: [BlockInput!]
+  storyMarkers: [StorymarkerInput!]
+}
+
+input StorymarkerInput {
+  id: Int!
+  anchor: String
+  storyId: Int!
+  story: StoryInput!
+  markerId: Int!
+  marker: MarkerInput!
+}
+
+input TimestampInput {
+  id: Int!
+  createdAt: Date!
+  author: String
+  description: String
+  fileName: String
+  url: String
+  markerId: Int!
+  marker: MarkerInput!
+}
+
+input MarkerInput {
+  id: Int!
+  name: String!
+  createdAt: Date!
+  author: String
+  description: String
+  type: String
+  color: String
+  layerId: Int!
+  layer: LayerInput!
+  iconId: Int
+  icon: IconInput
+  coordinates: [CoordinateInput!]
+  timestamps: [TimestampInput!]
+  storyMarkers: [StorymarkerInput!]
+}
+
+input LayerInput {
+  id: Int!
+  name: String!
+  createdAt: Date!
+  private: Boolean!
+  defaultShow: Boolean!
+  markers: [MarkerInput!]
 }
 
 """Date custom scalar type"""
@@ -193,6 +225,8 @@ type Query {
   coordinate(id: Int!): Coordinate!
   icons: [Icon!]!
   icon(id: Int!): Icon!
+  storymarkers: [Storymarker!]!
+  storymarker(id: Int!): Storymarker!
   stories: [Story!]!
   story(id: Int!): Story!
   blocks: [Block!]!
@@ -241,10 +275,15 @@ type Mutation {
   createIcon(createIconInput: CreateIconInput!): Icon!
   updateIcon(updateIconInput: UpdateIconInput!): Icon!
   removeIcon(id: Int!): Icon!
+  createStorymarker(createStorymarkerInput: CreateStorymarkerInput!): Storymarker!
+  updateAnchorStorymarker(updateStorymarkerInput: UpdateAnchorStorymarkerInput!): Storymarker!
+  removeStorymarker(id: Int!): Storymarker!
   createStory(createStoryInput: CreateStoryInput!): Story!
   createStoryWithBlocks(createStoryWithBlocksInput: CreateStoryWithBlocksInput!): Story!
   updateStory(updateStoryInput: UpdateStoryInput!): Story!
   updateStoryWithBlocks(updateStoryWithBlocksInput: UpdateStoryWithBlocksInput!): Story!
+  updateIsPublished(id: Int!): Story!
+  updateIsHighlighted(id: Int!): Story!
   removeStory(id: Int!): Story!
   createBlock(createBlockInput: CreateBlockInput!): Block!
   createBlockWithProperties(createBlockWithPropertiesInput: CreateBlockWithPropertiesInput!): Block!
@@ -353,6 +392,19 @@ input UpdateIconInput {
   url: String
 }
 
+input CreateStorymarkerInput {
+  anchor: String
+  storyId: Float
+  markerId: Int!
+}
+
+input UpdateAnchorStorymarkerInput {
+  anchor: String
+  storyId: Float
+  markerId: Int
+  id: Int!
+}
+
 input CreateStoryInput {
   title: String!
   slug: String!
@@ -360,8 +412,12 @@ input CreateStoryInput {
 
 input CreateStoryWithBlocksInput {
   blocks: [StoryBlockWithPropertiesInput!]
+  markers: [MarkerPropertyInput!]
   title: String!
   slug: String!
+  description: String
+  author: String
+  imgaeUrl: String
 }
 
 input StoryBlockWithPropertiesInput {
@@ -376,6 +432,11 @@ input StoryPropertyInput {
   type: String!
 }
 
+input MarkerPropertyInput {
+  markerId: Int!
+  anchor: String
+}
+
 input UpdateStoryInput {
   title: String
   slug: String
@@ -387,6 +448,7 @@ input UpdateStoryWithBlocksInput {
   blocks: [UpdateStoryBlockWithPropertiesInput!]
   title: String
   slug: String
+  markers: [UpdateMarkerPropertyInput!]
 }
 
 input UpdateStoryBlockWithPropertiesInput {
@@ -401,6 +463,12 @@ input UpdateStoryPropertyInput {
   name: String
   value: String
   type: String
+}
+
+input UpdateMarkerPropertyInput {
+  id: Int
+  markerId: Int!
+  anchor: String
 }
 
 input CreateBlockInput {

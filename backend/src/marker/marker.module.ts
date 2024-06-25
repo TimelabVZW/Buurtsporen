@@ -9,6 +9,7 @@ import { CoordinateModule } from 'src/coordinate/coordinate.module';
 import { IconModule } from 'src/icon/icon.module';
 import { QueueService } from './queue.service';
 import { QueueProcessor } from './queue.processor';
+import { StorymarkerModule } from 'src/storymarker/storymarker.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { QueueProcessor } from './queue.processor';
     forwardRef(() => TimestampModule),
     forwardRef(() => CoordinateModule),
     forwardRef(() => IconModule),
+    forwardRef(() => StorymarkerModule),
   ],
   exports: [MarkerService],
   providers: [MarkerResolver, MarkerService, QueueService, QueueProcessor],

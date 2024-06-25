@@ -191,6 +191,11 @@ interface LayersDataGridProps {
     setActiveLayer: (e: number) => void;
     setLayerCount: (e: number) => void;
 }
+
+interface StoriesDataGridProps {
+    refetchTrigger: boolean;
+    setStoriesCount: (e: number) => void;
+}
  
 interface TiptapProps {
     setInput: (e: string) => void;
@@ -251,4 +256,5 @@ export type {
     MarkerListProps,
     ImageExpandContainerProps,
     LayersDataGridProps,
+    StoriesDataGridProps,
 }

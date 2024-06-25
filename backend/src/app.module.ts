@@ -16,6 +16,7 @@ import { DateScalar } from './scalar-date/scalar-date';
 import { IconModule } from './icon/icon.module';
 import { StoryModule } from './story/story.module';
 import { BlockModule } from './block/block.module';
+import { StorymarkerModule } from './storymarker/storymarker.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { BlockModule } from './block/block.module';
     IconModule,
     StoryModule,
     BlockModule,
+    StorymarkerModule,
   ],
   controllers: [AppController],
   providers: [AppService, DateScalar],

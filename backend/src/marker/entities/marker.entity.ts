@@ -7,6 +7,7 @@ import {
 import { Coordinate } from 'src/coordinate/entities/coordinate.entity';
 import { Icon } from 'src/icon/entities/icon.entity';
 import { Layer } from 'src/layer/entities/layer.entity';
+import { Storymarker } from 'src/storymarker/entities/storymarker.entity';
 import { Timestamp } from 'src/timestamp/entities/timestamp.entity';
 import {
   Column,
@@ -84,4 +85,9 @@ export class Marker {
   @OneToMany(() => Timestamp, (timestamp) => timestamp.marker)
   @Field(() => [Timestamp], { nullable: true })
   timestamps?: Timestamp[];
+
+  //1-M storyMarkers
+  @OneToMany(() => Storymarker, (storyMarkers) => storyMarkers.marker)
+  @Field(() => [Storymarker], { nullable: true })
+  storyMarkers?: Storymarker[];
 }

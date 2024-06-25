@@ -41,6 +41,16 @@ export class StoryResolver {
   }
 
   @Mutation(() => Story)
+  updateIsPublished(@Args('id', { type: () => Int }) id: number) {
+    return this.storyService.updateIsPublished(id);
+  }
+
+  @Mutation(() => Story)
+  updateIsHighlighted(@Args('id', { type: () => Int }) id: number) {
+    return this.storyService.updateIsHighlighted(id);
+  }
+
+  @Mutation(() => Story)
   removeStory(@Args('id', { type: () => Int }) id: number) {
     return this.storyService.remove(id);
   }

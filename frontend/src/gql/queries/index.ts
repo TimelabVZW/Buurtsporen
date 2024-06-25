@@ -7,6 +7,7 @@ import GET_TIMESTAMPS_DATA from "./TimestampPage";
 import GET_MARKERS_DATA from "./MarkersPage";
 import GET_PAGINATED_MARKERS from "./PaginatedMarkers";
 import GET_ICONS_PAGE from "./IconsPage";
+import GET_STORIES_DATA from "./StoriesPage";
 
 export {
     GET_LAYERS_DATA,
@@ -18,4 +19,5 @@ export {
     GET_MARKERS_DATA,
     GET_PAGINATED_MARKERS,
     GET_ICONS_PAGE,
+    GET_STORIES_DATA,
 }

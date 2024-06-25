@@ -5,6 +5,7 @@ import { PropertyService } from './property.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Block } from './entities/block.entity';
 import { Property } from './entities/property.entity';
+import { BlockController } from './block.controller';
 
 @Module({
   imports: [
@@ -16,8 +17,7 @@ import { Property } from './entities/property.entity';
     BlockService, 
     PropertyService
   ],
-  exports:[
-    BlockService,
-  ]
+  controllers: [BlockController],
+  exports:[BlockService]
 })
 export class BlockModule {}

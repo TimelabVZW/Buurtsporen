@@ -12,6 +12,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Icons from './pages/Icons';
 import Test from './pages/Test';
 import { LoadingMap } from './components';
+import { Stories, Story } from './pages';
 
 // Lazy load pages
 const App = React.lazy(() => import('./App'));
@@ -47,6 +48,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
                   <Route path='/import-export' element={<ImportExport/>} />
                   <Route path='/timestamps' element={<Timestamps/>} />
                   <Route path='/icons' element={<Icons/>} />
+                  <Route path='/stories' element={<Stories/>} />
+                  <Route path='/stories/:id' element={<Story/>} />
                   <Route path='/test' element={<Test/>} />
                 </Route>
               </Routes>
