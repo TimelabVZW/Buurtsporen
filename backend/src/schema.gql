@@ -36,6 +36,7 @@ type Property {
 
 type Block {
   id: Int!
+  divId: String
   type: String!
   position: Int!
   createdAt: Date!
@@ -138,6 +139,7 @@ input PropertyInput {
 
 input BlockInput {
   id: Int!
+  divId: String
   type: String!
   position: Int!
   createdAt: Date!
@@ -412,7 +414,7 @@ input CreateStoryInput {
 
 input CreateStoryWithBlocksInput {
   blocks: [StoryBlockWithPropertiesInput!]
-  markers: [MarkerPropertyInput!]
+  storyMarkers: [MarkerPropertyInput!]
   title: String!
   slug: String!
   description: String
@@ -422,6 +424,7 @@ input CreateStoryWithBlocksInput {
 
 input StoryBlockWithPropertiesInput {
   properties: [StoryPropertyInput!]
+  divId: String
   type: String!
   position: Int!
 }
@@ -448,13 +451,18 @@ input UpdateStoryWithBlocksInput {
   blocks: [UpdateStoryBlockWithPropertiesInput!]
   title: String
   slug: String
-  markers: [UpdateMarkerPropertyInput!]
+  author: String
+  description: String
+  isPublished: Boolean
+  isHighlighted: Boolean
+  storyMarkers: [UpdateMarkerPropertyInput!]
 }
 
 input UpdateStoryBlockWithPropertiesInput {
   id: Int!
   properties: [UpdateStoryPropertyInput!]
   type: String
+  divId: String
   position: Int
 }
 
@@ -474,6 +482,7 @@ input UpdateMarkerPropertyInput {
 input CreateBlockInput {
   type: String!
   position: Int!
+  divId: String
   storyId: Int!
 }
 
@@ -481,6 +490,7 @@ input CreateBlockWithPropertiesInput {
   properties: [BlockPropertyInput!]
   type: String!
   position: Int!
+  divId: String
   storyId: Int!
 }
 
@@ -493,6 +503,7 @@ input BlockPropertyInput {
 input UpdateBlockInput {
   type: String
   position: Int
+  divId: String
   storyId: Int
   id: Int!
 }

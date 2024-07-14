@@ -22,6 +22,7 @@ import TimestampDataGrid from "./TimestampDataGrid";
 import LayersDataGrid from "./LayersDataGrid";
 import MarkerForm from "./MarkerForm";
 import TimestampList from "./TimestampList";
+import BlockDropdown from "./BlockDropdown";
 
 export {
     Button,
@@ -48,4 +49,5 @@ export {
     LayersDataGrid,
     MarkerForm,
     TimestampList,
+    BlockDropdown,
 }

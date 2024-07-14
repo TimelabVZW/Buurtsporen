@@ -13,6 +13,10 @@ export class Block {
   @Field(() => Int)
   id: number;
 
+  @Column({nullable: true})
+  @Field({nullable: true})
+  divId: string;
+
   @Column()
   @Field()
   type: string;

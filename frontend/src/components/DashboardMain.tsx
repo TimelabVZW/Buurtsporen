@@ -7,17 +7,18 @@ import ImportExportIcon from '@mui/icons-material/ImportExport';
 import MarkerIcon from '@mui/icons-material/Room';
 import TimestampIcon from '@mui/icons-material/AccessTimeFilled';
 import PaletteIcon from '@mui/icons-material/Palette';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 import "../sass/components/dashboard.scss"
 
 const DashboardMain = ({ children, active }: DashboardMainProps) => {
-    const pages = ['dashboard', 'layers', 'markers', 'timestamps', 'icons', 'import-export'];
+    const pages = ['dashboard', 'layers', 'markers', 'timestamps', 'stories', 'icons', 'import-export'];
 
     const getIcon = (name: string) => {
         switch (name) {
             case 'dashboard':
                 return (
-                    <HomeIcon 
+                    <HomeIcon
                         sx={{
                             fill: active === name? '#000000': '',
                         }}
@@ -41,7 +42,7 @@ const DashboardMain = ({ children, active }: DashboardMainProps) => {
                 );
             case 'import-export':
                 return (
-                    <ImportExportIcon 
+                    <ImportExportIcon
                         sx={{
                             fill: active === name? '#000000': '',
                         }}
@@ -49,7 +50,7 @@ const DashboardMain = ({ children, active }: DashboardMainProps) => {
                 );
             case 'timestamps':
                 return (
-                    <TimestampIcon 
+                    <TimestampIcon
                         sx={{
                             fill: active === name? '#000000': '',
                         }}
@@ -57,12 +58,20 @@ const DashboardMain = ({ children, active }: DashboardMainProps) => {
                 );
             case 'icons':
                 return (
-                    <PaletteIcon 
+                    <PaletteIcon
                         sx={{
                             fill: active === name? '#000000': '',
                         }}
                     />
                 );
+            case 'stories':
+                return (
+                    <MenuBookIcon
+                        sx={{
+                            fill: active === name? '#000000': '',
+                        }}
+                    />
+                )
             default:
                 return null;
         }

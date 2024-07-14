@@ -26,6 +26,9 @@ class UpdateStoryBlockWithPropertiesInput {
   @Field({nullable: true})
   type?: string;
 
+  @Field({nullable: true})
+  divId?: string;
+
   @Field(() => Int, {nullable: true})
   position?: number;
 }
@@ -56,6 +59,18 @@ export class UpdateStoryWithBlocksInput {
     @Field({nullable: true})
     slug?: string;
 
+    @Field({nullable: true})
+    author?: string;
+
+    @Field({nullable: true})
+    description?: string;
+
+    @Field({nullable: true})
+    isPublished?: boolean;
+
+    @Field({nullable: true})
+    isHighlighted?: boolean;
+
     @Field(() => [UpdateMarkerPropertyInput] ,{nullable: true})
-    markers?: UpdateMarkerPropertyInput[];
+    storyMarkers?: UpdateMarkerPropertyInput[];
 }

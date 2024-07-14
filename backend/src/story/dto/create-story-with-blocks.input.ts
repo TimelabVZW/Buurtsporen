@@ -17,6 +17,9 @@ class StoryBlockWithPropertiesInput {
   @Field(() => [StoryPropertyInput], {nullable: true})
   properties?: StoryPropertyInput[];
 
+  @Field({nullable: true})
+  divId?: string;
+
   @Field()
   type: string;
 
@@ -39,7 +42,7 @@ export class CreateStoryWithBlocksInput {
     blocks?: StoryBlockWithPropertiesInput[];
 
     @Field(() => [MarkerPropertyInput], {nullable: true})
-    markers?: MarkerPropertyInput[];
+    storyMarkers?: MarkerPropertyInput[];
 
     @Field()
     title: string;

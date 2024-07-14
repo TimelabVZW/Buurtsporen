@@ -12,6 +12,9 @@ import mutationUpdateDefaultShow from "./UpdateDefaultShow";
 import mutationCreateStory from "./CreateStory";
 import mutationUpdateIsHighlighted from "./UpdateIsHighlighted";
 import mutationUpdateIsPublished from "./UpdateIsPublished";
+import mutationUpdateStory from "./UpdateStory";
+import mutationRemoveStory from "./RemoveStory";
+import mutationCreateFullStory from "./CreateFullStory";
 
 export {
     mutationCreateLayer,
@@ -28,4 +31,7 @@ export {
     mutationCreateStory,
     mutationUpdateIsHighlighted,
     mutationUpdateIsPublished,
+    mutationCreateFullStory,
+    mutationUpdateStory,
+    mutationRemoveStory,
 }

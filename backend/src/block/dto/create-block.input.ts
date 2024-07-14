@@ -9,6 +9,9 @@ export class CreateBlockInput {
   @Field(() => Int)
   position: number;
 
+  @Field({nullable: true})
+  divId?: string;
+
   // //   Markers M-1
 
   @Field(() => Int)

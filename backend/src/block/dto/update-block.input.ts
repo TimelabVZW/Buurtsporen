@@ -8,6 +8,9 @@ export class UpdateBlockInput extends PartialType(CreateBlockInput) {
   
   @Field({ nullable: true })
   type?: string;
+  
+  @Field({ nullable: true })
+  divId?: string;
 
   @Field(() => Int, { nullable: true })
   position?: number;

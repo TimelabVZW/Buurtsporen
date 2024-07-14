@@ -32,12 +32,12 @@ create(createStoryInput: CreateStoryInput): Promise<Story> {
 
   // nested forEach, kind of meh but not meant to be called a lot (only when importing/duplicating pages).
 async createStoryWithBlocksProperties(createStoryWithBlocksInput: CreateStoryWithBlocksInput): Promise<Story> {
-  const {blocks, markers, ...createStoryInput} = createStoryWithBlocksInput;
+  const {blocks, storyMarkers, ...createStoryInput} = createStoryWithBlocksInput;
 
   const newStory = await this.create(createStoryInput);
 
-  if (markers) {
-    markers.forEach((marker) => {
+  if (storyMarkers) {
+    storyMarkers.forEach((marker) => {
       this.storyMarkerService.create({markerId: marker.markerId, storyId: newStory.id, anchor: marker.anchor? marker.anchor : ''})
     })
   }
@@ -97,7 +97,7 @@ async updateIsHighlighted(id: number) {
 
 // nested forEach, cant work around it.
 async updateWithBlocks(updateStoryWithBlocksInput: UpdateStoryWithBlocksInput): Promise<Story> {
-  let {blocks, markers, ...updateStoryInput} = updateStoryWithBlocksInput;
+  let {blocks, storyMarkers, ...updateStoryInput} = updateStoryWithBlocksInput;
   await this.update(updateStoryInput.id, updateStoryInput);
 
   if (blocks) {
@@ -107,11 +107,11 @@ async updateWithBlocks(updateStoryWithBlocksInput: UpdateStoryWithBlocksInput): 
   }
 
   // get all the storyMarkers that are removed from the array and delete them, at the same time get all new markers and add them.
-  if (markers) {
+  if (storyMarkers) {
     let oldStory = await this.findOne(updateStoryInput.id);
-    let removedMarkers = oldStory.storyMarkers.filter(storyMarker => !markers.some(marker => marker.markerId === storyMarker.markerId));
-    let addedMarkers = markers.filter(marker => !oldStory.storyMarkers.some(storyMarker => marker.markerId === storyMarker.markerId));
-    let changedMarkers = markers.filter(marker => oldStory.storyMarkers.some(storyMarker => marker.anchor != storyMarker.anchor && marker.id === storyMarker.id));
+    let removedMarkers = oldStory.storyMarkers.filter(storyMarker => !storyMarkers.some(marker => marker.markerId === storyMarker.markerId));
+    let addedMarkers = storyMarkers.filter(marker => !oldStory.storyMarkers.some(storyMarker => marker.markerId === storyMarker.markerId));
+    let changedMarkers = storyMarkers.filter(marker => oldStory.storyMarkers.some(storyMarker => marker.anchor != storyMarker.anchor && marker.id === storyMarker.id));
   
     removedMarkers.forEach(async (marker) => {
       await this.storyMarkerService.remove(marker.id);

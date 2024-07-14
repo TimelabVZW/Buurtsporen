@@ -225,6 +225,47 @@ interface ImageExpandContainerProps {
     alt: string;
 }
 
+interface Property {
+    name: string;
+    value: string;
+    type: string;
+}
+
+interface Block {
+    id?: number;
+    type: string;
+    position: number;
+    divId?: string;
+    properties: Property[];
+}
+
+interface Storymarker {
+    id: number;
+    anchor?: string;
+    storyId: number;
+    story: Story;
+    markerId: number;
+    marker: Marker;
+}
+
+interface Marker {
+    id: number;
+}
+
+interface Story {
+id: number;
+title: string;
+slug: string;
+description?: string;
+author?: string;
+imageUrl?: string;
+isHighlighted: boolean;
+isPublished: boolean;
+createdAt: Date;
+blocks?: Block[];
+storyMarkers?: Storymarker[];
+}
+
 export type {
     DeconstructedObject,
     MarkerDataGridProps,
@@ -257,4 +298,7 @@ export type {
     ImageExpandContainerProps,
     LayersDataGridProps,
     StoriesDataGridProps,
+    Story,
+    Block,
+    Property,
 }

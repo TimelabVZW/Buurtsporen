@@ -6,6 +6,9 @@ query GetStoryById ( $id : Int! ) {
         id
         title
         slug
+        description
+        author
+        imageUrl
         isPublished
         isHighlighted
         storyMarkers {
@@ -15,12 +18,14 @@ query GetStoryById ( $id : Int! ) {
         }
         blocks {
             id
-            storyId
+            divId
+            type
             position
             properties {
                 id
                 name
                 value
+                type
             }
         }
     }
