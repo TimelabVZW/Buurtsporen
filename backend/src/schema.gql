@@ -452,6 +452,7 @@ input UpdateStoryWithBlocksInput {
   title: String
   slug: String
   author: String
+  imageUrl: String
   description: String
   isPublished: Boolean
   isHighlighted: Boolean
